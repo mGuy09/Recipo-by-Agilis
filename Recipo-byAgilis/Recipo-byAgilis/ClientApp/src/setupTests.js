@@ -12,10 +12,10 @@ window.fetch = () => {
     {
       ok: true,
       json: () => Promise.resolve({
-        "authority": "https://localhost:7050",
+        "authority": "https://localhost:7096",
         "client_id": "Recipo_byAgilis",
-        "redirect_uri": "https://localhost:7050/authentication/login-callback",
-        "post_logout_redirect_uri": "https://localhost:7050/authentication/logout-callback",
+        "redirect_uri": "https://localhost:7096/authentication/login-callback",
+        "post_logout_redirect_uri": "https://localhost:7096/authentication/logout-callback",
         "response_type": "id_token token",
         "scope": "Recipo_byAgilisAPI openid profile"
      })

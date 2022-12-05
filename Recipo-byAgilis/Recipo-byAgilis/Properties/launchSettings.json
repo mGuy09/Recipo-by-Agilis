@@ -3,15 +3,15 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:11879",
-      "sslPort": 44316
+      "applicationUrl": "http://localhost:21716",
+      "sslPort": 44331
     }
   },
   "profiles": {
     "Recipo_byAgilis": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7050;http://localhost:5050",
+      "applicationUrl": "https://localhost:7096;http://localhost:5096",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
