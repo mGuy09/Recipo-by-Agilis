@@ -13,5 +13,11 @@ namespace Recipo_byAgilis.Data
         {
 
         }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<UserDetails> UserDetails { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<IngredientInRecipe> IngredientInRecipes { get; set; }
     }
 }
