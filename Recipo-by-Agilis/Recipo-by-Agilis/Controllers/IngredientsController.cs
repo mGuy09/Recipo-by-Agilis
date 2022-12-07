@@ -27,6 +27,12 @@ namespace Recipo_by_Agilis.Controllers
             return await _context.Ingredients.ToListAsync();
         }
 
+        [HttpGet("{categoryId}")]
+        public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredientsByCategory(int categoryId)
+        {
+            return await _context.Ingredients.Where(x => x.CategoryId == categoryId).ToListAsync();
+        }
+
         // GET: api/Ingredients/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ingredient>> GetIngredient(int id)

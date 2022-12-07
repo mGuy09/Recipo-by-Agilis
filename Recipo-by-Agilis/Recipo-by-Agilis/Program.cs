@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
 

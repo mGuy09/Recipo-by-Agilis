@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipo_by_Agilis.Models;
 
@@ -10,9 +11,11 @@ using Recipo_by_Agilis.Models;
 namespace RecipobyAgilis.Migrations
 {
     [DbContext(typeof(RecipoContext))]
-    partial class RecipoContextModelSnapshot : ModelSnapshot
+    [Migration("20221207091011_ingredient-category-table")]
+    partial class ingredientcategorytable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
