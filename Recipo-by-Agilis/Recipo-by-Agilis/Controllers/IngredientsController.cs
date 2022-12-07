@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using System.Web.Http.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
@@ -25,12 +25,6 @@ namespace Recipo_by_Agilis.Controllers
         public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredients()
         {
             return await _context.Ingredients.ToListAsync();
-        }
-
-        [HttpGet("{categoryId}")]
-        public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredientsByCategory(int categoryId)
-        {
-            return await _context.Ingredients.Where(x => x.CategoryId == categoryId).ToListAsync();
         }
 
         // GET: api/Ingredients/5
