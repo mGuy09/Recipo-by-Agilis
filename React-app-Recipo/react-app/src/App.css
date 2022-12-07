@@ -111,13 +111,14 @@ margin-left: 20px;
 height: 33px;
 width: 70px;
   color: #fff;
-background-color: #000;
+background-color:  #FFB600;
   cursor: pointer;
 }
 
 .btn-sm {
   padding: 6px 10px;
   vertical-align: middle;
+  border-radius: 10px;
 }
 
 .section {

@@ -12,15 +12,15 @@ function App() {
                         <img src={recipologo}
                             />
                     </div>
-                    <li><a href="#courses">Courses</a></li>
-                    <li><a href="#tutorials">Tutorials</a></li>
-                    <li><a href="#jobs">Jobs</a></li>
-                    <li><a href='#student'>Student</a></li>
+                    <li><a href="#ingredients">Ingredients</a></li>
+                    <li><a href="#recipes">Recipes</a></li>
+                    <li><a href='#contact'>Contact us</a></li>
                 </ul>
 
                 <div class="rightNav">
-                    <input type="text" name="search" id="search" />
-                    <button class="btn btn-sm">Search</button>
+                <ul class="nav-list">
+                <li><a href="#login">Login</a></li>
+                </ul>
                 </div>
             </nav>
 
