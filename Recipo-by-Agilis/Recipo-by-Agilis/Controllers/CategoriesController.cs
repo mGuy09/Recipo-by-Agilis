@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
@@ -11,47 +11,47 @@ namespace Recipo_by_Agilis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IngredientsController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly RecipoContext _context;
 
-        public IngredientsController(RecipoContext context)
+        public CategoriesController(RecipoContext context)
         {
             _context = context;
         }
 
-        // GET: api/Ingredients
+        // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredients()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategory()
         {
-            return await _context.Ingredients.ToListAsync();
+            return await _context.Category.ToListAsync();
         }
 
-        // GET: api/Ingredients/5
+        // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Ingredient>> GetIngredient(int id)
+        public async Task<ActionResult<Category>> GetCategory(int id)
         {
-            var ingredient = await _context.Ingredients.FindAsync(id);
+            var category = await _context.Category.FindAsync(id);
 
-            if (ingredient == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return ingredient;
+            return category;
         }
 
-        // PUT: api/Ingredients/5
+        // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIngredient(int id, Ingredient ingredient)
+        public async Task<IActionResult> PutCategory(int id, Category category)
         {
-            if (id != ingredient.Id)
+            if (id != category.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(ingredient).State = EntityState.Modified;
+            _context.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace Recipo_by_Agilis.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IngredientExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace Recipo_by_Agilis.Controllers
             return NoContent();
         }
 
-        // POST: api/Ingredients
+        // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient ingredient)
+        public async Task<ActionResult<Category>> PostCategory(Category category)
         {
-            _context.Ingredients.Add(ingredient);
+            _context.Category.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIngredient", new { id = ingredient.Id }, ingredient);
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
-        // DELETE: api/Ingredients/5
+        // DELETE: api/Categories/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteIngredient(int id)
+        public async Task<IActionResult> DeleteCategory(int id)
         {
-            var ingredient = await _context.Ingredients.FindAsync(id);
-            if (ingredient == null)
+            var category = await _context.Category.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            _context.Ingredients.Remove(ingredient);
+            _context.Category.Remove(category);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool IngredientExists(int id)
+        private bool CategoryExists(int id)
         {
-            return _context.Ingredients.Any(e => e.Id == id);
+            return _context.Category.Any(e => e.Id == id);
         }
     }
 }

@@ -12,4 +12,5 @@ public class RecipoContext : DbContext
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<Recipe> Recipes { get; set; }
     public DbSet<IngredientInRecipe> IngredientsInRecipes { get; set; }
+    public DbSet<Category> Category { get; set; }
 }
