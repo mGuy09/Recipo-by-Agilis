@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 function Categories(){
     return (
-<table class="table">
+<table className="table">
   <thead>
     <tr>
       <th scope="col">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+        <div className="form-check">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
         </div>
       </th>
       <th scope="col">Lorem</th>
@@ -17,24 +17,24 @@ function Categories(){
   <tbody>
     <tr>
       <th scope="row">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+        <div className="form-check">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
         </div>
       </th>
       <td>Sit</td>
     </tr>
     <tr>
       <th scope="row">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+        <div classNaem="form-check">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
         </div>
       </th>
       <td>Adipisicing</td>
     </tr>
     <tr>
       <th scope="row">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+        <div classname="form-check">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
         </div>
       </th>
       <td>Hic</td>
