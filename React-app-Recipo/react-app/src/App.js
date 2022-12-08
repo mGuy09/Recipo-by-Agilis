@@ -24,7 +24,7 @@ function App() {
         //     {Content.map(ing => <p key={ing.id}>{ing.name}</p>)}
         // </div>
         <div>
-          <Navbar OnClick={SubscriptionDisplay} />
+          <Navbar  />
           <Body />
           <Footer />           
         </div>

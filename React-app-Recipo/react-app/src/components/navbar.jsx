@@ -2,11 +2,9 @@
 import recipologo from './image-recipo-logo.png';
 import Subscription from './subscription'
 import useModal from '../useModal';
-
+import Modal from './modal'
 function Navbar() {
-  const clickHandler = () => {
-    <Subscription />
-  }
+
   const { isShowing, toggle } = useModal();
   return (
     <nav className="navbar background">
@@ -16,8 +14,9 @@ function Navbar() {
           />
         </div>
         <li><a href="#ingredients">Ingredients</a></li>
-        <li><button className="button-default" onClick={toggle}> Subscription</button>
-          <Subscription isShowing={isShowing} hide={toggle} /></li>
+        <li><Modal /></li>
+        {/* <li><button className="button-default" onClick={toggle}> Subscription</button>
+          <Subscription isShowing={isShowing} hide={toggle} /></li> */}
         <li><a href='#contact'>Contact us</a></li>
       </ul>
 
