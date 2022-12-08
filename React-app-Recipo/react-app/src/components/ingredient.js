@@ -1,15 +1,15 @@
 
-const ingredient = ({item}) => {
+const ingredient = ({ item }) => {
   return (
     <div>
-        <h1>Ingredients</h1>
-        {Object.entries(item).map(([key, value])=>{
-            return (
-             <div key={key}>
-                <p>{value}</p>
-             </div>
-            )
-        })}
+      <h1>Ingredients</h1>
+      {Object.entries(item).map(([key, value]) => {
+        return (
+          <div key={key}>
+            <p>{value}</p>
+          </div>
+        )
+      })}
 
     </div>
   )
