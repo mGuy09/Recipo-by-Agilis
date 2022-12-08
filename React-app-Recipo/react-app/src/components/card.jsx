@@ -43,14 +43,10 @@ function Card() {
                     </div>
 
                 </div>
-
-
                 <div className="modal-footer flex-center">
                     <p>Intrested in subscribing? Please login or register first.</p>
                 </div>
             </div>
-
-
 
             <div className="modal fade show" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -62,6 +58,7 @@ function Card() {
                     </div>
                 </div>
             </div>
+            
         </div>
     )
 }

@@ -20,7 +20,7 @@ function ModalInFunctionalComponent() {
             <a href='#' onClick={setModalIsOpenToTrue}>Subscription</a>
 
             <Modal isOpen={modalIsOpen}>
-                <button onClick={setModalIsOpenToFalse}>x</button>
+                <button onClick={setModalIsOpenToFalse}>Close</button>
                 <Card />
             </Modal>
         </>
