@@ -1,3 +1,8 @@
+import React from "react";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+
+function Register(){
+    return (
 <section class="vh-100" style="background-color: #eee;">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -67,3 +72,7 @@
     </div>
   </div>
 </section>
+    )
+}
+
+export default Register;
