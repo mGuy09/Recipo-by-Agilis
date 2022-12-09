@@ -1,15 +1,13 @@
-import React from "react";
 import agilislogo from './agilis-logo-small.png';
 
-function Footer(){
-    return(
+function Footer() {
+    return (
         <footer className="footer">
-        <div className="logo">
-                    <img src={agilislogo}
-                        />
-                </div>
+            <div className="logo">
+                <img src={agilislogo} alt="footer img" />
+            </div>
             <p className="text-footer">
-                Copyright �-All rights are reserved
+                Copyright &copy; All rights are reserved
             </p>
         </footer>
     )

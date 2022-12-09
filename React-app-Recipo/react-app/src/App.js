@@ -11,6 +11,8 @@ import {
 import Navbar from './components/navbar';
 import Body from './components/body';
 import Footer from './components/footer';
+import Subscription from './components/subscription' 
+
 
 function App() {
     // const [Content, setContent] = useState([])
@@ -29,7 +31,7 @@ function App() {
         //     {Content.map(ing => <p key={ing.id}>{ing.name}</p>)}
         // </div>
         <div>
-          <Navbar />
+          <Navbar  />
           <Body />
           <Footer />           
         </div>
@@ -37,5 +39,8 @@ function App() {
     )
 }
 
+function SubscriptionDisplay(){
+    return <Subscription /> 
+}
 
 export default App;

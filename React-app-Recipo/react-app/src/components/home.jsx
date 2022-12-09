@@ -9,7 +9,7 @@ function Home() {
                 <ul className="nav-list">
                     <div className="logo">
                         <img src={recipologo}
-                            />
+                        />
                     </div>
                     <li><a href="#ingredients">Ingredients</a></li>
                     <li><a href="#recipes">Recipes</a></li>
@@ -17,9 +17,9 @@ function Home() {
                 </ul>
 
                 <div class="rightNav">
-                <ul class="nav-list">
-                <li><a href="#login">Login</a></li>
-                </ul>
+                    <ul class="nav-list">
+                        <li><a href="#login">Login</a></li>
+                    </ul>
                 </div>
             </nav>
 
@@ -35,13 +35,13 @@ function Home() {
                     </div>
                 </div>
             </section>
-           
-           
+
+
             <footer className="footer">
-            <div class="logo">
-                        <img src={agilislogo}
-                            />
-                    </div>
+                <div class="logo">
+                    <img src={agilislogo}
+                    />
+                </div>
                 <p className="text-footer">
                     Copyright �-All rights are reserved
                 </p>
