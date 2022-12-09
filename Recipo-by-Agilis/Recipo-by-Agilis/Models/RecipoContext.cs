@@ -15,5 +15,4 @@ public class RecipoContext : IdentityDbContext<IdentityUser>
     public DbSet<Recipe> Recipes { get; set; }
     public DbSet<IngredientInRecipe> IngredientsInRecipes { get; set; }
     public DbSet<Category> Category { get; set; }
-    public DbSet<Subscription> Subscription { get; set; }
-}
+    public DbSet<Subscription> Subscription { get; set; } }

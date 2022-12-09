@@ -1,4 +1,5 @@
 import React from "react";
+import {Link, Redirect} from 'react-router-dom'
 import recipologo from './image-recipo-logo.png';
 
 function Navbar() {
@@ -7,9 +8,9 @@ function Navbar() {
                 <ul className="nav-list">
                     <div className="logo">
                         <img src={recipologo}
-                            />
+                            alt=''/>
                     </div>
-                    <li><a href="#ingredients">Ingredients</a></li>
+                    <li><Link >Ingredients</Link></li>
                     <li><a href="#recipes">Recipes</a></li>
                     <li><a href='#contact'>Contact us</a></li>
                 </ul>
