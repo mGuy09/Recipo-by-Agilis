@@ -5,7 +5,7 @@ import fajitas from '../photos/fajitas.jpg'
 import Login from './login'
 import Register from './register'
 
-function Card() {
+function Card(props) {
     const login = <Login />
     const register = <Register />
     return (
@@ -14,9 +14,10 @@ function Card() {
                 <p className="heading">Subscriptions Types</p>
             </div>
             <div className="modal-body">
+                
                 <div className="card">
                     <div className="view overlay">
-                        <img className="card-img-top" src={chopp} alt="Card image cap" />
+                        <img className="card-img-top"  src={chopp} alt="Card image cap" />
                         <a href="#!">
                             <div className="mask rgba-white-slight"></div>
                         </a>
@@ -29,7 +30,7 @@ function Card() {
 
                     <div className="card">
                         <div className="view overlay">
-                            <img className="card-img-top" src={fajitas} alt="Card image cap" />
+                            <img className="card-img-top"  src={fajitas} alt="Card image cap" />
                             <a href="#!">
                                 <div className="mask rgba-white-slight"></div>
                             </a>
@@ -58,10 +59,10 @@ function Card() {
                     </div>
                 </div>
             </div>
-            
+
         </div>
     )
 }
-    
+
 
 export default Card;
