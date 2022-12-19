@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Identity.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Recipo_by_Agilis.Models;
 
-public class RecipoContext : IdentityDbContext<IdentityUser>
+public class RecipoContext : IdentityDbContext<AppUser>
 {
     public RecipoContext(DbContextOptions<RecipoContext> options) : base(options)
     {

@@ -1,7 +1,21 @@
-﻿namespace Recipo_by_Agilis.Models;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public abstract class BaseEntity
+namespace Ordering.Core.Entities.Base
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+    public class BaseEntity
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 Id { get; set; }
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime ModifiedDate { get; private set; }
+
+        public BaseEntity()
+        {
+            this.ModifiedDate = DateTime.Now;
+        }
+    }
 }
