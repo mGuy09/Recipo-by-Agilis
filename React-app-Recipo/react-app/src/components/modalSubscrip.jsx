@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import Card from './card';
 
 
-function ModalInFunctionalComponent() {
+function ModalInFunctionalComponent(props) {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
