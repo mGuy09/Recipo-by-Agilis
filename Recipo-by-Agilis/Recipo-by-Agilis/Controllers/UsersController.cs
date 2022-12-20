@@ -1,40 +1,39 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using Recipo_by_Agilis.Models;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Identity;
+//using Recipo_by_Agilis.Models;
 
-namespace Recipo_by_Agilis.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
-    {
-        private readonly UserManager<IdentityUser> _userManager;
+//namespace Recipo_by_Agilis.Controllers
+//{
 
-        public UsersController(UserManager<IdentityUser> userManager)
-        {
-            _userManager = userManager;
-        }
+//    public class UsersController : ControllerBase
+//    {
+//        private readonly UserManager<IdentityUser> _userManager;
 
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+//        public UsersController(UserManager<IdentityUser> userManager)
+//        {
+//            _userManager = userManager;
+//        }
 
-            var result = await _userManager.CreateAsync(
-                new IdentityUser() {UserName = user.UserName ,Email = user.Email },
-                user.Password
-            );
+//        [HttpPost]
+//        public async Task<ActionResult<User>> PostUser(User user)
+//        {
+//            if (!ModelState.IsValid)
+//            {
+//                return BadRequest(ModelState);
+//            }
 
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
+//            var result = await _userManager.CreateAsync(
+//                new IdentityUser() { UserName = user.UserName, Email = user.Email },
+//                user.Password
+//            );
 
-            user.Password = null;
-            return Created("", user);
-        }
-    }
-}
+//            if (!result.Succeeded)
+//            {
+//                return BadRequest(result.Errors);
+//            }
+
+//            user.Password = null;
+//            return Created("", user);
+//        }
+//    }
+//}
