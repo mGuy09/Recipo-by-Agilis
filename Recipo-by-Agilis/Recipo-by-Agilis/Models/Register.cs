@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Recipo_by_Agilis.Models;
 
-public class Register
+public class Register: IdentityUser
 {
+    private readonly RecipoContext _context;
+
     [Required(ErrorMessage = "Please enter a username")]
     public string UserName { get; set; }
 
@@ -28,4 +32,27 @@ public class Register
         Password = password;
         ConfirmPassword = password;
     }
+    //public object AddNewUser(Register register, User user)
+    //{
+    //    try
+    //    {
+            
+    //        _context.Users.Add(register);
+    //        _context.SaveChanges();
+    //        return new Response()
+    //        {
+    //            Status = "success",
+    //            Message = "user added"
+    //        };
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        return new Response()
+    //        {
+    //            Status = "failed to add user"
+    //        };
+    //    }
+
+    //    //}
+    //}
 }
