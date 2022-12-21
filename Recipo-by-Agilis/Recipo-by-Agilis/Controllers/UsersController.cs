@@ -1,39 +1,33 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Identity;
-//using Recipo_by_Agilis.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Recipo_by_Agilis.Models;
+using Recipo_by_Agilis.Services;
 
-//namespace Recipo_by_Agilis.Controllers
-//{
+namespace Recipo_by_Agilis.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UsersController : ControllerBase
+    {
+        private IUserService _userService;
 
-//    public class UsersController : ControllerBase
-//    {
-//        private readonly UserManager<IdentityUser> _userManager;
+        public UsersController(IUserService userService)
+        {
+            _userService = userService;
+        }
 
-//        public UsersController(UserManager<IdentityUser> userManager)
-//        {
-//            _userManager = userManager;
-//        }
+        // /api/auth/register
+        [HttpPost("Register")]
+        public async Task<IActionResult> RegisterAsync([FromBody] Register model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.RegisterUserAsync(model);
+                if (result.IsSuccess) return Ok(result); //status code 200 
+                return BadRequest(result);
+            }
 
-//        [HttpPost]
-//        public async Task<ActionResult<User>> PostUser(User user)
-//        {
-//            if (!ModelState.IsValid)
-//            {
-//                return BadRequest(ModelState);
-//            }
-
-//            var result = await _userManager.CreateAsync(
-//                new IdentityUser() { UserName = user.UserName, Email = user.Email },
-//                user.Password
-//            );
-
-//            if (!result.Succeeded)
-//            {
-//                return BadRequest(result.Errors);
-//            }
-
-//            user.Password = null;
-//            return Created("", user);
-//        }
-//    }
-//}
+            return BadRequest("Some properties are not valid"); //status code 400. smth from the client side
+        }
+    }
+}
