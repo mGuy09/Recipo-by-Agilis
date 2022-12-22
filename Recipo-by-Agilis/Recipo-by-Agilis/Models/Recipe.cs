@@ -1,8 +1,7 @@
 ﻿namespace Recipo_by_Agilis.Models;
 
-public class Recipe
+public class Recipe:BaseEntity
 {
-    public int Id { get; set; }
     public string Steps { get; set; }
     public bool IsPremium { get; set; }
 }
