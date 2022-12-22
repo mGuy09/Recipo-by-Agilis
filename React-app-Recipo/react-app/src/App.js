@@ -12,41 +12,38 @@ import Navbar from './components/navbar';
 import Body from './components/body';
 import Footer from './components/footer';
 import Subscription from './components/subscription' 
-import axios, {AxiosResponse} from 'axios';
+import Axios, {  AxiosResponse } from 'axios';
+import baseURL from "./endpoints"
 
 function App() {
-    // const [Content, setContent] = useState([])
-    // const data =async() =>{
-    //     const resp = await fetch("https://localhost:7291/api/Ingredients")
-    //     const payload = await resp.json()
-    //     setContent(payload)
-    // }
-    // useEffect(() => {
-    //     data()
-    // }, [])
-    // console.log(Content)
-  
-  // useEffect(() => {
-  //   axios.get('url...').then((response: AxiosResponse<any>) => {
-  //     console.log(response.data);
-  //   })
-  // }, [])
-    return (
-        // <div>
-            
-        //     {Content.map(ing => <p key={ing.id}>{ing.name}</p>)}
-        // </div>
-        <div>
-          <Navbar  />
-          <Body />
-          <Footer />           
-        </div>
-      
-    )
-}
 
-function SubscriptionDisplay(){
-    return <Subscription /> 
+  // const [Content, setContent] = useState([])
+  // const data =async() =>{
+  //     const resp = await fetch(baseURL)
+  //     const payload = await resp.json()
+  //     setContent(payload)
+    
+  useEffect(() => {
+    Axios.get(baseURL).then((AxiosResponse < any >) => {
+      console.log(response.data);
+    })
+  }, []);
+  // console.log(Content)
+  
+ 
+  return (
+    <div>
+      <Navbar />
+      <Body />
+      <Footer />
+    </div>
+      
+  )
+
+
+  function SubscriptionDisplay() {
+    return <Subscription />
+  }
 }
 
 export default App;

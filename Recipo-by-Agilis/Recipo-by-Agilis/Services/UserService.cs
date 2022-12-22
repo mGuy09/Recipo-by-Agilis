@@ -31,6 +31,7 @@ public class UserService : IUserService
         var result = await _userManager.CreateAsync(identityUser, model.Password);
         if (result.Succeeded)
         {
+            //TO do: send a confirmation email
             return new UserManagerResponse { Message = "User created.", IsSuccess = true };
         }
 

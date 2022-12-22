@@ -10,10 +10,12 @@ namespace Recipo_by_Agilis.Controllers
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
+        private readonly IConfiguration _configuration;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IConfiguration configuration)
         {
             _userService = userService;
+            _configuration = configuration;
         }
 
         // /api/auth/register

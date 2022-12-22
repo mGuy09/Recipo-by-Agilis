@@ -5,6 +5,7 @@ using Recipo_by_Agilis.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using Recipo_by_Agilis.Services;
 
 
@@ -55,9 +56,22 @@ builder.Services.AddAuthentication(auth =>
 });
 
 
+//aici, trebuie sa mai adaugam niste satari pt access
+var provider = builder.Services.BuildServiceProvider();
+var config = provider.GetRequiredService<IConfiguration>();
+builder.Services.AddCors(options =>
+{
+    var frontendUrl = config.GetValue<string>("frontend_url");
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
-builder.Services.AddCors();
-
+//JSON serializer
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => 
+    options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+    .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
 var app = builder.Build();
 
@@ -69,6 +83,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 app.UseAuthorization();
 app.UseAuthentication();
 
