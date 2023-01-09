@@ -20,9 +20,13 @@ function RegisterForm(props) {
         
     }
     const onChange = (e) => {
-        e.persist();
+        // e.persist();
+        // SetUser({
+        //     ...user, [e.target.name]: e.target.value
+        // })
+        const value = e.target.value;
         SetUser({
-            ...user, [e.target.name]: e.target.value
+            ...user, [e.target.name]: value
         })
     }
     return (
