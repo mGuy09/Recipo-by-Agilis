@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Recipo_by_Agilis.Services;
 
