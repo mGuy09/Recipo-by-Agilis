@@ -1,17 +1,16 @@
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
 
-function RegisterForm(props) {
-    const [user, SetUser] = useState({ UserName: '', Email: '', Password: '', ConfirmPassword: '' })
+function RegisterForm() {
+    const [user, SetUser] = useState({})
     const apiUrl = 'https://localhost:7291/api/Users/Register';
 
-    const AddUser = (e) => {
+    const AddUser = async(e) => {
         e.preventDefault();
         const data = { userName: user.username, email: user.email, password: user.password, confirmPassword: user.confirmpassword };
         console.log(data);
-        axios.post(apiUrl, { data }).then(result => {
+        await axios.post(apiUrl, data).then(result => {
             console.log(result);
             // props.history.push('/Register')
         });
