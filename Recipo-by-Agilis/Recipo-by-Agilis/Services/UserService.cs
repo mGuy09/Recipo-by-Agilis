@@ -25,7 +25,7 @@ public class UserService : IUserService
         var identityUser = new IdentityUser
         {
             Email = model.Email,
-            UserName = model.Email
+            UserName = model.UserName
         };
 
         var result = await _userManager.CreateAsync(identityUser, model.Password);
