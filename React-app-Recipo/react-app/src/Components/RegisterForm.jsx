@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-function RegisterForm() {
+
+function RegisterForm(props) {
     const [user, SetUser] = useState({})
+    const navigate = useNavigate()
     const apiUrl = 'https://localhost:7291/api/Users/Register';
 
     const AddUser = async(e) => {
@@ -12,8 +15,9 @@ function RegisterForm() {
         console.log(data);
         await axios.post(apiUrl, data).then(result => {
             console.log(result);
-            // props.history.push('/Register')
+            navigate('/Login')
         });
+        
     }
     const onChange = (e) => {
         e.persist();
