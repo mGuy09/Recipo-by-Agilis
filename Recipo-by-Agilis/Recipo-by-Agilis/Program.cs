@@ -59,6 +59,7 @@ builder.Services.AddAuthentication(auth =>
 //aici, trebuie sa mai adaugam niste satari pt access
 var provider = builder.Services.BuildServiceProvider();
 var config = provider.GetRequiredService<IConfiguration>();
+
 builder.Services.AddCors(options =>
 {
     var frontendUrl = config.GetValue<string>("frontend_url");
