@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Parallax } from 'react-parallax'
 import RegisterForm from '../Components/RegisterForm'
 import BackgroundImage from '../Images/sol-ingrao-pw19GpDRZic-unsplash.jpg'

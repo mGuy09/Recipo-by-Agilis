@@ -8,7 +8,6 @@ import Login from "./Pages/Login";
 import Subscriptions from "./Pages/Subscriptions";
 import Register from "./Pages/Register";
 
-
 function App() {
   return (
     <div>
