@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import LoginAltButtons from './LoginAltButtons'
 
 
@@ -13,9 +14,11 @@ const LoginForm = () => {
                 <input type="text" name='email' placeholder='Email' className='border border-gray-400 rounded-full px-3 py-1 outline-none m-2 '/>
                 <input type="password" name='password' placeholder='Password' className='border border-gray-400 rounded-full px-3 py-1 outline-none m-2 '/>
             </div>
-            <button className='bg-orange-500  mx-2 text-white hover:bg-orange-400 active:bg-orange-600 rounded-full px-6 py-2 duration-300'>Login</button>
+            <button className='bg-orange-500  mx-2 text-white hover:bg-orange-400 active:bg-orange-600 rounded-full px-6 py-2 duration-300'><Link to='/Dashboard'>Login</Link></button>
         </form>
-    
+        <div className='flex gap-1 mt-12'>
+    <p className='text-lg font-thin'>Don't have an account?</p><Link className='text-lg underline hover:text-orange-300 duration-100 active:text-orange-700 text-orange-500' to='/Register'>Sign Up</Link>
+    </div>
     </div>
   )
 }
