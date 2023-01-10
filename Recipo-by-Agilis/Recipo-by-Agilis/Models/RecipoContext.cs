@@ -17,5 +17,7 @@ public class RecipoContext : IdentityDbContext
 
     public DbSet<User> Users { get; set; }
 
-   
+    public DbSet<UserSubscription> UserSubscriptions { get; set; }
+
+
 }
