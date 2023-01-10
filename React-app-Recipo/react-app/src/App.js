@@ -7,8 +7,11 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Subscriptions from "./Pages/Subscriptions";
 import Register from "./Pages/Register";
+import {useCookies} from 'react-cookie'
+import axios from "axios";
 
 function App() {
+  
   return (
     <div>
       <Navbar />

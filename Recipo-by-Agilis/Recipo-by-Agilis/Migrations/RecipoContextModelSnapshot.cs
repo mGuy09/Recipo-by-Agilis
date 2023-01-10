@@ -234,7 +234,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.Ingredient", b =>
@@ -254,7 +254,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredients", (string)null);
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.IngredientInRecipe", b =>
@@ -273,7 +273,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IngredientsInRecipes");
+                    b.ToTable("IngredientsInRecipes", (string)null);
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.Recipe", b =>
@@ -297,7 +297,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.Subscription", b =>
@@ -314,7 +314,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subscription");
+                    b.ToTable("Subscription", (string)null);
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.User", b =>
@@ -339,7 +339,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.UserSubscription", b =>
@@ -358,7 +358,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserSubscriptions");
+                    b.ToTable("UserSubscriptions", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

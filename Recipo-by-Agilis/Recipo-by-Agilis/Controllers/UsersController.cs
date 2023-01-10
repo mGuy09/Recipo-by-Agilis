@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Recipo_by_Agilis.Models;
 using Recipo_by_Agilis.Services;
@@ -46,6 +48,7 @@ namespace Recipo_by_Agilis.Controllers
 
             return BadRequest("Some properties are not valid");
         }
+        
     }
 
 

@@ -9,5 +9,4 @@ public class UserManagerResponse
 
     public DateTime? ExpireDate { get; set; }
 
-    public string UserId { get; set; }
 }

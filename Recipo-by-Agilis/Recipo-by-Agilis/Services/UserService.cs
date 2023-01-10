@@ -69,7 +69,8 @@ public class UserService : IUserService
         var claims = new[]
         {
             new Claim("Email", model.Email),
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim("userId",user.Id)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
@@ -82,12 +83,13 @@ public class UserService : IUserService
             signingCredentials: new SigningCredentials(key,SecurityAlgorithms.HmacSha256 ));
        
         string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+        
         return new UserManagerResponse()
         {
-            UserId = user.Id,
             Message = tokenAsString,
             IsSuccess = true,
             ExpireDate = token.ValidTo
         };
     }
+
 }
