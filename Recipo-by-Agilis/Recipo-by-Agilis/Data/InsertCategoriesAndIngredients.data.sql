@@ -5,11 +5,16 @@ INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (3,N'Dairy')
 INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (4,N'Condiments')
 INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (5,N'Herbs & Spices')
 INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (6,N'Grains')
+INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (7,N'Fish')
+INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (8,N'Seafood')
+INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (9,N'Fruit')
+
 SET IDENTITY_INSERT [dbo].[Category] OFF 
 
 SET IDENTITY_INSERT [dbo].[Ingredients] ON 
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (1,N'Tomato', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (2,N'Potato', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (3,N'Milk', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Dairy'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (4,N'Cottage Cheese', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Dairy'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (5,N'Cheddar Cheese', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Dairy'))
@@ -29,18 +34,22 @@ INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (18,N'Emmenta
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (19,N'Gouda', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Dairy'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (20,N'Edam', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Dairy'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (21,N'Parmesan', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Dairy'))
+
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (22,N'Beef Steak', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (23,N'Minced Beef Meat', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (24,N'Minced Pork Meat', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (25,N'Chicken Breast', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (26,N'Chicken Wing', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (27,N'Pork Meat', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
+
+
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (28,N'Carrot', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (29,N'Mushroom', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (30,N'Salad', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (31,N'Cabbage', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (32,N'Cucumber', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (33,N'Corn', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (34,N'Aioli', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (35,N'Ketchup', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (36,N'Mayo', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
@@ -48,6 +57,7 @@ INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (37,N'Mustard
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (38,N'Ranch', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (39,N'Wasabi', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (40,N'Honey Mustard', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
+
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (41,N'Rosemary', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (42,N'Basil', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (43,N'Bay Leaf', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'))
@@ -56,6 +66,7 @@ INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (45,N'Chives'
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (46,N'Cilantro', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (47,N'Oregano', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (48,N'Parsley', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'))
+
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (49,N'Sourdough Bread', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Grains'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (50,N'Baguette', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Grains'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (51,N'Brioche', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Grains'))
@@ -66,6 +77,59 @@ INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (55,N'Multigr
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (56,N'Tortillia', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Grains'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (57,N'Pita', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Grains'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (58,N'Whole Grain Bread', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Grains'))
+
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (59,N'Salmon', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (60,N'Trout', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (61,N'Tuna', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (62,N'Sardines', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (63,N'Sword Fish', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (64,N'Cod Fish', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (65,N'Butter Fish', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (66,N'Dorada', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (67,N'Makarel', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fish'))
+
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (68,N'Calamari', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Seafood'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (69,N'Octopus', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Seafood'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (70,N'Shrimps', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Seafood'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (71,N'Mussels', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Seafood'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (72,N'Oysters', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Seafood'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (73,N'Lobster', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Seafood'))
+
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (74,N'Lamb', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (75,N'Duck', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (76,N'Rabbit', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
+
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (77,N'Peas', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (78,N'Green beans', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (79,N'Onion', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (80,N'Garlic', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (81,N'Zuccinni', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (82,N'Radishes', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (83,N'Beetroot', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (84,N'Bell Pepper', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (85,N'Cauliflower', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (86,N'Eggplant', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (87,N'Strawberries', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (88,N'Blueberries', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (89,N'Blackberries', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (90,N'Raspberries', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (91,N'Gooseberries', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (92,N'Apples', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (93,N'Pears', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (94,N'Plums', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (95,N'Apricots', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (96,N'Peaches', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (97,N'Cherries', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (98,N'Watermelon', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (99,N'Oranges', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (100,N'Lemons', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (101,N'Kiwi', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (102,N'Bananas', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (103,N'Litchi', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Fruit'))
+
+
+
 SET IDENTITY_INSERT [dbo].[Ingredients] OFF
 
 SET IDENTITY_INSERT [dbo].[Subscription] ON 
