@@ -16,7 +16,7 @@ const LoginForm = () => {
     console.log(data);
     await axios.post(apiUrl, data).then(result => {
       console.log(result);
-      localStorage.
+      
       // navigate('/Login')
     });
 

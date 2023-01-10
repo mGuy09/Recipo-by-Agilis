@@ -67,3 +67,11 @@ INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (56,N'Tortill
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (57,N'Pita', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Grains'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (58,N'Whole Grain Bread', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Grains'))
 SET IDENTITY_INSERT [dbo].[Ingredients] OFF
+
+SET IDENTITY_INSERT [dbo].[Subscription] ON 
+INSERT INTO [dbo].[Subscription] ([Id],[Name]) VALUES (1,N'Free')
+INSERT INTO [dbo].[Subscription] ([Id],[Name]) VALUES (2,N'Monthly')
+INSERT INTO [dbo].[Subscription] ([Id],[Name]) VALUES (3,N'Yearly')
+
+SET IDENTITY_INSERT [dbo].[Subscription] OFF 
+

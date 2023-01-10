@@ -84,6 +84,7 @@ public class UserService : IUserService
         string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
         return new UserManagerResponse()
         {
+            UserId = user.Id,
             Message = tokenAsString,
             IsSuccess = true,
             ExpireDate = token.ValidTo
