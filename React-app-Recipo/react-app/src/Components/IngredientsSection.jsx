@@ -1,54 +1,77 @@
 import React, { useEffect, useState } from 'react'
 import IngredientLabel from './IngredientLabel'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 
 const  IngredientsSection = ({filter, search}) => {
   const [baseList, setBaseList] = useState([])
   const [selectedIngredients, setSelected] = useState([])
+  const [Checkmark, setCheckmark] = useState([])
 
+  
   const categoryId = filter
   const name = search
   useEffect(()=>{
-    
       axios.get('https://localhost:7291/api/Ingredients').then(res => {
-        console.log(res.data)
         setBaseList(res.data)
-        
       })
-    
   }, [])
-  console.log(categoryId)
-  console.log(search)
+
+  
+  useEffect(()=>{
+    setCheckmark(document.querySelectorAll('.checkmark'))
+  }, [filter,search])
+
+   useEffect(()=>{
+    
+    Checkmark.forEach(element => {
+      if(selectedIngredients.includes(element.id)){
+        element.checked = true
+      }
+    })
+  },[Checkmark, selectedIngredients])
 
   const HandleClick = (e) =>{
-    
+    if(e.target.checked){
       setSelected(prev =>{
-        if(!e.target.checked)
         return [...prev, e.target.id]
       })
+    }
+    else
+    {
+      setSelected(selectedIngredients.filter((item) => item !== e.target.id))
+    }
   }
-  console.log(selectedIngredients)
-
+  const OnSubmit = () => {
+    console.log(selectedIngredients)
+  }
 
   return (
-    <div className='flex flex-wrap gap-6 p-10'>
-      {name == undefined ? categoryId != 0 ? baseList.filter((item)=> item.CategoryId == categoryId).map(item=>(
-        <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
-        )
-        ): 
-        baseList.map(item => (
-          <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
-        )) :
-        categoryId != 0? baseList.filter((item)=> item.CategoryId == categoryId & item.Name.toLowerCase().includes(name)).map(item=>(
+    <div className='flex flex-col'>
+      <div className='flex flex-wrap gap-6 p-10 justify-center'>
+        {baseList.length === 0 && <p className='flex justify-center text-2xl'>Loading...</p>}
+        {name == undefined ? categoryId != 0 ? baseList.filter((item)=> item.CategoryId == categoryId).map(item=>(
           <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
           )
           ): 
-          baseList.filter((item) => item.Name.toLowerCase().includes(name)).map(item => (
+          baseList.map(item => (
             <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
-          ))}
+          )) :
+          categoryId != 0? baseList.filter((item)=> item.CategoryId == categoryId & item.Name.toLowerCase().includes(name)).map(item=>(
+            <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
+            )
+            ): 
+            baseList.filter((item) => item.Name.toLowerCase().includes(name)).map(item => (
+              <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
+            ))}
+          
+          
+      </div>
+      <div className='p-10 flex justify-center items-center'>
+        {selectedIngredients.length > 2 ? <button onClick={OnSubmit} className='bg-orange-500 px-8 py-2 rounded-full text-lg text-white'>Get Recipes</button>: <h1 className='font-thin text-xl '>Please select 3 or more ingredients</h1>}
         
-        
+      </div>
     </div>
   )
 }
