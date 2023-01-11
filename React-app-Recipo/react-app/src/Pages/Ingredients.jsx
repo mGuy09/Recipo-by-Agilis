@@ -5,6 +5,8 @@ import IngredientsSection from '../Components/IngredientsSection'
 import PremiumAddRecipes from '../Components/PremiumAddRecipes'
 
 const Ingredients = () => {
+  
+  
   return (
     <>
     <PremiumAddRecipes />
@@ -13,7 +15,7 @@ const Ingredients = () => {
     <FaSearch size={15} className='text-gray-400 mr-1'/>
     <input className='px-2 w-full outline-none' placeholder='Search' type="search" />
     </div>
-    <IngredientsSection />
+    <IngredientsSection/>
     </>
   )
 }

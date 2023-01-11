@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using IdentityUser = Microsoft.AspNetCore.Identity.IdentityUser;
+using JwtConstants = Microsoft.IdentityModel.JsonWebTokens.JwtConstants;
 
 namespace Recipo_by_Agilis.Services;
 
@@ -69,8 +70,8 @@ public class UserService : IUserService
         var claims = new[]
         {
             new Claim("Email", model.Email),
-            new Claim(ClaimTypes.Name, user.UserName),
-            new Claim("userId",user.Id)
+            new Claim("Username", user.UserName),
+            new Claim("UserId",user.Id)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
@@ -91,5 +92,6 @@ public class UserService : IUserService
             ExpireDate = token.ValidTo
         };
     }
+
 
 }
