@@ -88,7 +88,8 @@ public class UserService : IUserService
         {
             Message = tokenAsString,
             IsSuccess = true,
-            ExpireDate = token.ValidTo
+            ExpireDate = token.ValidTo,
+           UserName = user.UserName,
         };
     }
 

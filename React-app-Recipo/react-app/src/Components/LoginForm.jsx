@@ -11,15 +11,16 @@ const LoginForm = () => {
   const navigate = useNavigate()
   const apiUrl = 'https://localhost:7291/api/Users/Login';
   const [cookies, setCookie] = useCookies()
-  
+
   const LoginUser = async (e) => {
     e.preventDefault();
     const data = { email: user.email, password: user.password };
-    console.log(data);
+    // console.log(data);
     await axios.post(apiUrl, data).then(result => {
-      console.log(result);
+      // console.log(result);
 
-      setCookie('token',result.data.Message, { path: '/'})
+      setCookie('token', result.data.Message, { path: '/' })
+      
       navigate('/Dashboard')
     });
 
@@ -33,7 +34,7 @@ const LoginForm = () => {
   return (
     <div>
 
-      <form action="" className='flex flex-col items-center' onSubmit={LoginUser }>
+      <form action="" className='flex flex-col items-center' onSubmit={LoginUser}>
         <h1 className='text-2xl font-medium m-2 mt-10 mb-10'>Sign In</h1>
         <LoginAltButtons />
         <div className='flex flex-col gap-2 my-2'>
