@@ -3,12 +3,13 @@ import {TfiClose, TfiMenu} from 'react-icons/tfi'
 import {FaUserAlt} from 'react-icons/fa'
 import {IoMdStar} from 'react-icons/io'
 import { Link, useNavigate } from 'react-router-dom'
+import {useCookies} from 'react-cookie'
 
 function Navbar() {
+  const [cookies] = useCookies()
+
   const [nav, setNav] = useState(false)
   const [dropdown , setDropdown] = useState(false)
-
-  const navigate = useNavigate()
 
   const ref = useRef()
 
@@ -33,7 +34,7 @@ function Navbar() {
   const DropdownClose =() => {
     setDropdown(false)
   }
-
+  
   return (
     <>
     <div className={!nav ? 'bg-translate' : 'w-full h-full ease-in-out duration-1000 bg-black bg-opacity-70 fixed z-20 backdrop-blur-sm'} onClick={Close}></div>
@@ -65,11 +66,12 @@ function Navbar() {
           </div>
           <ul className='border-t border-t-gray-200'>
           <Link to='/' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Home</li></Link>
-            <Link to='/Dashboard' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Dashboard</li></Link>
-            <Link to='/Subscriptions' onClick={Close}><li className='p-4 text-emerald-500 drop-shadow-md active:duration-75 hover:bg-emerald-500 hover:text-white active:bg-emerald-700 flex'><IoMdStar className='mr-1 mt-1'/> Subscriptions</li></Link>
+          {cookies !== null && <Link to='/Dashboard' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Dashboard</li></Link>}
+            {cookies !== null && <Link to='/Subscriptions' onClick={Close}><li className='p-4 text-emerald-500 drop-shadow-md active:duration-75 hover:bg-emerald-500 hover:text-white active:bg-emerald-700 flex'><IoMdStar className='mr-1 mt-1'/> Subscriptions</li></Link>}
             <Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Contact</li></Link>
             <Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>About</li></Link>
-            <Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700 lg:hidden'>Sign In</li></Link>
+            {cookies === null ?<Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700 lg:hidden'>Sign In</li></Link>:
+            <Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700 lg:hidden'>Logout</li></Link>}
           </ul>
         </div>
       </div>  

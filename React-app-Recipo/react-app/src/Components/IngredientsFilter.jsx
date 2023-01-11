@@ -3,14 +3,12 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 const IngredientsFilter = ({parentCallback}) => {
     const [filterDropdown, setDropdown] = useState(false)
-    const Inputs = document.querySelectorAll('input')
     const[isLarge, setIsLarge] = useState(window.innerWidth >= 1024 ? true : false)
     const OpenClose = () => {
         setDropdown(!filterDropdown)
     }
     const onTrigger = (e) => {
-        parentCallback = e.target.value
-        console.log(parentCallback)
+        parentCallback(e.target.value) 
     }
     useEffect(()=>{
         function handleResize(){
@@ -19,9 +17,7 @@ const IngredientsFilter = ({parentCallback}) => {
         }
         window.addEventListener('resize', handleResize)
     })
-    Inputs.forEach((item)=>{
-        console.log(item)
-    })
+    
   return (
     <div className='duration-300 ease-in-out'>
     <div className='p-6 mx-10 flex px-8 justify-between items-center border-b border-b-gray-400 z-10'>
