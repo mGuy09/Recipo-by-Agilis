@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { TfiClose, TfiMenu } from 'react-icons/tfi'
 import { FaUserAlt } from 'react-icons/fa'
 import { IoMdStar } from 'react-icons/io'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 function Navbar() {
