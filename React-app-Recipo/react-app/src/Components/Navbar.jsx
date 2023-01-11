@@ -2,21 +2,23 @@ import React, { useState, useEffect, useRef } from 'react'
 import {TfiClose, TfiMenu} from 'react-icons/tfi'
 import {FaUserAlt} from 'react-icons/fa'
 import {IoMdStar} from 'react-icons/io'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Navbar() {
   const [nav, setNav] = useState(false)
   const [dropdown , setDropdown] = useState(false)
 
+  const navigate = useNavigate()
+
   const ref = useRef()
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!ref?.current?.contains(event.target)) {
+      if (!ref?.current?.includes(event.target)) {
         DropdownClose();
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mouseup", handleClickOutside);
   }, [ref]);
 
   const OpenClose = () => {
@@ -31,6 +33,7 @@ function Navbar() {
   const DropdownClose =() => {
     setDropdown(false)
   }
+
   return (
     <>
     <div className={!nav ? 'bg-translate' : 'w-full h-full ease-in-out duration-1000 bg-black bg-opacity-70 fixed z-20 backdrop-blur-sm'} onClick={Close}></div>
@@ -47,7 +50,7 @@ function Navbar() {
               <ul className='flex flex-col duration-200'>
                 <li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>User Page</li>
                 <li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Options</li>
-                <li className='py-2 px-3 hover:bg-orange-500 cursor-pointer'>Login</li>
+                <Link to={'/Login'}><li className='py-2 px-3 hover:bg-orange-500 cursor-pointer'>Login</li></Link>
               </ul>
             </div>
         </div>
