@@ -65,7 +65,7 @@ function Navbar() {
             <Link to='/' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Home</li></Link>
             <Link to='/Dashboard' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Dashboard</li></Link>
             <Link to='/Subscriptions' onClick={Close}><li className='p-4 text-emerald-500 drop-shadow-md active:duration-75 hover:bg-emerald-500 hover:text-white active:bg-emerald-700 flex'><IoMdStar className='mr-1 mt-1' /> Subscriptions</li></Link>
-            <Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Contact</li></Link>
+            <Link to='/Contact' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Contact</li></Link>
             <Link to='/About' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>About</li></Link>
             <Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700 lg:hidden'>Sign In</li></Link>
           </ul>

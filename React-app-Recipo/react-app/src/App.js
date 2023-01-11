@@ -8,6 +8,7 @@ import Login from "./Pages/Login";
 import Subscriptions from "./Pages/Subscriptions";
 import Register from "./Pages/Register";
 import About from "./Pages/About";
+import Contact from "./Pages/Contact";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Ingredients" element={<Ingredients />} />
         <Route path='/Subscriptions' element={<Subscriptions />} />
         <Route path="/About" element={<About />} />
+        <Route path='/Contact' element={<Contact />} />
       </Routes>
       <Footer />
     </div>
