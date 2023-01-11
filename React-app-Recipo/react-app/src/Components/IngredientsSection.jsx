@@ -1,33 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import IngredientLabel from './IngredientLabel'
+import axios from 'axios'
+import { FaTruckLoading } from 'react-icons/fa'
 
-const IngredientsSection = () => {
+
+const  IngredientsSection = () => {
+  const [ingredientsList, setIngredients] = useState([])
+  useEffect(()=>{
+    axios.get('https://localhost:7291/api/Ingredients').then((res) => {
+      setIngredients(res.data)
+    })
+    
+  }, [])
+  console.log(ingredientsList)
   return (
     <div className='flex flex-wrap gap-6 p-10'>
-        <IngredientLabel text='cheese' />
-        <IngredientLabel text='cheese1' />
-        <IngredientLabel text='cheese2' />
-        <IngredientLabel text='cheese3' />
-        <IngredientLabel text='cheese4' />
-        <IngredientLabel text='cheese5' />        
-        <IngredientLabel text='cheese6' />
-        <IngredientLabel text='cheese7' />
-        <IngredientLabel text='cheese8' />
-        <IngredientLabel text='cheese9' />
-        <IngredientLabel text='cheese10' />
-        <IngredientLabel text='cheese11' />        
-        <IngredientLabel text='cheese12' />
-        <IngredientLabel text='cheese13' />
-        <IngredientLabel text='cheese14' />
-        <IngredientLabel text='cheese15' />
-        <IngredientLabel text='cheese16' />
-        <IngredientLabel text='cheese17' />        
-        <IngredientLabel text='cheese18' />
-        <IngredientLabel text='cheese19' />
-        <IngredientLabel text='cheese20' />
-        <IngredientLabel text='cheese21' />
-        <IngredientLabel text='cheese22' />
-        <IngredientLabel text='cheese23' />
+        {ingredientsList == [] ? <h1>loading...</h1> : (ingredientsList.map((item)=>
+        <IngredientLabel text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
+          
+        ))}
+        
     </div>
   )
 }
