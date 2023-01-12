@@ -14,12 +14,14 @@ namespace Recipo_by_Agilis.Controllers
         private IUserService _userService;
         private readonly IConfiguration _configuration;
         private readonly RoleManager<IdentityRole> _roleManager;
-        
-        public UsersController(IUserService userService, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public UsersController(IUserService userService, IConfiguration configuration, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             _userService = userService;
             _configuration = configuration;
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         // /api/auth/register

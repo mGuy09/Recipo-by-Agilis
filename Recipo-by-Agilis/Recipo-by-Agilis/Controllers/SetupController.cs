@@ -102,8 +102,58 @@ public class SetupController : ControllerBase
             return BadRequest(new { error = "The user eas not added to the role" });
         }
 
-        //check if use is assigned to role 
+        //check if user is assigned to role 
 
 
     }
+
+    [HttpGet]
+    [Route("GetUserRoles")]
+
+    public async Task<IActionResult> GetUserRolesTask(string email)
+    {
+        //check if email si valid
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            _logger.LogInformation($"The User with {email} does not exist");
+            return BadRequest(new { error = "User does not exist" });
+        }
+        //return the roles
+        var roles = await _userManager.GetRolesAsync(user);
+        return Ok(roles);
+    }
+
+    [HttpPost]
+    [Route("RemoveUserFromRole")]
+
+    public async Task<IActionResult> RemoveUserFromRole(string email, string role)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            _logger.LogInformation($"The User with {email} does not exist");
+            return BadRequest(new { error = "User does not exist" });
+        }
+
+        //check if role exists
+
+        var roleExists = await _roleManager.RoleExistsAsync(role);
+
+        if (!roleExists)
+        {
+            _logger.LogInformation($"The Role {email} does not exist");
+            return BadRequest(new { error = "Role does not exist" });
+
+        }
+
+        var result = await _userManager.RemoveFromRoleAsync(user, role);
+        if (result.Succeeded)
+        {
+            return Ok(new { result = $"User {email} has been removed from role{role}" });
+        }
+
+        return BadRequest(new { error = $"Unable to remove User{user} from Role{role}" });
+    }
+
 }

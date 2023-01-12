@@ -34,17 +34,13 @@ public class UserService : IUserService
         if (model.Password != model.ConfirmPassword)
             return new UserManagerResponse() { Message = "Passwords don't match", IsSuccess = false };
 
-        var identityUser = new IdentityUser
-        {
-            Email = model.Email,
-            UserName = model.UserName
-        };
-        
-       
-        var result = await _userManager.CreateAsync(identityUser, model.Password);
+        var newUser = new IdentityUser { Email = model.Email, UserName = model.UserName };
+        var result = await _userManager.CreateAsync(newUser, model.Password);
         
         if (result.Succeeded)
         {
+            // add the user to a role
+            var resultRoleAddition = await _userManager.AddToRoleAsync(newUser, "FreeUser");
             return new UserManagerResponse { Message = "User created.", IsSuccess = true };
             
         }
