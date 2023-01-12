@@ -20,4 +20,5 @@ public class Register
     [StringLength(50, MinimumLength = 5)]
     public string ConfirmPassword { get; set; }
 
+    
 }

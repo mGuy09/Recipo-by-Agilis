@@ -14,11 +14,14 @@ namespace Recipo_by_Agilis.Controllers
         private IUserService _userService;
         private readonly IConfiguration _configuration;
         private UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UsersController(IUserService userService, IConfiguration configuration, UserManager<IdentityUser> userManager)
+        public UsersController(IUserService userService, IConfiguration configuration, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             _userService = userService;
             _configuration = configuration;
+            _roleManager = roleManager;
             _userManager = userManager;
         }
 
@@ -30,7 +33,11 @@ namespace Recipo_by_Agilis.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _userService.RegisterUserAsync(model);
-                if (result.IsSuccess) return Ok(result); //status code 200 
+                if (result.IsSuccess) 
+                {
+                   
+                    return Ok(result); //status code 200 
+                }
                 return BadRequest(result);
             }
 

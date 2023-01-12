@@ -12,36 +12,48 @@ public class UserService : IUserService
 {
     private UserManager<IdentityUser> _userManager;
     private IConfiguration _configuration;
+    private RoleManager<IdentityRole> _roleManager;
+
 
     public UserService(UserManager<IdentityUser> usermanager, IConfiguration configuration)
     {
         _userManager = usermanager;
         _configuration = configuration;
+        
     }
 
     public async Task<UserManagerResponse> RegisterUserAsync(Register model)
     {
+        
         if (model == null)
             throw new NullReferenceException("register model is null");
+
+      
 
         if (model.Password != model.ConfirmPassword)
             return new UserManagerResponse() { Message = "Passwords don't match", IsSuccess = false };
 
-        var identityUser = new IdentityUser
-        {
-            Email = model.Email,
-            UserName = model.UserName
-        };
-
-        var result = await _userManager.CreateAsync(identityUser, model.Password);
+        var newUser = new IdentityUser { Email = model.Email, UserName = model.UserName };
+        var result = await _userManager.CreateAsync(newUser, model.Password);
+        
         if (result.Succeeded)
         {
-            //TO do: send a confirmation email
+            // add the user to a role
+            var resultRoleAddition = await _userManager.AddToRoleAsync(newUser, "FreeUser");
             return new UserManagerResponse { Message = "User created.", IsSuccess = true };
+            
         }
-
         return new UserManagerResponse
-            { Message = "User was not created", IsSuccess = false, Errors = result.Errors.Select(e => e.Description) };
+        {
+            Message = "Failed to create user",
+            IsSuccess = false,
+            Errors = result.Errors.Select(e => e.Description)
+        };
+
+
+        //    //TO do: send a confirmation email
+       
+
     }
 
     public async Task<UserManagerResponse> LoginUserAsync(Login model)
