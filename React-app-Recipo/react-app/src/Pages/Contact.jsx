@@ -18,7 +18,7 @@ const Contact = () => {
     };
     return (
         <div className='grid-cols-2  items-center ' >
-            <Parallax bgImage={BackgroundImage} className='w-full h-screen flex items-center relative bg-slate-300' renderLayer={(percentage) => (
+            <Parallax bgImage={BackgroundImage} className='w-full h-screen flex items-center relative bg-black justify-center' renderLayer={(percentage) => (
                 <div
                     style={{
                         position: 'absolute',
@@ -28,22 +28,21 @@ const Contact = () => {
                     }}
                 />
             )} strength={0} blur={5}>
-                <div className='bg-slate-400 drop-shadow-lg p-20 rounded-xl m-60'>
+                <div className='bg-white drop-shadow-lg p-20 rounded-xl flex flex-col'>
                     <h1 className='text-5xl font-semibold'>Want to get in touch?</h1>
 
-
-                </div>
-                <section className='flex flex-col place-items-center bg-slate-400 drop-shadow-lg p-20 rounded-xl m-60 '>
-                    <div>
-                        <h2 className='text-center space-x-3 '>Contact us</h2>
-                        <form ref={form} onSubmit={sendEmail} className='space-x-3 '>
-                            <input className='space-x-3 ' type="text" placeholder='Your name' name='user_name' required />
-                            <input className='space-x-3 ' type="email" placeholder='Your email' name='email' required />
-                            <input className='space-x-3 ' name="message" required cols="30" rows="10" placeholder='Your message' />
-                            <button className='' type='submit'>Send message</button>
+                    
+                       
+                        <form ref={form} onSubmit={sendEmail} className='flex flex-col items-center gap-10 p-20 rounded-xl  '>
+                            <input className='border border-gray-400 px-4 py-2 rounded-full' type="text" placeholder='Your name' name='user_name' required />
+                            <input className='border border-gray-400 px-4 py-2 rounded-full' type="email" placeholder='Your email' name='email' required />
+                            <input className='border border-gray-400 px-4 py-2 rounded-full' name="message" required cols="30" rows="10" placeholder='Your message' />
+                            <button className='bg-orange-500 rounded-full px-4 py-2 drop-shadow-lg hover:bg-orange-400 text-white duration-200 active:bg-orange-700' type='submit'>Send message</button>
                         </form>
-                    </div>
-                </section>
+                       
+                    
+                </div>
+                
             </Parallax>
 
         </div>

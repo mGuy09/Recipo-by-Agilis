@@ -28,6 +28,7 @@ const  IngredientsSection = ({filter, search}) => {
     Checkmark.forEach(element => {
       if(selectedIngredients.includes(element.id)){
         element.checked = true
+        console.log(element )
       }
     })
   },[Checkmark, selectedIngredients])

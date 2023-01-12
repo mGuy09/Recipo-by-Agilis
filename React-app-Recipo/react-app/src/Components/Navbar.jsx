@@ -70,7 +70,7 @@ function Navbar() {
             {cookies !== null && <Link to='/Subscriptions' onClick={Close}><li className='p-4 text-emerald-500 drop-shadow-md active:duration-75 hover:bg-emerald-500 hover:text-white active:bg-emerald-700 flex'><IoMdStar className='mr-1 mt-1' /> Subscriptions</li></Link>}
             <Link to='/Contact' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>Contact</li></Link>
             <Link to='/About' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700'>About</li></Link>
-            {cookies === null ? <Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700 lg:hidden'>Sign In</li></Link> :
+            {cookies === null ? <Link to='/Login' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700 lg:hidden'>Sign In</li></Link> :
               <Link to='' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:text-white active:bg-orange-700 lg:hidden'>Logout</li></Link>}
           </ul>
         </div>
