@@ -1,10 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Identity;
-using Recipo_by_Agilis.Models;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Recipo_by_Agilis.Models;
 using IdentityUser = Microsoft.AspNetCore.Identity.IdentityUser;
 
 namespace Recipo_by_Agilis.Services;
@@ -68,28 +67,27 @@ public class UserService : IUserService
 
         var claims = new[]
         {
-            new Claim("Email", model.Email),
-            new Claim("Username", user.UserName),
-            new Claim("userId",user.Id)
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.UserName)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
 
         var token = new JwtSecurityToken(
-            issuer: _configuration["AuthSettings:Issuer"],
-            audience: _configuration["AuthSettings:Audience"],
+            issuer:null,
+            audience: null,
             claims: claims,
             expires: DateTime.Now.AddDays(30),
-            signingCredentials: new SigningCredentials(key,SecurityAlgorithms.HmacSha256 ));
+            signingCredentials: new SigningCredentials(key,SecurityAlgorithms.HmacSha256));
        
         string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
-        
+
         return new UserManagerResponse()
         {
-            Message = tokenAsString,
+            Message = "Successfully logged in",
             IsSuccess = true,
-            ExpireDate = token.ValidTo,
-           
+            User = user,
+            Token = tokenAsString
         };
     }
 

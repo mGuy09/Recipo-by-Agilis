@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import IngredientLabel from './IngredientLabel'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
-
 
 const  IngredientsSection = ({filter, search}) => {
   const [baseList, setBaseList] = useState([])
   const [selectedIngredients, setSelected] = useState([])
   const [Checkmark, setCheckmark] = useState([])
-
   
   const categoryId = filter
   const name = search
@@ -28,7 +25,6 @@ const  IngredientsSection = ({filter, search}) => {
     Checkmark.forEach(element => {
       if(selectedIngredients.includes(element.id)){
         element.checked = true
-        console.log(element )
       }
     })
   },[Checkmark, selectedIngredients])
@@ -70,7 +66,7 @@ const  IngredientsSection = ({filter, search}) => {
           
       </div>
       <div className='p-10 flex justify-center items-center'>
-        {selectedIngredients.length > 2 ? <button onClick={OnSubmit} className='bg-orange-500 px-8 py-2 rounded-full text-lg text-white'>Get Recipes</button>: <h1 className='font-thin text-xl '>Please select 3 or more ingredients</h1>}
+        {selectedIngredients.length >= 1 ? <button onClick={OnSubmit} className='bg-orange-500 px-8 py-2 rounded-full text-lg text-white'>Get Recipes</button>: <h1 className='font-thin text-xl '>Please select 1 or more ingredients</h1>}
         
       </div>
     </div>

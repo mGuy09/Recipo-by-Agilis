@@ -14,7 +14,6 @@ const Ingredients = () => {
   const SearchFilter = (e) => {
     setSearchFilter(e.target.value)
   }
-  console.log(search)
   
   return (
     <>

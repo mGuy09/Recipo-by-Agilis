@@ -1,9 +1,11 @@
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Recipo_by_Agilis.Services;
 
@@ -12,10 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 //Configure EntityFramework with SQL Server
 builder.Services.AddDbContext<RecipoContext>(options =>
@@ -37,41 +40,80 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 //Authentication
 builder.Services.AddAuthentication(auth =>
 {
+    
     auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidAudience = configuration["AuthSettings:Audience"],
-        ValidIssuer = configuration["AuthSettings:Issuer"],
-        //la 42 si 43 trebuie trecut linkul url
-        RequireExpirationTime = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        //ValidAudience = configuration["AuthSettings:Audience"],
+        //ValidIssuer = configuration["AuthSettings:Issuer"],
+        ValidateLifetime = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AuthSettings:Key"])),
         ValidateIssuerSigningKey = true
     };
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            context.Token = context.Request.Cookies["Token"];
+            return Task.CompletedTask;
+        }
+    };
 });
-
+builder.Services.AddAuthorization();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Recipo Api", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Jwt auth header",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
+});
 
 //aici, trebuie sa mai adaugam niste satari pt access
 var provider = builder.Services.BuildServiceProvider();
 var config = provider.GetRequiredService<IConfiguration>();
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-builder.Services.AddCors(options =>
-{
-    var frontendUrl = config.GetValue<string>("frontend_url");
-    options.AddDefaultPolicy(builder =>
+
+builder.Services.AddCors(cors => {
+    cors.AddPolicy(name: myAllowSpecificOrigins, policy =>
     {
-        builder.WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader();
+        policy.WithOrigins("http://localhost:3000").AllowCredentials();
     });
+
+
 });
 
 //JSON serializer
-builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => 
-    options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-    .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+//builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => 
+//    options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+//    .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
 var app = builder.Build();
 
@@ -83,10 +125,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors();
+app.UseAuthorization();
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
+});
 
 app.UseAuthentication();
-app.UseAuthorization();
 
 
 app.MapControllers();

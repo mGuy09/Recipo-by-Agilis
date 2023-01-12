@@ -1,4 +1,6 @@
-﻿namespace Recipo_by_Agilis.Models;
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Recipo_by_Agilis.Models;
 
 public class UserManagerResponse
 {
@@ -9,4 +11,6 @@ public class UserManagerResponse
 
     public DateTime? ExpireDate { get; set; }
 
+    public IdentityUser User { get; set; }
+    public string Token { get; set; }
 }

@@ -13,14 +13,17 @@ namespace Recipo_by_Agilis.Controllers
     {
         private IUserService _userService;
         private readonly IConfiguration _configuration;
+        private UserManager<IdentityUser> _userManager;
 
-        public UsersController(IUserService userService, IConfiguration configuration)
+        public UsersController(IUserService userService, IConfiguration configuration, UserManager<IdentityUser> userManager)
         {
             _userService = userService;
             _configuration = configuration;
+            _userManager = userManager;
         }
 
         // /api/auth/register
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync([FromBody] Register model)
         {
@@ -35,6 +38,7 @@ namespace Recipo_by_Agilis.Controllers
         }
 
         // /api/auth/login
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> LoginAsync([FromBody] Login model)
         {
@@ -42,13 +46,27 @@ namespace Recipo_by_Agilis.Controllers
             {
                 var result = await _userService.LoginUserAsync(model);
                 if (result.IsSuccess)
-                    return Ok(result);
-                return BadRequest(result);
+                {
+                    Response.Cookies.Append("Token", result.Token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                    Response.Cookies.Append("Username", result.User.UserName, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                    return Ok();
+                }
+                return BadRequest();
             }
-
+            
             return BadRequest("Some properties are not valid");
         }
+        [Authorize]
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            
+                var result = _userManager.FindByNameAsync(User.Identity.Name);
+                return Ok(result); 
+            
 
+            
+        }
         
     }
 
