@@ -10,7 +10,10 @@ const  IngredientsSection = ({filter, search}) => {
   const categoryId = filter
   const name = search
   useEffect(()=>{
-      axios.get('https://localhost:7291/api/Ingredients').then(res => {
+      axios.get('https://localhost:7291/api/Ingredients', {
+        withCredentials: true,
+        headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'
+    }}).then(res => {
         setBaseList(res.data)
       })
   }, [])

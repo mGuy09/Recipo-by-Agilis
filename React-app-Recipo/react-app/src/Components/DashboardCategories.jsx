@@ -19,12 +19,12 @@ const DashboardCategories = () => {
         </div>
     </div>
     <div className='grid py-10 px-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-48 lg:gap-x-32 mx-20'>
-        <CategoryCard id={1} text='Dairy' image={Dairy}/>
-        <CategoryCard id={2} text='Meats' image={Meats}/>
-        <CategoryCard id={3} text='Vegetables' image={Vegetables}/>
-        <CategoryCard id={4} text='Herbs & Spices' image={Herbs}/>
-        <CategoryCard id={5} text='Condiments' image={Condiments}/>
-        <CategoryCard id={6} text='Grains' image={Grains} />
+        <CategoryCard  text='Dairy' image={Dairy}/>
+        <CategoryCard  text='Meats' image={Meats}/>
+        <CategoryCard  text='Vegetables' image={Vegetables}/>
+        <CategoryCard text='Herbs & Spices' image={Herbs}/>
+        <CategoryCard  text='Condiments' image={Condiments}/>
+        <CategoryCard  text='Grains' image={Grains} />
     </div>
     </>
   )

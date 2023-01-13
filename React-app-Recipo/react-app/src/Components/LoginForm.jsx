@@ -13,7 +13,7 @@ const LoginForm = () => {
     e.preventDefault();
     const data = { email: user.email, password: user.password };
     console.log(data);
-    await axios.post(apiUrl, data, {Credentials: 'allow'}).then((result) => {
+    await axios.post(apiUrl, data).then((result) => {
       console.log(result);
       
     });

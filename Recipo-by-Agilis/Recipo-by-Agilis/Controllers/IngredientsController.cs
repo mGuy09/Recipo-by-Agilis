@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Http.Cors;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
 
 namespace Recipo_by_Agilis.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class IngredientsController : ControllerBase
@@ -22,14 +18,15 @@ namespace Recipo_by_Agilis.Controllers
         }
 
         // GET: api/Ingredients
-        [HttpGet]
+        [Authorize]
+        [Microsoft.AspNetCore.Mvc.HttpGet]
         public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredients()
         {
             return await _context.Ingredients.ToListAsync();
         }
 
         // GET: api/Ingredients/5
-        [HttpGet("{id}")]
+        [Microsoft.AspNetCore.Mvc.HttpGet("{id}")]
         public async Task<ActionResult<Ingredient>> GetIngredient(int id)
         {
             var ingredient = await _context.Ingredients.FindAsync(id);
@@ -44,7 +41,7 @@ namespace Recipo_by_Agilis.Controllers
 
         // PUT: api/Ingredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [Microsoft.AspNetCore.Mvc.HttpPut("{id}")]
         public async Task<IActionResult> PutIngredient(int id, Ingredient ingredient)
         {
             if (id != ingredient.Id)
@@ -75,7 +72,7 @@ namespace Recipo_by_Agilis.Controllers
 
         // POST: api/Ingredients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
         public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient ingredient)
         {
             _context.Ingredients.Add(ingredient);
@@ -85,7 +82,7 @@ namespace Recipo_by_Agilis.Controllers
         }
 
         // DELETE: api/Ingredients/5
-        [HttpDelete("{id}")]
+        [Microsoft.AspNetCore.Mvc.HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIngredient(int id)
         {
             var ingredient = await _context.Ingredients.FindAsync(id);

@@ -13,7 +13,6 @@ namespace Recipo_by_Agilis.Controllers
     {
         private IUserService _userService;
         private readonly IConfiguration _configuration;
-        private UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -56,20 +55,27 @@ namespace Recipo_by_Agilis.Controllers
                 {
                     Response.Cookies.Append("Token", result.Token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
                     Response.Cookies.Append("Username", result.User.UserName, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-                    return Ok();
+                    return Ok(new
+                    {
+                        Message = "user created successfully"
+                    });
                 }
-                return BadRequest();
+                return Unauthorized();
             }
             
             return BadRequest("Some properties are not valid");
         }
-        [Authorize]
+        
         [HttpGet("GetUser")]
         public async Task<IActionResult> GetCurrentUser()
         {
             
-                var result = _userManager.FindByNameAsync(User.Identity.Name);
-                return Ok(result); 
+                var result = await _userManager.FindByNameAsync(User.Identity.Name);
+                return Ok(new
+                {
+                    Message = result.Email
+
+                }); 
             
 
             

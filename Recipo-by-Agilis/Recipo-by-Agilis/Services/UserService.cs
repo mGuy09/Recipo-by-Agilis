@@ -15,11 +15,11 @@ public class UserService : IUserService
     private RoleManager<IdentityRole> _roleManager;
 
 
-    public UserService(UserManager<IdentityUser> usermanager, IConfiguration configuration)
+    public UserService(UserManager<IdentityUser> usermanager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
     {
         _userManager = usermanager;
         _configuration = configuration;
-        
+        _roleManager = roleManager;
     }
 
     public async Task<UserManagerResponse> RegisterUserAsync(Register model)
@@ -28,7 +28,10 @@ public class UserService : IUserService
         if (model == null)
             throw new NullReferenceException("register model is null");
 
-      
+        var userExists = await _userManager.FindByEmailAsync(model.Email);
+        if (userExists != null) return new UserManagerResponse{Message = "user already exists", IsSuccess = false};
+        userExists = await _userManager.FindByNameAsync(model.UserName);
+        if (userExists != null) return new UserManagerResponse { Message = "user already exists", IsSuccess = false };
 
         if (model.Password != model.ConfirmPassword)
             return new UserManagerResponse() { Message = "Passwords don't match", IsSuccess = false };
@@ -38,10 +41,9 @@ public class UserService : IUserService
         
         if (result.Succeeded)
         {
-            // add the user to a role
             var resultRoleAddition = await _userManager.AddToRoleAsync(newUser, "FreeUser");
+
             return new UserManagerResponse { Message = "User created.", IsSuccess = true };
-            
         }
         return new UserManagerResponse
         {
@@ -76,12 +78,19 @@ public class UserService : IUserService
                 Message = "Invalid password.",
                 IsSuccess = false,
             };
+        var userRoles = await _userManager.GetRolesAsync(user);
 
-        var claims = new[]
+        var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Name, user.UserName)
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
+
+        foreach (var userRole in userRoles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, userRole));
+        }
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
 
@@ -92,7 +101,8 @@ public class UserService : IUserService
             expires: DateTime.Now.AddDays(30),
             signingCredentials: new SigningCredentials(key,SecurityAlgorithms.HmacSha256));
        
-        string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+        var jwthandler = new JwtSecurityTokenHandler();
+        string tokenAsString = jwthandler.WriteToken(token);
 
         return new UserManagerResponse()
         {
