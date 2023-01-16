@@ -31,9 +31,9 @@ namespace Recipo_by_Agilis.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _userService.RegisterUserAsync(model);
-                if (result.IsSuccess) 
+                if (result.IsSuccess)
                 {
-                   
+
                     return Ok(result); //status code 200 
                 }
                 return BadRequest(result);
@@ -57,7 +57,7 @@ namespace Recipo_by_Agilis.Controllers
             return BadRequest("Some properties are not valid");
         }
 
-        
+
     }
 
 

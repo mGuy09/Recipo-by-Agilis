@@ -4,6 +4,7 @@ import { FaUserAlt } from 'react-icons/fa'
 import { IoMdStar } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
+import RecipoLogo from '../Images/recipologo.png'
 
 function Navbar() {
   const [cookies] = useCookies()
@@ -44,6 +45,7 @@ function Navbar() {
             <TfiMenu size={30} className='m-1 cursor-pointer' onClick={OpenClose} />
           </div>
           <h1 className='cursor-default ml-3 font-semibold text-2xl'>RECIPO</h1>
+          {/* <img src={RecipoLogo} width={100} alt="" /> */}
         </div>
         <div className='m-3'>
           <FaUserAlt size={25} className='hidden lg:flex mx-5 mt-2 cursor-pointer items-center' onClick={DropdownOpenClose} />
@@ -52,6 +54,7 @@ function Navbar() {
               <li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>User Page</li>
               <li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Options</li>
               <Link to={'/Login'}><li className='py-2 px-3 hover:bg-orange-500 cursor-pointer'>Login</li></Link>
+              <Link to={'/Login'}><li className='py-2 px-3 hover:bg-orange-500 cursor-pointer'>Login As Admin</li></Link>
             </ul>
           </div>
         </div>
