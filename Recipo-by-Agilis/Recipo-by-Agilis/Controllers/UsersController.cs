@@ -25,15 +25,16 @@ namespace Recipo_by_Agilis.Controllers
         }
 
         // /api/auth/register
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync([FromBody] Register model)
         {
             if (ModelState.IsValid)
             {
                 var result = await _userService.RegisterUserAsync(model);
-                if (result.IsSuccess)
+                if (result.IsSuccess) 
                 {
-
+                   
                     return Ok(result); //status code 200 
                 }
                 return BadRequest(result);
@@ -43,6 +44,7 @@ namespace Recipo_by_Agilis.Controllers
         }
 
         // /api/auth/login
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> LoginAsync([FromBody] Login model)
         {
@@ -50,14 +52,35 @@ namespace Recipo_by_Agilis.Controllers
             {
                 var result = await _userService.LoginUserAsync(model);
                 if (result.IsSuccess)
-                    return Ok(result);
-                return BadRequest(result);
+                {
+                    Response.Cookies.Append("Token", result.Token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                    Response.Cookies.Append("Username", result.User.UserName, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                    return Ok(new
+                    {
+                        Message = "user created successfully"
+                    });
+                }
+                return Unauthorized();
             }
-
+            
             return BadRequest("Some properties are not valid");
         }
+        
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            
+                var result = await _userManager.FindByNameAsync(User.Identity.Name);
+                return Ok(new
+                {
+                    Message = result.Email
 
+                }); 
+            
 
+            
+        }
+        
     }
 
 
