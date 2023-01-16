@@ -1,29 +1,63 @@
+import axios from 'axios'
 import React from 'react'
 import { FaSearch } from 'react-icons/fa'
+import { useParams, useNavigate } from 'react-router'
 import IngredientsFilter from '../Components/IngredientsFilter'
 import IngredientsSection from '../Components/IngredientsSection'
 import PremiumAddRecipes from '../Components/PremiumAddRecipes'
 
 const Ingredients = () => {
-  const [filter, setFilter] = React.useState(0)
+  const FilterRef = useParams()
+
+  const [filter, setFilter] = React.useState(FilterRef.id)
   const [search, setSearchFilter] = React.useState('')
+  const [selectedIngredients, setSelectedIngredients] = React.useState([])
+  const [isFocused, setFocus] = React.useState(false)
+
   
+  const navigate = useNavigate()
+  React.useEffect(()=>{
+    axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
+      console.log(res)
+    }).catch((reason)=>{
+      reason.response.status != 200 && navigate('/Login')
+    })
+  },[])
+
   const HandleCallback = (childData) => {
-    setFilter(childData)
+      setFilter(childData)
   }
   const SearchFilter = (e) => {
     setSearchFilter(e.target.value)
   }
+  const onSubmit=()=>{
+    console.log(selectedIngredients)
+  }
+  
+  const HandleSelectedAmout = (childData) => {
+    setSelectedIngredients(childData)
+  }
+  const onFocus = (e)=>{
+    setFocus(true)
+  }
+  const outOfFocus=()=>{
+    setFocus(false)
+  }
   
   return (
     <>
-    <PremiumAddRecipes />
-    <IngredientsFilter parentCallback={HandleCallback}/>
-    <div className='border-gray-400 border-2 mx-10 md:mx-32 lg:mx-52 px-3 py-2 my-10 flex items-center rounded-full'>
-    <FaSearch size={15} className='text-gray-400 mr-1'/>
-    <input className='px-2 w-full outline-none' placeholder='Search' onChange={SearchFilter} type="search" />
-    </div>
-    <IngredientsSection filter={filter} search={search}/>
+      <PremiumAddRecipes />
+      <IngredientsFilter parentCallback={HandleCallback} FilterRef={FilterRef}/>
+      <div className='flex justify-center flex-col items-center gap-5 lg:flex-row-reverse lg:justify-around p-5'>
+        <div className='border-gray-400  border-2 px-3 py-2 w-[80%] lg:w-[20rem] flex items-center rounded-full'>
+          <FaSearch size={15} className={!isFocused?'text-gray-400  mr-1': 'text-gray-900 mr-1'}/>
+          <input className='px-2 w-full outline-none focus:placeholder:text-gray-300 autofill:hidden' placeholder='Search' onBlur={outOfFocus} onFocus={onFocus}  onChange={SearchFilter} type="search" />
+        </div>
+        <div className={selectedIngredients.length > 1? 'visible':'invisible'}>
+          <button onClick={onSubmit} className='bg-orange-500 rounded-full shadow-md py-3 px-6 text-white hover:bg-orange-400 duration-150 active:bg-orange-700 font-medium '>Get Recipes</button>
+        </div>
+      </div>
+      <IngredientsSection ParentCallback={HandleSelectedAmout} filter={filter} search={search}/>
     </>
   )
 }

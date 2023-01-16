@@ -53,8 +53,8 @@ namespace Recipo_by_Agilis.Controllers
                 var result = await _userService.LoginUserAsync(model);
                 if (result.IsSuccess)
                 {
-                    Response.Cookies.Append("Token", result.Token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-                    Response.Cookies.Append("Username", result.User.UserName, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                    Response.Cookies.Append("Token", result.Token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true});
+                    Response.Cookies.Append("Username", result.User.UserName, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true});
                     return Ok(new
                     {
                         Message = "user created successfully"
@@ -65,7 +65,7 @@ namespace Recipo_by_Agilis.Controllers
             
             return BadRequest("Some properties are not valid");
         }
-        
+        [Authorize]
         [HttpGet("GetUser")]
         public async Task<IActionResult> GetCurrentUser()
         {
@@ -73,14 +73,23 @@ namespace Recipo_by_Agilis.Controllers
                 var result = await _userManager.FindByNameAsync(User.Identity.Name);
                 return Ok(new
                 {
-                    Message = result.Email
+                    Email = result.Email,
+                    Username = result.UserName
 
-                }); 
-            
-
-            
+                });
         }
-        
+
+        [HttpGet("Logout")]
+        public async Task<IActionResult> LogOut()
+        {
+            Response.Cookies.Delete("Token", new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true });
+            Response.Cookies.Delete("Username", new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true });
+            return Ok(new
+            {
+                Message = "User Successfully logged out"
+            });
+        }
+
     }
 
 

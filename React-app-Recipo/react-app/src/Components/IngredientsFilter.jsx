@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
+import FilterRadio from './FilterRadio'
+import axios from 'axios'
 
-const IngredientsFilter = ({parentCallback}) => {
+const IngredientsFilter = ({parentCallback, FilterRef}) => {
     const [filterDropdown, setDropdown] = useState(false)
     const[isLarge, setIsLarge] = useState(window.innerWidth >= 1024 ? true : false)
+    const[categoryList, setCategoryList] = useState([])
+    const[Checkmark, setCheckmark] = useState([])
+
+    React.useEffect(()=>{
+      axios.get('https://localhost:7291/api/Categories', {withCredentials: true}).then(res => {
+        setCategoryList(res.data)})
+    }, [])
+
     const OpenClose = () => {
         setDropdown(!filterDropdown)
     }
@@ -16,7 +26,19 @@ const IngredientsFilter = ({parentCallback}) => {
             else setIsLarge(false)
         }
         window.addEventListener('resize', handleResize)
-    })
+    },[])
+    useEffect(()=>{
+        setCheckmark(document.querySelectorAll('.filter'))
+    },[categoryList])
+    useEffect(()=>{
+        Checkmark.forEach(item=>{
+        
+            if(item.value === FilterRef.id){
+                item.checked = true
+            }
+        })
+    },[Checkmark])    
+    
     
   return (
     <div className='duration-300 ease-in-out'>
@@ -25,41 +47,15 @@ const IngredientsFilter = ({parentCallback}) => {
             <h1 className='text-lg md:text-xl lg:text-2xl font-thin cursor-default '>Ingredient Filter</h1>
         </div>
         <div>
-            <IoIosArrowDown size={42} className={!filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 lg:hidden': 'hidden'} onClick={OpenClose}/>
-            <IoIosArrowUp size={42} className={filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 lg:hidden': 'hidden'} onClick={OpenClose}/>
+            <IoIosArrowDown size={42} className={!filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden visible': 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden invisible hidden'} onClick={OpenClose}/>
+            <IoIosArrowUp size={42} className={filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden visible': 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden invisible hidden'} onClick={OpenClose}/>
         </div>
     </div>
-    {<div className={filterDropdown || isLarge ? 'flex gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0' : 'hidden'}>
-            
-            <div>
-                <input type="radio" id='allingredientsfilter' name='ingredientsfilter'  value={0} onClick={onTrigger} className='hidden peer'/>
-                <label htmlFor="allingredientsfilter" className='py-3 px-5 duration-150 bg-white border rounded-full border-gray-400 text-gray-400 peer-checked:bg-orange-500 peer-checked:border-orange-500 peer-checked:hover:bg-orange-400 peer-checked:hover:border-orange-400 peer-checked:text-white hover:border-orange-500 hover:text-orange-500 active:bg-orange-700 active:text-white peer-checked:active:bg-orange-700 cursor-pointer select-none'>All Ingredients</label>
-            </div>
-            <div>
-                <input type="radio" id='dairyfilter' name='ingredientsfilter' value={3} onClick={onTrigger} className='hidden peer'/>
-                <label htmlFor="dairyfilter" className='py-3 px-5 duration-150 bg-white border rounded-full border-gray-400 text-gray-400 peer-checked:bg-orange-500 peer-checked:border-orange-500 peer-checked:hover:bg-orange-400 peer-checked:hover:border-orange-400 peer-checked:text-white hover:border-orange-500 hover:text-orange-500 active:bg-orange-700 active:text-white peer-checked:active:bg-orange-700 cursor-pointer select-none'>Dairy</label>        
-            </div>
-            <div>
-                <input type="radio" id='meatsfilter' name='ingredientsfilter' value={2} onClick={onTrigger} className='hidden peer'/>
-                <label htmlFor="meatsfilter" className='py-3 px-5 duration-150 bg-white border rounded-full border-gray-400 text-gray-400 peer-checked:bg-orange-500 peer-checked:border-orange-500 peer-checked:hover:bg-orange-400 peer-checked:hover:border-orange-400 peer-checked:text-white hover:border-orange-500 hover:text-orange-500 active:bg-orange-700 active:text-white peer-checked:active:bg-orange-700 cursor-pointer select-none'>Meats</label>        
-            </div>
-            <div>
-                <input type="radio" id='veggiefilter' name='ingredientsfilter' value={1} onClick={onTrigger} className='hidden peer'/>
-                <label htmlFor="veggiefilter" className='py-3 px-5 duration-150 bg-white border rounded-full border-gray-400 text-gray-400 peer-checked:bg-orange-500 peer-checked:border-orange-500 peer-checked:hover:bg-orange-400 peer-checked:hover:border-orange-400 peer-checked:text-white hover:border-orange-500 hover:text-orange-500 active:bg-orange-700 active:text-white peer-checked:active:bg-orange-700 cursor-pointer select-none'>Vegetables</label>        
-            </div>
-            <div>
-                <input type="radio" id='herbsfilter' name='ingredientsfilter' value={5} onClick={onTrigger} className='hidden peer'/>
-                <label htmlFor="herbsfilter" className='py-3 px-5 duration-150 bg-white border rounded-full border-gray-400 text-gray-400 peer-checked:bg-orange-500 peer-checked:border-orange-500 peer-checked:hover:bg-orange-400 peer-checked:hover:border-orange-400 peer-checked:text-white hover:border-orange-500 hover:text-orange-500 active:bg-orange-700 active:text-white peer-checked:active:bg-orange-700 cursor-pointer select-none'>Herbs & Spices</label>        
-            </div>
-            <div>
-                <input type="radio" id='condimentsfilter' name='ingredientsfilter' value={4} onClick={onTrigger} className='hidden peer'/>
-                <label htmlFor="condimentsfilter" className='py-3 px-5 duration-150 bg-white border rounded-full border-gray-400 text-gray-400 peer-checked:bg-orange-500 peer-checked:border-orange-500 peer-checked:hover:bg-orange-400 peer-checked:hover:border-orange-400 peer-checked:text-white hover:border-orange-500 hover:text-orange-500 active:bg-orange-700 active:text-white peer-checked:active:bg-orange-700 cursor-pointer select-none'>Condiments</label>        
-            </div>
-            <div>
-                <input type="radio" id='grainsfilter' name='ingredientsfilter' value={6} onClick={onTrigger} className='hidden peer'/>
-                <label htmlFor="grainsfilter" className='py-3 px-5 duration-150 bg-white border rounded-full border-gray-400 text-gray-400 peer-checked:bg-orange-500 peer-checked:border-orange-500 peer-checked:hover:bg-orange-400 peer-checked:hover:border-orange-400 peer-checked:text-white hover:border-orange-500 hover:text-orange-500 active:bg-orange-700 active:text-white peer-checked:active:bg-orange-700 cursor-pointer select-none'>Grains</label>        
-            </div>
-        </div>}
+    <div className={filterDropdown || isLarge ? 'transition-all flex gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0 visible' : 'transition-all gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0 invisible hidden'}>
+            {categoryList.length === 0? <p>Loading...</p>:categoryList.map((item) =>(
+                <FilterRadio key={item.id} Name={item.name} id={item.id} onTrigger={onTrigger}/>
+            ) )}
+    </div>
     
     </div>
   )

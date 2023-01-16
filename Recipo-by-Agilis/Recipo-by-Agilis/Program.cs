@@ -34,7 +34,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
         options.Password.RequireDigit = true;
         options.Password.RequireLowercase = true;
         options.Password.RequiredLength = 5;
-    }).AddEntityFrameworkStores<RecipoContext>()
+    }).AddRoles<IdentityRole>().AddEntityFrameworkStores<RecipoContext>()
     .AddDefaultTokenProviders();
 
 //Authentication
@@ -106,7 +106,7 @@ var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(cors => {
     cors.AddPolicy(name: myAllowSpecificOrigins, policy =>
     {
-        policy.AllowCredentials().WithOrigins("http://localhost:3000");
+        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000"); ;
     });
 
 
@@ -129,10 +129,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 
-app.UseCors(opt =>
-{
-    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
-});
+app.UseCors(myAllowSpecificOrigins);
 
 app.UseAuthorization();
 
