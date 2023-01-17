@@ -2,78 +2,83 @@ import React, { useEffect, useState } from 'react'
 import IngredientLabel from './IngredientLabel'
 import axios from 'axios'
 
-const  IngredientsSection = ({filter, search}) => {
+const  IngredientsSection = ({search, filter, ParentCallback}) => {
   const [baseList, setBaseList] = useState([])
   const [selectedIngredients, setSelected] = useState([])
   const [Checkmark, setCheckmark] = useState([])
-  
-  const categoryId = filter
-  const name = search
   useEffect(()=>{
-      axios.get('https://localhost:7291/api/Ingredients', {
-        withCredentials: true,
-        headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'
-    }}).then(res => {
-        setBaseList(res.data)
-      })
+      setTimeout(() => {
+        axios.get('https://localhost:7291/api/Ingredients', {withCredentials: true}).then(res => {
+          console.log(res.status)
+          setBaseList(res.data)
+        })
+      }, 2000)
   }, [])
 
-  
+  useEffect(()=>{
+    ParentCallback(selectedIngredients)
+  }, [selectedIngredients])
+
   useEffect(()=>{
     setCheckmark(document.querySelectorAll('.checkmark'))
-  }, [filter,search])
+  }, [baseList, filter, search])
 
    useEffect(()=>{
-    
+    // debugger;
     Checkmark.forEach(element => {
-      if(selectedIngredients.includes(element.id)){
-        element.checked = true
-      }
+      selectedIngredients.forEach(item => {
+        if(item.id === element.id){
+          element.checked = true 
+        }
+      })
+      
     })
-  },[Checkmark, selectedIngredients])
+  },[Checkmark])
 
   const HandleClick = (e) =>{
     if(e.target.checked){
       setSelected(prev =>{
-        return [...prev, e.target.id]
+        return [...prev, {id: e.target.id, name:e.target.id, categoryId:e.target.dataset.categoryId}]
       })
     }
     else
     {
-      setSelected(selectedIngredients.filter((item) => item !== e.target.id))
+      setSelected(selectedIngredients.filter((item) => item.id !== e.target.id))
     }
   }
-  const OnSubmit = () => {
-    console.log(selectedIngredients)
-  }
+  
+  
 
   return (
     <div className='flex flex-col'>
-      <div className='flex flex-wrap gap-6 p-10 justify-center'>
-        {baseList.length === 0 && <p className='flex justify-center text-2xl'>Loading...</p>}
-        {name == undefined ? categoryId != 0 ? baseList.filter((item)=> item.CategoryId == categoryId).map(item=>(
-          <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
+       <div className={selectedIngredients.length <= 1 ?'p-3 flex justify-center items-center visible': 'p-3 invisible'}>
+        <h1 className='font-thin text-xl '>Please select 2 or more ingredients</h1>
+      </div>
+      
+      {baseList.length === 0 &&  <div className='my-20 flex justify-center items-center'><div className=' animate-spin border-t-gray-600 border-l-gray-200 border-r-4 border-r-gray-600 border-b-4 border-b-gray-200 border-t-4 border-l-4 rounded-full absolute w-7 h-7 m-2'></div><div className='w-7 h-7 m-2 border-4 border-black border-opacity-40 rounded-full absolute'></div></div>}
+      
+      {baseList.length > 0 && 
+      <div className='flex flex-wrap justify-center mx-10 lg:mx-20 my-10 items-center gap-6 p-10'>
+        
+        {search === undefined ? filter !== 0 ? baseList.filter((item)=> item.categoryId == filter).map(item=>(
+          <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} />
           )
           ): 
           baseList.map(item => (
-            <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
+            <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} />
           )) :
-          categoryId != 0? baseList.filter((item)=> item.CategoryId == categoryId & item.Name.toLowerCase().includes(name)).map(item=>(
-            <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
+          filter !== 0? baseList.filter((item)=> item.categoryId == filter & item.name.toLowerCase().includes(search)).map(item=>(
+            <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} />
             )
             ): 
-            baseList.filter((item) => item.Name.toLowerCase().includes(name)).map(item => (
-              <IngredientLabel ClickHandler={HandleClick} text={item.Name} categoryId={item.CategoryId} Id={item.Id}/>
+            baseList.filter((item) => item.name.toLowerCase().includes(search)).map(item => (
+              <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} />
             ))}
           
           
+      </div>}
       </div>
-      <div className='p-10 flex justify-center items-center'>
-        {selectedIngredients.length >= 1 ? <button onClick={OnSubmit} className='bg-orange-500 px-8 py-2 rounded-full text-lg text-white'>Get Recipes</button>: <h1 className='font-thin text-xl '>Please select 1 or more ingredients</h1>}
-        
-      </div>
-    </div>
-  )
+        )
 }
 
 export default IngredientsSection
