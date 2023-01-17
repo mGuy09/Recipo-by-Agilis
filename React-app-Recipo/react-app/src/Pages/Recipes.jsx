@@ -11,6 +11,7 @@ const Recipes = () => {
       reason.response.status != 200 && navigate('/Login')
     })
   },[])
+  
   return (
     <div>Recipes</div>
   )

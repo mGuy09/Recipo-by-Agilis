@@ -4,6 +4,7 @@ import { FaUserAlt } from 'react-icons/fa'
 import { IoMdStar } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { getCookie } from 'react-use-cookie'
 
 function Navbar() {
   const[isLoggedIn, setLoggedIn] = useState()
@@ -12,16 +13,10 @@ function Navbar() {
 
   const ref = useRef()
   const HandleLogout=()=>{
-    axios.get('https://localhost:7291/api/Users/Logout', {withCredentials: true}).then(res => window.location.reload(false))
+    axios.get('https://localhost:7291/api/Users/Logout', {withCredentials: true}).then(res => 
+    {localStorage.removeItem('Authorized')
+    window.location.reload(false)})
   }
-
-  React.useEffect(()=>{
-    axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
-      setLoggedIn(true)
-    }).catch((reason)=>{
-      reason.response.status === 401 && setLoggedIn(false)
-    })
-  },[nav, dropdown])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,6 +27,11 @@ function Navbar() {
     document.addEventListener("mouseup", handleClickOutside);
   }, [ref]);
 
+  useEffect(()=>{
+    setLoggedIn(localStorage.getItem('Authorized') !== null? true : false)
+    console.log(isLoggedIn, localStorage.getItem('Authorized'))
+  },[isLoggedIn,nav,dropdown])
+
   const OpenClose = () => {
     setNav(!nav)
   }
@@ -39,7 +39,9 @@ function Navbar() {
     setNav(false)
   }
   const DropdownOpenClose = () => {
-    setDropdown(!dropdown)
+    setTimeout(()=>{
+      setDropdown(!dropdown)
+    },100)
   }
   const DropdownClose = () => {
     setDropdown(false)

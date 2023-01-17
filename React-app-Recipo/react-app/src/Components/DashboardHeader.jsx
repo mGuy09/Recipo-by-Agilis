@@ -10,8 +10,11 @@ const DashboardHeader = () => {
   
   React.useEffect(()=>{
     axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
+      
       setUsername(res.data.username)
-    }).catch((reason)=>reason.response.status !== 200 && navigate('/Login'))
+    }).catch((reason)=>{
+      reason.response.status !== 200 && navigate('/Login')
+    })
   },[])
   
   return (
