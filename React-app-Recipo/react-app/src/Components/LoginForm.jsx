@@ -17,12 +17,15 @@ const LoginForm = () => {
     console.log(data);
     
     await axios.post(apiUrl, data, {withCredentials: true}).then((result) => {
+      localStorage.setItem('Authorized', 'true')
       console.log(result);
     });
     setLoading(false)
+    
     navigate('/Dashboard')
 
   }
+  
   const onChange = (e) => {
     const value = e.target.value;
     SetUser({

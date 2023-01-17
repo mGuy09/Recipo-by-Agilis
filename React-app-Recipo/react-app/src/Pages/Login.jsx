@@ -5,6 +5,7 @@ import SmallImage from '../Images/Foodies - Food Delivery 1.png'
 import BackgroundImage from '../Images/sol-ingrao-pw19GpDRZic-unsplash.jpg'
 
 const Login = () => {
+  
   return (
     <div className=''>
         <Parallax bgImage={BackgroundImage} className='w-full h-screen flex justify-center lg:justify-end items-center relative bg-black' bgStyle={'filter: brightness (.5)'} strength={300} blur={5}>

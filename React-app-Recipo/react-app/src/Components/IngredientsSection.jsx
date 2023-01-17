@@ -12,7 +12,7 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
           console.log(res.status)
           setBaseList(res.data)
         })
-      }, 2000)
+      }, 1500)
   }, [])
 
   useEffect(()=>{
@@ -27,7 +27,7 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
     // debugger;
     Checkmark.forEach(element => {
       selectedIngredients.forEach(item => {
-        if(item.id === element.id){
+        if(item.name === element.id){
           element.checked = true 
         }
       })
@@ -38,7 +38,7 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
   const HandleClick = (e) =>{
     if(e.target.checked){
       setSelected(prev =>{
-        return [...prev, {id: e.target.id, name:e.target.id, categoryId:e.target.dataset.categoryId}]
+        return [...prev, {id: e.target.dataset.ingredientId, name:e.target.id, categoryId:e.target.dataset.categoryId}]
       })
     }
     else
@@ -61,18 +61,18 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
       <div className='flex flex-wrap justify-center mx-10 lg:mx-20 my-10 items-center gap-6 p-10'>
         
         {search === undefined ? filter !== 0 ? baseList.filter((item)=> item.categoryId == filter).map(item=>(
-          <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} />
+          <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} id={item.id}/>
           )
           ): 
           baseList.map(item => (
-            <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} />
+            <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} id={item.id}/>
           )) :
           filter !== 0? baseList.filter((item)=> item.categoryId == filter & item.name.toLowerCase().includes(search)).map(item=>(
-            <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} />
+            <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} id={item.id}/>
             )
             ): 
             baseList.filter((item) => item.name.toLowerCase().includes(search)).map(item => (
-              <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} />
+              <IngredientLabel key={item.id} ClickHandler={HandleClick} text={item.name} categoryId={item.categoryId} id={item.id} />
             ))}
           
           
