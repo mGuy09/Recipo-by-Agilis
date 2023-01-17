@@ -9,7 +9,6 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
   useEffect(()=>{
       setTimeout(() => {
         axios.get('https://localhost:7291/api/Ingredients', {withCredentials: true}).then(res => {
-          console.log(res.status)
           setBaseList(res.data)
         })
       }, 1500)
@@ -38,7 +37,7 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
   const HandleClick = (e) =>{
     if(e.target.checked){
       setSelected(prev =>{
-        return [...prev, {id: e.target.dataset.ingredientId, name:e.target.id, categoryId:e.target.dataset.categoryId}]
+        return [...prev, {id: parseInt(e.target.dataset.ingredientId), name:e.target.id, categoryId:parseInt(e.target.dataset.categoryId)}]
       })
     }
     else

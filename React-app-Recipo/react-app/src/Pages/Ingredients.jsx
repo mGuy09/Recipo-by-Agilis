@@ -32,6 +32,9 @@ const Ingredients = () => {
   }
   const onSubmit=()=>{
     console.log(selectedIngredients)
+    axios.post(`https://localhost:7291/api/Recipes/IngredientsinRecipe`, selectedIngredients).then(res => {
+      console.log(res)
+    })
   }
   
   const HandleSelectedAmout = (childData) => {

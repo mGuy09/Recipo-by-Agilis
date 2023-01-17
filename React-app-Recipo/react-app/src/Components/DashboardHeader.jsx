@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router'
-import FoodImage from '../Images/Foodies - Chef Top Menu.png'
+import PremiumFoodImage from '../Images/Foodies - Chef Top Menu.png'
+import FoodImage from '../Images/Foodies - Noodle Soup.png'
 
 
 const DashboardHeader = ({ParentCallback}) => {
@@ -11,7 +12,6 @@ const DashboardHeader = ({ParentCallback}) => {
   
   React.useEffect(()=>{
     axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
-      console.log(res)
       setUserRole(res.data.roles)
       setUsername(res.data.username)
     }).catch((reason)=>{
@@ -31,7 +31,9 @@ const DashboardHeader = ({ParentCallback}) => {
         <h5 className='text-sm md:text-lg lg:text-xl font-thin drop-shadow-lg'>Begin your journey</h5>
         </div>
         <div>
-            <img src={FoodImage} alt="" className='hidden md:flex lg:flex md:w-[400px] lg:w-[600px]'/>
+          {userRole.includes('SubscribedUser') ? <img src={PremiumFoodImage} alt="" className='hidden md:flex lg:flex md:w-[400px] lg:w-[600px]'/> :
+          <img src={FoodImage} alt="" className='hidden md:flex lg:flex md:w-[400px] lg:w-[600px]'/>
+}
         </div>
     </div>
   )

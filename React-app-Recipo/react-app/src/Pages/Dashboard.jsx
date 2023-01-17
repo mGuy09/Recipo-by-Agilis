@@ -9,7 +9,6 @@ const Dashboard = () => {
   const [userRole, setUserRole] = React.useState([])
 
   const ParentCallback = (childData) => {
-    console.log(childData)
     setUserRole(childData)
   }
   
