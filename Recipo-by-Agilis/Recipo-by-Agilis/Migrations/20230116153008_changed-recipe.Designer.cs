@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipo_by_Agilis.Models;
 
@@ -11,9 +12,11 @@ using Recipo_by_Agilis.Models;
 namespace RecipobyAgilis.Migrations
 {
     [DbContext(typeof(RecipoContext))]
-    partial class RecipoContextModelSnapshot : ModelSnapshot
+    [Migration("20230116153008_changed-recipe")]
+    partial class changedrecipe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,21 +54,21 @@ namespace RecipobyAgilis.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ec2ffc24-13ac-4f55-9b56-aa6e0190059c",
+                            Id = "05d85dcd-e32c-48e3-bd51-c22a6f9ae7d0",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "e96c6c42-3de9-4313-bf13-bdfa65151fcf",
+                            Id = "84c079b5-1384-4645-b0db-359cb96ffe94",
                             ConcurrencyStamp = "2",
                             Name = "FreeUser",
                             NormalizedName = "FreeUser"
                         },
                         new
                         {
-                            Id = "0075dcb0-e196-4e1b-a621-644f9e7a2589",
+                            Id = "177d63ff-4e20-4c87-8a86-1c2fe360235d",
                             ConcurrencyStamp = "3",
                             Name = "SubscribedUser",
                             NormalizedName = "SubscribedUser"
@@ -336,15 +339,34 @@ namespace RecipobyAgilis.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Subscription");
+                });
+
+            modelBuilder.Entity("Recipo_by_Agilis.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.UserSubscription", b =>

@@ -15,9 +15,7 @@ public class RecipoContext : IdentityDbContext
     public DbSet<IngredientInRecipe> IngredientsInRecipes { get; set; }
     public DbSet<Category> Category { get; set; }
     public DbSet<Subscription> Subscription { get; set; }
-
-    public DbSet<User> Users { get; set; }
-
+    
     public DbSet<UserSubscription> UserSubscriptions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)

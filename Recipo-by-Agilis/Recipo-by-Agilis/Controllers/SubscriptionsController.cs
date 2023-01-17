@@ -14,10 +14,12 @@ namespace Recipo_by_Agilis.Controllers
     public class SubscriptionsController : ControllerBase
     {
         private readonly RecipoContext _context;
+        private readonly IConfiguration _configuration;
 
-        public SubscriptionsController(RecipoContext context)
+        public SubscriptionsController(RecipoContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: api/Subscriptions

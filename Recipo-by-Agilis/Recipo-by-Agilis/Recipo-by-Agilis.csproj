@@ -36,6 +36,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Logic\" />
 	  <Folder Include="Services\" />
 	</ItemGroup>
 
