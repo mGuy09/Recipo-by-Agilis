@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
 
 namespace Recipo_by_Agilis.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RecipesController : ControllerBase
@@ -104,6 +99,17 @@ namespace Recipo_by_Agilis.Controllers
         private bool RecipeExists(int id)
         {
             return _context.Recipes.Any(e => e.Id == id);
+        }
+
+
+        [HttpPost("IngredientsinRecipe")]
+        public async Task<IActionResult> GetRecipesByIngredients(List<Ingredient> data)
+        {
+            var ingredientsInRecipe = _context.IngredientsInRecipes.AsEnumerable()
+                .Where(e => data.AsEnumerable().All(i => i.Id == e.IngredientId))
+                .Select(e => e.RecipeId).ToList();
+            var recipes = await _context.Recipes.Where(e => ingredientsInRecipe.Contains(e.Id)).ToListAsync();
+            return Ok(recipes);
         }
     }
 }
