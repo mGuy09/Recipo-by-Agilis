@@ -71,11 +71,12 @@ namespace Recipo_by_Agilis.Controllers
         {
             
                 var result = await _userManager.FindByNameAsync(User.Identity.Name);
+                var userRole = await _userManager.GetRolesAsync(result);
                 return Ok(new
                 {
                     Email = result.Email,
-                    Username = result.UserName
-
+                    Username = result.UserName,
+                    Roles = userRole
                 });
         }
 

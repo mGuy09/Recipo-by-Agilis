@@ -4,21 +4,27 @@ import { useNavigate } from 'react-router'
 import FoodImage from '../Images/Foodies - Chef Top Menu.png'
 
 
-const DashboardHeader = () => {
+const DashboardHeader = ({ParentCallback}) => {
   const [username, setUsername] = React.useState()
+  const [userRole, setUserRole] = React.useState([])
   const navigate = useNavigate()
   
   React.useEffect(()=>{
     axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
-      
+      console.log(res)
+      setUserRole(res.data.roles)
       setUsername(res.data.username)
     }).catch((reason)=>{
       reason.response.status !== 200 && navigate('/Login')
     })
+
   },[])
+  React.useEffect(()=>{    
+    ParentCallback(userRole)
+  },[userRole])
   
   return (
-    <div className='cursor-default flex justify-between flex-row p-10 sm:p-12 md:p-16 lg:p-20 text-white bg-gradient-to-br from-orange-500 to-orange-900 items-center'>
+    <div className={userRole.includes('SubscribedUser') ? 'cursor-default flex justify-between flex-row p-10 sm:p-12 md:p-16 lg:p-20 text-white bg-gradient-to-br from-emerald-700 via-emerald-900 to-black items-center': 'cursor-default flex justify-between flex-row p-10 sm:p-12 md:p-16 lg:p-20 text-white bg-gradient-to-br from-orange-500 to-orange-900 items-center'}>
         <div>
         <h1 className='text-xl md:text-2xl lg:text-5xl font-medium drop-shadow-lg'>Hi, {username}</h1>
         <br />
