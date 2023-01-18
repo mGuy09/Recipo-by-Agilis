@@ -18,7 +18,6 @@ const Ingredients = () => {
   const navigate = useNavigate()
   React.useEffect(()=>{
     axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
-      console.log(res)
     }).catch((reason)=>{
       reason.response.status != 200 && navigate('/Login')
     })
@@ -33,6 +32,9 @@ const Ingredients = () => {
   }
   const onSubmit=()=>{
     console.log(selectedIngredients)
+    axios.post(`https://localhost:7291/api/Recipes/IngredientsinRecipe`, selectedIngredients).then(res => {
+      console.log(res)
+    })
   }
   
   const HandleSelectedAmout = (childData) => {

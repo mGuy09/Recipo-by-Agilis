@@ -29,7 +29,6 @@ function Navbar() {
 
   useEffect(()=>{
     setLoggedIn(localStorage.getItem('Authorized') !== null? true : false)
-    console.log(isLoggedIn, localStorage.getItem('Authorized'))
   },[isLoggedIn,nav,dropdown])
 
   const OpenClose = () => {
@@ -61,8 +60,8 @@ function Navbar() {
           <FaUserAlt size={25} className='hidden lg:flex mx-5 mt-2 cursor-pointer items-center' onClick={DropdownOpenClose} />
           <div className={!dropdown ? 'absolute hidden bg-white z-10 right-2 top-[62px]' : 'absolute flex bg-white z-10 right-2 top-[62px] duration-300'} onClick={DropdownClose}>
             <ul className='flex flex-col duration-200 shadow-xl'>
-              {isLoggedIn && <li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>User Page</li>}
-              {isLoggedIn && <li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Options</li>}
+              {isLoggedIn && <Link to={'/User'}><li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>User Page</li></Link>}
+              {isLoggedIn && <Link to={'/User/Options'}><li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Options</li></Link>}
               {!isLoggedIn && <Link to='/Register'><li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Register Account</li></Link>}
               {isLoggedIn ? <li onClick={HandleLogout} className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Sign Out</li>:
               <Link to={'/Login'}><li className='py-2 px-3 hover:bg-orange-500 cursor-pointer'>Sign In</li></Link>}

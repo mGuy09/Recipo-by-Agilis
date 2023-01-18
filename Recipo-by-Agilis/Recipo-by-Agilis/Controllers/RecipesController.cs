@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
 
 namespace Recipo_by_Agilis.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RecipesController : ControllerBase
@@ -104,6 +99,31 @@ namespace Recipo_by_Agilis.Controllers
         private bool RecipeExists(int id)
         {
             return _context.Recipes.Any(e => e.Id == id);
+        }
+
+
+        [HttpPost("IngredientsinRecipe")]
+        public async Task<IActionResult> GetRecipesByIngredients(List<Ingredient> data)
+        {
+            //var ingredientsInRecipe = _context.IngredientsInRecipes.AsEnumerable()
+            //    .Where(e => data.AsEnumerable().Any(i => i.Id == e.IngredientId))
+            //    .Select(e => e.RecipeId).ToList();
+            //var recipes = await _context.Recipes.Where(e => ingredientsInRecipe.Contains(e.Id)).ToListAsync();
+
+            var Recipes = _context.Recipes.AsEnumerable().Select(e => new RecipeDto
+            {
+                Id = e.Id,
+                IngredientIds = _context.IngredientsInRecipes.AsEnumerable().Where(i => i.RecipeId == e.Id).Select(i=> i.IngredientId).ToList(),
+                IsPremium = e.IsPremium,
+                Name = e.Name,
+                Steps = e.Steps
+            });
+            var filteredRecipes = Recipes.Where(e => data.Any(i => e.IngredientIds.Any(x => x == i.Id))).ToList();
+
+            return Ok(new
+            {
+                data = filteredRecipes
+            });
         }
     }
 }

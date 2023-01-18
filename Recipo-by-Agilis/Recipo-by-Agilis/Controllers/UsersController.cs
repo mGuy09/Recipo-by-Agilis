@@ -54,7 +54,6 @@ namespace Recipo_by_Agilis.Controllers
                 if (result.IsSuccess)
                 {
                     Response.Cookies.Append("Token", result.Token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true});
-                    Response.Cookies.Append("Username", result.User.UserName, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true});
                     return Ok(new
                     {
                         Message = "user created successfully"
@@ -71,11 +70,12 @@ namespace Recipo_by_Agilis.Controllers
         {
             
                 var result = await _userManager.FindByNameAsync(User.Identity.Name);
+                var userRole = await _userManager.GetRolesAsync(result);
                 return Ok(new
                 {
-                    Email = result.Email,
-                    Username = result.UserName
-
+                    EmailAddress = result.Email,
+                    Username = result.UserName,
+                    Roles = userRole
                 });
         }
 
@@ -83,7 +83,6 @@ namespace Recipo_by_Agilis.Controllers
         public async Task<IActionResult> LogOut()
         {
             Response.Cookies.Delete("Token", new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true });
-            Response.Cookies.Delete("Username", new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true });
             return Ok(new
             {
                 Message = "User Successfully logged out"

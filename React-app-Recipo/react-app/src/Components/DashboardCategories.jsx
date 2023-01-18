@@ -11,7 +11,7 @@ const DashboardCategories = () => {
   useEffect(()=>{
     setTimeout(()=>{
       axios.get('https://localhost:7291/api/Categories', {withCredentials: true}).then(res => {
-        console.log(res.data) 
+        console.log(res.data)
         setCategoryList(res.data)})
     },2753)
   }, [])
@@ -31,7 +31,7 @@ const DashboardCategories = () => {
       
       :
       categoryList.map((item) => (
-        <Link to={'/Ingredients/'+item.id}><CategoryCard key={item.id} text={item.name} id={item.id}/></Link>
+        <Link key={"ingredients-" + item.id} to={'/Ingredients/'+item.id}><CategoryCard  text={item.name} id={item.id}/></Link>
       ))
       }
     </div>
