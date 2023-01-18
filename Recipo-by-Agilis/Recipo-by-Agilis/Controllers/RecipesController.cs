@@ -105,11 +105,25 @@ namespace Recipo_by_Agilis.Controllers
         [HttpPost("IngredientsinRecipe")]
         public async Task<IActionResult> GetRecipesByIngredients(List<Ingredient> data)
         {
-            var ingredientsInRecipe = _context.IngredientsInRecipes.AsEnumerable()
-                .Where(e => data.AsEnumerable().All(i => i.Id == e.IngredientId))
-                .Select(e => e.RecipeId).ToList();
-            var recipes = await _context.Recipes.Where(e => ingredientsInRecipe.Contains(e.Id)).ToListAsync();
-            return Ok(recipes);
+            //var ingredientsInRecipe = _context.IngredientsInRecipes.AsEnumerable()
+            //    .Where(e => data.AsEnumerable().Any(i => i.Id == e.IngredientId))
+            //    .Select(e => e.RecipeId).ToList();
+            //var recipes = await _context.Recipes.Where(e => ingredientsInRecipe.Contains(e.Id)).ToListAsync();
+
+            var Recipes = _context.Recipes.AsEnumerable().Select(e => new RecipeDto
+            {
+                Id = e.Id,
+                IngredientIds = _context.IngredientsInRecipes.AsEnumerable().Where(i => i.RecipeId == e.Id).Select(i=> i.IngredientId).ToList(),
+                IsPremium = e.IsPremium,
+                Name = e.Name,
+                Steps = e.Steps
+            });
+            var filteredRecipes = Recipes.Where(e => data.Any(i => e.IngredientIds.Any(x => x == i.Id))).ToList();
+
+            return Ok(new
+            {
+                data = filteredRecipes
+            });
         }
     }
 }
