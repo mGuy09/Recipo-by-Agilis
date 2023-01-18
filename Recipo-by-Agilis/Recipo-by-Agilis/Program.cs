@@ -8,10 +8,15 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Recipo_by_Agilis.Services;
+using Stripe;
 
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
+
+//Add Stripe
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
@@ -131,6 +136,7 @@ app.UseAuthentication();
 
 app.UseCors(myAllowSpecificOrigins);
 
+app.UseRouting();
 app.UseAuthorization();
 
 

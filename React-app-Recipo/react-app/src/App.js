@@ -11,6 +11,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import React, { useState } from "react";
 import NotFound from "./Pages/NotFound";
+import Checkout from "./Pages/Checkout";
 
 
 function App() {
@@ -21,12 +22,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path='/Login' element={<Login />} />
         <Route path="/Register" element={<Register />} />
-        <Route path='/Dashboard' element={<Dashboard/>} />
-        <Route path="/Ingredients/:id" element={<Ingredients />}/>
+        <Route path='/Dashboard' element={<Dashboard />} />
+        <Route path="/Ingredients/:id" element={<Ingredients />} />
         <Route path='/Subscriptions' element={<Subscriptions />} />
         <Route path="/About" element={<About />} />
         <Route path='/Contact' element={<Contact />} />
-        <Route path='/404notfound' element={<NotFound/>}/>
+        <Route path='/404notfound' element={<NotFound />} />
+        <Route path="/Checkout" element={<Checkout />} />
       </Routes>
       <Footer />
     </div>
