@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router'
-import { Link } from 'react-router-dom'
 import PremiumAd from '../Components/PremiumAd'
 import RecipeCard from '../Components/RecipeCard'
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipo_by_Agilis.Models;
 
@@ -11,9 +12,11 @@ using Recipo_by_Agilis.Models;
 namespace RecipobyAgilis.Migrations
 {
     [DbContext(typeof(RecipoContext))]
-    partial class RecipoContextModelSnapshot : ModelSnapshot
+    [Migration("20230119180958_added-thefavorite-table-feature")]
+    partial class addedthefavoritetablefeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,21 +54,21 @@ namespace RecipobyAgilis.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4c9554d-15c6-4aaa-9832-165952d6be1e",
+                            Id = "a8c85c95-fec2-4c3a-870f-3651db81c7b8",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "d0c13854-b341-4147-b059-52ff2326cde6",
+                            Id = "15bf6691-6477-439b-8011-266fa6859373",
                             ConcurrencyStamp = "2",
                             Name = "FreeUser",
                             NormalizedName = "FreeUser"
                         },
                         new
                         {
-                            Id = "32c91f3f-e4e4-47f7-aa65-3ed1792d0f6e",
+                            Id = "7f4a90da-324e-48f9-ad5d-e3fd7c13e2bf",
                             ConcurrencyStamp = "3",
                             Name = "SubscribedUser",
                             NormalizedName = "SubscribedUser"

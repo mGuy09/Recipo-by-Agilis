@@ -11,7 +11,7 @@ const Subscriptions = () => {
     axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
       console.log(res)
     }).catch((reason)=>{
-      reason.response.status != 200 && navigate('/Login')
+      reason.response.status !== 200 && navigate('/Login')
     })
   },[])
   return (

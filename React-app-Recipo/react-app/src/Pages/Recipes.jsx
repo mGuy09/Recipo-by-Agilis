@@ -8,10 +8,10 @@ const Recipes = () => {
   const [isPremium, setIsPremium] = React.useState()
   const navigate = useNavigate()
   React.useEffect(()=>{
-    axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
+    axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}, navigate).then(res => {
       setIsPremium(res.data.roles.includes('SubscribedUser'))
     }).catch((reason)=>{
-      reason.response.status != 200 && navigate('/Login')
+      reason.response.status !== 200 && navigate('/Login')
     })
   },[])
 

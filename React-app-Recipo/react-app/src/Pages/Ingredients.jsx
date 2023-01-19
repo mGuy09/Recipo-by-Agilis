@@ -22,7 +22,7 @@ const Ingredients = () => {
   React.useEffect(()=>{
     axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
     }).catch((reason)=>{
-      reason.response.status != 200 && navigate('/Login')
+      reason.response.status !== 200 && navigate('/Login')
     })
   },[])
   

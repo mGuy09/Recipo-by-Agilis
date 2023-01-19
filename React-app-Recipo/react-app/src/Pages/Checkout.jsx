@@ -41,9 +41,10 @@ const Checkout = () => {
 
   return (
     <div>
-      <form action="/checkoutapi" method="POST">
-        <button type="submit">Checkout</button>
-      </form>
+      <div>
+        <button></button>
+        <button></button>
+      </div>
     </div>
   )
 }

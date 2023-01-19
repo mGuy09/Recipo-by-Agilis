@@ -17,6 +17,7 @@ public class RecipoContext : IdentityDbContext
     public DbSet<Subscription> Subscription { get; set; }
     
     public DbSet<UserSubscription> UserSubscriptions { get; set; }
+    public DbSet<Favorites> Favorites { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
