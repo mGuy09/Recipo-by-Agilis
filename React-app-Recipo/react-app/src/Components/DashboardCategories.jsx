@@ -31,7 +31,7 @@ const DashboardCategories = () => {
       
       :
       categoryList.map((item) => (
-        <Link key={"ingredients-" + item.id} to={'/Ingredients/'+item.id}><CategoryCard  text={item.name} id={item.id}/></Link>
+        <Link key={"ingredients-" + item.id} to={'/Ingredients/'+item.id}><CategoryCard image={item.imageLink} text={item.name} id={item.id} /></Link>
       ))
       }
     </div>

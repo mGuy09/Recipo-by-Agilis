@@ -2,7 +2,7 @@ import React from 'react'
 
 const PulseCategoryCard = () => {
   return (
-    <div className=' flex justify-center animate-pulse px-24 py-16 md:px-32 md:py-20 lg:px-40 lg:py-28 rounded-xl bg-orange-300 my-10'>
+    <div className=' flex justify-center animate-pulse w-[290px] h-[180px] md:w-[320px] md:h-[210px] lg:w-[350px] lg:h-[240px] xl:w-[380px] xl:h-[270px] rounded-xl bg-gray-200 my-10'>
         <h1 className='invisible'>text</h1>
     </div>
   )

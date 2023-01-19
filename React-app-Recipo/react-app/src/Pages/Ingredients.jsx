@@ -1,17 +1,20 @@
 import axios from 'axios'
+import { useAtom } from 'jotai'
 import React from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { useParams, useNavigate } from 'react-router'
 import IngredientsFilter from '../Components/IngredientsFilter'
 import IngredientsSection from '../Components/IngredientsSection'
 import PremiumAddRecipes from '../Components/PremiumAddRecipes'
+import { SelectedIngredients } from '../State'
 
 const Ingredients = () => {
   const FilterRef = useParams()
 
   const [filter, setFilter] = React.useState(FilterRef.id)
   const [search, setSearchFilter] = React.useState('')
-  const [selectedIngredients, setSelectedIngredients] = React.useState([])
+  // const [selectedIngredients, setSelectedIngredients] = React.useState([])
+  const [selectedIngredients, setSelectedIngredients] = useAtom(SelectedIngredients)
   const [isFocused, setFocus] = React.useState(false)
 
   
@@ -31,10 +34,8 @@ const Ingredients = () => {
     setSearchFilter(e.target.value)
   }
   const onSubmit=()=>{
-    console.log(selectedIngredients)
-    axios.post(`https://localhost:7291/api/Recipes/IngredientsinRecipe`, selectedIngredients).then(res => {
-      console.log(res)
-    })
+    // console.log(selectedIngredients)
+    navigate('/Recipes')
   }
   
   const HandleSelectedAmout = (childData) => {

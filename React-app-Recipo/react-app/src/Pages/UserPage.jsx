@@ -34,7 +34,7 @@ const UserPage = () => {
                 <div className='flex flex-col'>
                     <h1 className='text-xl'>Your Recipes</h1>
                 </div>
-                    <div className='flex flex-col xl:flex-row gap-10 mt-10 justify-evenly items-center '>
+                    <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mt-10 justify-evenly items-center '>
                         <RecipeCard />
                         <RecipeCard />
                         <RecipeCard />

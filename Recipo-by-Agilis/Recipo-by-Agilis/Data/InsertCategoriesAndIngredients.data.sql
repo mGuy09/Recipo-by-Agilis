@@ -1,12 +1,12 @@
 ﻿SET IDENTITY_INSERT [dbo].[Category] ON 
-INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (1,N'Vegetables')
-INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (2,N'Meats')
-INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (3,N'Dairy')
-INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (4,N'Condiments')
-INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (5,N'Herbs & Spices')
-INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (6,N'Grains')
-INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (7,N'Fish & Seafood')
-INSERT INTO [dbo].[Category] ([Id],[Name]) VALUES (8,N'Fruit')
+INSERT INTO [dbo].[Category] ([Id],[Name], [ImageLink]) VALUES (1,N'Vegetables', N'https://images.unsplash.com/photo-1627888086271-6c8546b2977c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1319&q=80' )
+INSERT INTO [dbo].[Category] ([Id],[Name], [ImageLink]) VALUES (2,N'Meats', N'https://images.unsplash.com/photo-1611038333075-2efd28705f42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1249&q=80')
+INSERT INTO [dbo].[Category] ([Id],[Name], [ImageLink]) VALUES (3,N'Dairy', N'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80')
+INSERT INTO [dbo].[Category] ([Id],[Name], [ImageLink]) VALUES (4,N'Condiments', N'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')
+INSERT INTO [dbo].[Category] ([Id],[Name], [ImageLink]) VALUES (5,N'Herbs & Spices', N'https://images.unsplash.com/photo-1509358271058-acd22cc93898?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')
+INSERT INTO [dbo].[Category] ([Id],[Name], [ImageLink]) VALUES (6,N'Grains', N'https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80')
+INSERT INTO [dbo].[Category] ([Id],[Name], [ImageLink]) VALUES (7,N'Fish & Seafood', N'https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80')
+INSERT INTO [dbo].[Category] ([Id],[Name], [ImageLink]) VALUES (8,N'Fruit', N'https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')
 
 SET IDENTITY_INSERT [dbo].[Category] OFF 
 
@@ -149,17 +149,16 @@ SET IDENTITY_INSERT [dbo].[Subscription] OFF
 
 SET IDENTITY_INSERT [dbo].[Recipes] ON 
 
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name]) VALUES (1,'1.peel and wash the potatos and the onion. 2. Next you need to chop thinly the onion. 3. fry the onion untill golden. 4. fry the potatos untill medium done. 5. roughtly smash the potatos, and mix them with the onion and eggs and season it to taste. 6. pour the mixture into a frying pan and cook it at low-medium heat for 7 minutes on each side.',
-N'Free', 'Spanish Tortilla' )
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name]) VALUES (2,'1.peel and wash the potatos. 2. Next you need slice them into french fries strips.
-3. fry the potatos untill medium done. 4. place them in an oven pan and put them in the preheated oven at 180 degrees celsius. 5.Take them out of the oven and sprinkle grated cheesse over them, then put them back in the oven for 5 more minutes.',
-N'Free', 'Grated Potatos' )
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name]) VALUES (3,'1.Clean the skin and the bones if any. 2. Dry the salmon with a kitchen paper towel. 3. Cut the salmon into slices 0.5 cm thick. 4. Enjoy with some soya sauce',
-N'Free', 'Salmon Sashimi' )
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name]) VALUES (4,'1. in a bowl mix the flour with tghe water, salt, yeast, until you get a soft dough. 2. let it sit in the fridge for 30 minutes. 3. roll the dough on a clean flat surface into a round shape of 0.4 cm thick. 4. place the rolled dough on a baking sheet and spread the tomato sauce, salami, mushrooms, olives and cheesse. 5. put the pizza in the preheated oven at 210 degrees Celsius for 20 minutes',
-N'Monthly', 'HomeMade Pizza' )
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name]) VALUES (5,'1. In a wok or big pan place the beef and cook it untill all the juices evaporate. 2. Pour the tomato sauce, salt, ground pepper and basil leaves and cook for 5 more minutes. 3. Place a big enough pot of water on the stove and bring it to a boil, then add the pasta of choice and boil in until aldente. 4. Strain the pasta and then pour the beef sauce over it and mix well. 5. Give it a little zing with a sprinkle of parmesan cheesse. Enjoy!',
-N'Yearly', 'Bolognese Pasta' )
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (1,'1 .peel and wash the potatos and the onion.\\2. Next you need to chop thinly the onion.\\3. fry the onion untill golden.\\4. fry the potatos untill medium done.\\5. roughtly smash the potatos, and mix them with the onion and eggs and season it to taste.\\6. pour the mixture into a frying pan and cook it at low-medium heat for 7 minutes on each side.',
+0, N'Spanish Tortilla', N'https://images.unsplash.com/photo-1639669794539-952631b44515?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1221&q=80' )
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (2,'1 .peel and wash the potatos.\\2. Next you need slice them into french fries strips.\\3. fry the potatos untill medium done.\\4. place them in an oven pan and put them in the preheated oven at 180 degrees celsius.\\5.Take them out of the oven and sprinkle grated cheesse over them, then put them back in the oven for 5 more minutes.',
+0, N'Grated Potatos', N'https://images.unsplash.com/photo-1568226189293-77924f3f10c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80' )
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (3,'1 .Clean the skin and the bones if any.\\2. Dry the salmon with a kitchen paper towel.\\3. Cut the salmon into slices 0.5 cm thick.\\4. Enjoy with some soya sauce',
+0, N'Salmon Sashimi' , N'https://images.unsplash.com/photo-1599570340442-844ea773ef96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (4,'1. in a bowl mix the flour with tghe water, salt, yeast, until you get a soft dough.\\2. let it sit in the fridge for 30 minutes.\\3. roll the dough on a clean flat surface into a round shape of 0.4 cm thick.\\4. place the rolled dough on a baking sheet and spread the tomato sauce, salami, mushrooms, olives and cheesse.\\5. put the pizza in the preheated oven at 210 degrees Celsius for 20 minutes',
+1, N'HomeMade Pizza', N'https://images.unsplash.com/photo-1585778718569-2efde6c55c80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80' )
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (5,'1. In a wok or big pan place the beef and cook it untill all the juices evaporate.\\2. Pour the tomato sauce, salt, ground pepper and basil leaves and cook for 5 more minutes.\\3. Place a big enough pot of water on the stove and bring it to a boil, then add the pasta of choice and boil in until aldente.\\4. Strain the pasta and then pour the beef sauce over it and mix well.\\5. Give it a little zing with a sprinkle of parmesan cheesse. Enjoy!',
+1, N'Bolognese Pasta', N'https://images.unsplash.com/photo-1600803734709-83f30a78e312?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80' )
 
 SET IDENTITY_INSERT [dbo].[Recipes] OFF 
 
