@@ -2,9 +2,9 @@ import React from 'react'
 
 const RecipeCard = () => {
   return (
-    <div className='border-2 rounded-xl flex flex-col w-[400px] h-[500px] gap-5 p-6 relative border-gray-300 shadow-md hover:scale-105 active:scale-[1.02] duration-150'>
-        <div className='bg-gradient-to-b rounded-xl from-transparent via-transparent to-white/90 absolute z-10 w-[90%] h-[95%] '></div>
-        <div className='w-[320px] h-[240px] self-center bg-orange-500 rounded-xl'></div>
+    <div className='border-2 rounded-xl flex flex-col bg-white w-[280px] h-[380px] xl:w-[350px] xl:h-[450px] gap-5 p-6 relative border-gray-300 shadow-md hover:scale-105 active:scale-[1.02] duration-150'>
+        <div className='bg-gradient-to-b rounded-xl from-transparent via-transparent to-white/90 absolute z-10 w-[90%] h-[90%] xl:h-[95%] '></div>
+        <div className='w-[260px] h-[200px] xl:w-[300px] xl:h-[240px] self-center bg-orange-500 rounded-xl'></div>
         <h1 className='text-xl font-medium tracking-wide'>Recipe Name</h1>
         <div className='overflow-hidden h-[60%] '>
         <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum facilisis imperdiet felis, a pretium leo malesuada ut. Mauris imperdiet egestas tincidunt. Etiam eget leo mi. Nulla eu porttitor elit, et laoreet tellus. Etiam facilisis sem a erat ornare interdum. Sed pulvinar interdum ante, quis pharetra massa ultrices et. Etiam quam nunc, sodales vel ipsum a, varius placerat est. Proin sollicitudin ex eu nulla vehicula, vel dignissim nunc interdum. Pellentesque aliquam ut orci nec tempus. Fusce sodales feugiat quam fermentum luctus. Suspendisse fermentum leo sit amet nulla rutrum volutpat in at tortor. In id lobortis mauris. Maecenas eget enim at turpis vehicula accumsan. Quisque non accumsan ex. Morbi dapibus nunc vel pellentesque maximus.</p>

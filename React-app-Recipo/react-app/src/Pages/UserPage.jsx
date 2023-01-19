@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import PremiumAd from '../Components/PremiumAd'
 import RecipeCard from '../Components/RecipeCard'
@@ -8,16 +9,17 @@ const UserPage = () => {
     const [username, setUsername] = React.useState()
     const [userRole, setUserRole] = React.useState([])
     const [email, setEmail] = React.useState()
+    const navigate = useNavigate()
 
     React.useEffect(()=>{
         axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
         setUsername(res.data.username)
         setUserRole(res.data.roles)
         setEmail(res.data.emailAddress)
-    })
-    })
+    }).catch(reason => reason.response.status === 401 && navigate('/Login'))
+    },[])
     
-
+ 
   return (
     <div className='flex flex-col'>
         <PremiumAd/>
@@ -32,7 +34,7 @@ const UserPage = () => {
                 <div className='flex flex-col'>
                     <h1 className='text-xl'>Your Recipes</h1>
                 </div>
-                    <div className='flex gap-10 mt-10 justify-evenly'>
+                    <div className='flex flex-col xl:flex-row gap-10 mt-10 justify-evenly items-center '>
                         <RecipeCard />
                         <RecipeCard />
                         <RecipeCard />

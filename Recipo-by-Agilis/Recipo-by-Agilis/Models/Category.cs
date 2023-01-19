@@ -2,5 +2,5 @@
 
 public class Category: BaseEntity
 {
-
+    public string ImageLink { get; set; }
 }

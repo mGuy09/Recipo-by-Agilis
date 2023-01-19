@@ -8,5 +8,6 @@ public class RecipeDto
     public string Name { get; set; }
     public string Steps { get; set; }
     public string IsPremium { get; set; }
+    public string Image { get; set; }
     public List<int> IngredientIds { get; set; }
 }
