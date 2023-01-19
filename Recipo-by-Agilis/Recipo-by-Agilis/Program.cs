@@ -1,4 +1,5 @@
 using System.Text;
+using CData.EntityFrameworkCore.Stripe;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Recipo_by_Agilis;
 using Recipo_by_Agilis.Services;
 using Stripe;
 
@@ -15,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 //Add Stripe
-StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+builder.Services.AddStripeInfrastructure(builder.Configuration);
 
 
 // Add services to the container.
@@ -24,6 +26,7 @@ builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.Re
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddStripe<>()
 
 //Configure EntityFramework with SQL Server
 builder.Services.AddDbContext<RecipoContext>(options =>

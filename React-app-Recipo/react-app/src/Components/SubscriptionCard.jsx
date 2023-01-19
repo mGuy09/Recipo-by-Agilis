@@ -7,6 +7,7 @@ const SubscriptionCard = ({ title, price, description, isMiddle }) => {
       <h1 className='text-xl lg:text-2xl font-normal my-5'>{title}</h1>
       <h2 className='text-base lg:text-lg font-thin my-2'>{description}</h2>
       <h3 className='text-lg lg:text-xl font-normal my-5'>{price}</h3>
+      
     </div>
   )
 }
