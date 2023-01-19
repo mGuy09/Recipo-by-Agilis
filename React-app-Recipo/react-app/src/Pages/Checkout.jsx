@@ -22,6 +22,7 @@ const Checkout = () => {
     SetAmount(parseInt(e.target.dataset.amount))
   }
   const onSubmit = (data) => {
+    console.log(data)
     axios.post('https://localhost:7291/api/Stripe/customer/add', {
       "email": email,
       "name": userName,
@@ -42,8 +43,20 @@ const Checkout = () => {
   return (
     <div>
       <div>
-        <button></button>
-        <button></button>
+        <button>Monthly</button>
+        <button>Year</button>
+      </div>
+      <div>
+        <form onSubmit={onSubmit}>
+
+          <input type="text" placeholder='Card number' />
+          <input type="month" placeholder='Exp month' />
+          {/* <input type="year" placeholder='Exp year' /> */}
+
+          <input type="text" placeholder='ccv' />
+          <input type="text" placeholder='name' />
+          <button>Pay</button>
+        </form>
       </div>
     </div>
   )
