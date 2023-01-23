@@ -12,6 +12,7 @@ const DashboardHeader = ({ParentCallback}) => {
   
   React.useEffect(()=>{
     axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
+      console.log(res)
       setUserRole(res.data.roles)
       setUsername(res.data.username)
     }).catch((reason)=>{

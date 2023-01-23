@@ -16,6 +16,7 @@ import Recipes from "./Pages/Recipes";
 import UserPage from "./Pages/UserPage";
 import UserOptions from "./Pages/UserOptions";
 import AddRecipe from "./Pages/AddRecipe";
+import RecipePage from "./Pages/RecipePage";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route path='/User'element={<UserPage/>}/>
         <Route path='/User/Options' element={<UserOptions/>}/>
         <Route path='/Add-Recipe' element={<AddRecipe/>}/>
+        <Route path='/Recipes/:id' element={<RecipePage/>} />
       </Routes>
       <Footer />
     </div>

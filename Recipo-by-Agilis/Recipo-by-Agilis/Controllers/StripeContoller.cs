@@ -27,6 +27,7 @@ public class StripeContoller: ControllerBase
         [FromBody] AddStripeCustomer customer,
         CancellationToken ct)
     {
+        
         StripeCustomer createdCustomer = await _stripeService.AddStripeCustomerAsync(
             customer,
             ct);

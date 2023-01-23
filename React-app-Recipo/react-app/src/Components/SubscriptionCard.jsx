@@ -1,5 +1,4 @@
 import React from 'react'
-import Checkout from '../Pages/Checkout'
 const SubscriptionCard = ({ title, price, description, isMiddle }) => {
 
   return (

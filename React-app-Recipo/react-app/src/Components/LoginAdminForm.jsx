@@ -2,7 +2,6 @@ import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import React from 'react'
 import { useState } from 'react'
-import { useCookies } from 'react-cookie'
 
 import { Link, useNavigate } from 'react-router-dom'
 import LoginAltButtons from './LoginAltButtons'
@@ -12,18 +11,12 @@ const LoginAdminForm = () => {
     const [user, SetUser] = useState({})
     const navigate = useNavigate()
     const apiUrl = 'https://localhost:7291/api/Users/Login';
-    const [cookies, setCookie] = useCookies()
     const LoginUser = async (e) => {
         e.preventDefault();
         const data = { email: user.email, password: user.password };
         console.log(data);
         await axios.post(apiUrl, data).then(async (result) => {
             console.log(result);
-
-            await setCookie('token', result.data.Message, { path: '/' })
-            console.log(cookies.token)
-            let token = await jwtDecode(cookies.token)
-            console.log(token)
             localStorage.setItem("username", token.Username)
             navigate('/Dashboard')
         });

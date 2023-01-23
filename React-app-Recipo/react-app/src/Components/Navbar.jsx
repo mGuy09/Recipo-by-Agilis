@@ -4,7 +4,6 @@ import { FaUserAlt } from 'react-icons/fa'
 import { IoMdStar } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { getCookie } from 'react-use-cookie'
 
 function Navbar() {
   const[isLoggedIn, setLoggedIn] = useState()
