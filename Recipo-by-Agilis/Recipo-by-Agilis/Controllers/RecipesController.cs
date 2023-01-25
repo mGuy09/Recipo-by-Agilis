@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipo_by_Agilis.Models;
@@ -11,10 +12,12 @@ namespace Recipo_by_Agilis.Controllers
     public class RecipesController : ControllerBase
     {
         private readonly RecipoContext _context;
+        private readonly  UserManager<IdentityUser> _userManager;
 
-        public RecipesController(RecipoContext context)
+        public RecipesController(RecipoContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Recipes
@@ -75,6 +78,11 @@ namespace Recipo_by_Agilis.Controllers
         public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
         {
             _context.Recipes.Add(recipe);
+            _context.RecipeByUser.Add(new RecipeByUser()
+            {
+                RecipeId = recipe.Id,
+                UserId = User.Identity.Name
+            });
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRecipe", new { id = recipe.Id }, recipe);
