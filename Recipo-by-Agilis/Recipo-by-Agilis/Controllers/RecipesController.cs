@@ -43,7 +43,14 @@ namespace Recipo_by_Agilis.Controllers
                 Name = recipe.Name,
                 Steps = recipe.Steps,
                 IngredientIds = _context.IngredientsInRecipes.AsEnumerable().Where(i => i.RecipeId == recipe.Id)
-                    .Select(i => i.IngredientId).ToList()
+                    .Select(i => i.IngredientId).ToList(),
+                IngredientQuantity = _context.IngredientsInRecipes.AsEnumerable().Where(i => i.RecipeId == recipe.Id).Select(i => new IngredientDto()
+                    {
+                        IngredientId = i.IngredientId,
+                        Quantity = i.Quantity,
+                        QuantityType = i.QuantityType
+                    }).ToList()
+
             };
 
             return RecipeDto;
@@ -125,8 +132,6 @@ namespace Recipo_by_Agilis.Controllers
                 Name = e.Name,
                 Steps = e.Steps,
                 ImageLink = e.ImageLink,
-                
-
             });
             var filteredRecipes = Recipes.Where(e => data.Any(i => e.IngredientIds.Any(x => x == i.Id))).ToList();
 

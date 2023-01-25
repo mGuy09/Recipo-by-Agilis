@@ -12,7 +12,6 @@ const RecipePage = () => {
     const Param = useParams()
     const [recipe ,setRecipe] = useState([])
     const navigate = useNavigate()
-    const [selectedIngredients] = useAtom(SelectedIngredients)
     const [PortionAmount, setPortionAmount] = useState(1)
     const [steps, setSteps] = useState([])
     const [ingredients , setIngredients] = useState([])
@@ -26,12 +25,10 @@ const RecipePage = () => {
     React.useEffect(()=>{ 
       async function fetchData(){
         await axios.get(`https://localhost:7291/api/Recipes/${Param.id}`, {withCredentials: true}).then(res => {
-         console.log(res.data)
          setRecipe(res.data)
          setSteps(res.data.steps.split('\\\\'))
        })
        await axios.get('https://localhost:7291/api/Ingredients', {withCredentials: true}).then(res => {
-         console.log(res.data)
          setIngredients(res.data)
        })
       }
@@ -39,9 +36,11 @@ const RecipePage = () => {
     },[])
     const IncreaseServing = () =>{
       setPortionAmount(PortionAmount+1)
+      
     }
     const DecreaseServing = () => {
-      setPortionAmount(PortionAmount-1)
+      PortionAmount > 1 && setPortionAmount(PortionAmount-1)
+      
     }
     
     
@@ -60,21 +59,21 @@ const RecipePage = () => {
       <div className='flex justify-between mx-10 py-10 px-10 my-5 border-b-2 border-b-gray-300'>
         <h1 className='font-medium text-4xl'>{recipe.name}</h1>
         <div className='flex gap-2 items-center'>
-        <button onClick={DecreaseServing} className='text-xl px-2 rounded-md hover:bg-gray-200 active:bg-gray-500 border border-gray-400 hover:border-gray-300 active:border-gray-500 hover:scale-105 active:scale-95 duration-300 bg-gray-300' >-</button>
+        <button onClick={DecreaseServing} className='text-xl select-none px-2 rounded-md hover:bg-gray-200 active:bg-gray-500 border border-gray-400 hover:border-gray-300 active:border-gray-500 hover:scale-105 active:scale-95 duration-300 bg-gray-300' >-</button>
         <span className='font-medium text-lg'>{PortionAmount} {PortionAmount > 1 ? "Servings" : "Serving"}</span>
-        <button onClick={IncreaseServing} className='text-xl px-2 rounded-md hover:bg-gray-200 active:bg-gray-500 border border-gray-400 hover:border-gray-300 active:border-gray-500 hover:scale-105 active:scale-95 duration-300 bg-gray-300' >+</button>
+        <button onClick={IncreaseServing} className='text-xl select-none px-2 rounded-md hover:bg-gray-200 active:bg-gray-500 border border-gray-400 hover:border-gray-300 active:border-gray-500 hover:scale-105 active:scale-95 duration-300 bg-gray-300' >+</button>
         </div>
       </div>
       <div className='flex gap-16 p-10 justify-around'>
         <div className=''>
-          <div className='mx-5 border-2 rounded-xl h-full w-full p-5 border-gray-300'>
+          <div className='mx-5 border-2 rounded-xl h-full w-[30rem] p-5 border-gray-300'>
             <div className='py-2 border-b-2 border-b-gray-300 mb-2'>
-              <h1 className='text-2xl font-medium '>Ingredients</h1>
+              <h1 className='text-2xl text-center font-medium '>Ingredients</h1>
             </div>
-          <div className='flex flex-col mt-7 gap-3 mx-3'>
+          <div className='flex flex-col mt-7 w-full gap-3 mx-3'>
             
             {ingredients.filter((item) => recipe.ingredientIds.includes(item.id)).map(item => (
-              <p className='text-lg font-medium' key={item.id}>{item.name}</p>
+              <p className='text-lg border-b border-b-gray-200 py-2 font-medium' key={item.id}>{item.name} - {recipe.ingredientQuantity.filter((i) => i.ingredientId === item.id).map(i => i.quantityType === 'pc' ? i.quantity*PortionAmount +' '+ i.quantityType :i.quantity*PortionAmount + i.quantityType)}</p>
             ))}
           </div>
           </div>

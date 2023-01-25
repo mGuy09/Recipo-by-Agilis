@@ -1,16 +1,12 @@
 import axios from 'axios'
-import { useAtom } from 'jotai'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { SelectedIngredients, SelectedRecipe } from '../State'
 import RecipePageCard from './RecipePageCard'
 
 const RecipeSection = () => {
     const [recipes, setRecipes] = useState([])
     const [selectedIngredients] = useState(JSON.parse(localStorage.getItem('ingredients')))
-    const [seling] = useAtom(SelectedIngredients)
     React.useEffect(()=>{
-      console.log(selectedIngredients, seling)
         axios.post(`https://localhost:7291/api/Recipes/IngredientsinRecipe`, selectedIngredients).then(res => {
             console.log(res.data.data)
           setRecipes(res.data.data)
