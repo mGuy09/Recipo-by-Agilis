@@ -49,7 +49,7 @@ const Checkout = () => {
       setDetails(res.data.customerId)
       console.log(details)
       setDone(true)
-    })
+    }).catch(reason => reason.response.status !== 200 && navigate('/Checkout/Failed'))
   }
 
   useEffect(()=>{
@@ -63,7 +63,8 @@ const Checkout = () => {
         }, { withCredentials: true }).then(response => {
           console.log(response)
           setDone(false)
-        })
+          navigate('/Checkout/Success')
+        }).catch(reason => reason.response.status !== 200 && navigate('/Checkout/Failed'))
     }
   }, [isDone])
 
@@ -84,14 +85,14 @@ const Checkout = () => {
     <div className='flex justify-center items-center h-[80vh] gap-5'>
       <div className='flex p-10 w-[30%] gap-5'>
       <div>
-      <input type="radio" id='monthly' onChange={amountHandler} value={7999} name='subscription' className='hidden peer' />
+      <input type="radio" id='monthly' onChange={amountHandler} value={799} name='subscription' className='hidden peer' />
       <label htmlFor="monthly" className='flex flex-col pr-10 pl-3 peer-checked:shadow-lg py-6 border-2 duration-150 border-gray-300 rounded-xl peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-700 hover:bg-gray-200'>
         <p className='text-2xl font-medium'>Monthly</p>
         <p className='text-lg font-thin'>Recurring payment monthly for Recipo Premium</p>
       </label>
       </div>
       <div>
-      <input type="radio" id='yearly' onChange={amountHandler} value={799900} name='subscription' className='hidden peer' />
+      <input type="radio" id='yearly' onChange={amountHandler} value={7999} name='subscription' className='hidden peer' />
       <label htmlFor="yearly" className='flex flex-col pr-10 pl-3 py-6 border-2 peer-checked:shadow-lg duration-150 border-gray-300 rounded-xl peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-700 hover:bg-gray-200'>
         
           <p className='text-2xl font-medium'>Yearly</p>

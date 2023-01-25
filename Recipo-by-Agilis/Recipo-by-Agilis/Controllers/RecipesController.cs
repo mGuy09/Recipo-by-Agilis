@@ -26,7 +26,7 @@ namespace Recipo_by_Agilis.Controllers
 
         // GET: api/Recipes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipe(int id)
+        public async Task<ActionResult<RecipeDto>> GetRecipe(int id)
         {
             var recipe = await _context.Recipes.FindAsync(id);
 
@@ -35,7 +35,18 @@ namespace Recipo_by_Agilis.Controllers
                 return NotFound();
             }
 
-            return recipe;
+            var RecipeDto = new RecipeDto()
+            {
+                Id = recipe.Id,
+                ImageLink = recipe.ImageLink,
+                IsPremium = recipe.IsPremium,
+                Name = recipe.Name,
+                Steps = recipe.Steps,
+                IngredientIds = _context.IngredientsInRecipes.AsEnumerable().Where(i => i.RecipeId == recipe.Id)
+                    .Select(i => i.IngredientId).ToList()
+            };
+
+            return RecipeDto;
         }
 
         // PUT: api/Recipes/5

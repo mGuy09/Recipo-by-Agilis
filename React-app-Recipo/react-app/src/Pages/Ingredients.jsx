@@ -15,6 +15,7 @@ const Ingredients = () => {
   const [search, setSearchFilter] = React.useState('')
   // const [selectedIngredients, setSelectedIngredients] = React.useState([])
   const [selectedIngredients, setSelectedIngredients] = useAtom(SelectedIngredients)
+  localStorage.removeItem('ingredients')
   const [isFocused, setFocus] = React.useState(false)
 
   
@@ -34,7 +35,8 @@ const Ingredients = () => {
     setSearchFilter(e.target.value)
   }
   const onSubmit=()=>{
-    // console.log(selectedIngredients)
+    console.log(selectedIngredients)
+    localStorage.setItem('ingredients', JSON.stringify(selectedIngredients))
     navigate('/Recipes')
   }
   
