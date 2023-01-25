@@ -113,7 +113,9 @@ namespace Recipo_by_Agilis.Controllers
                 IsPremium = e.IsPremium,
                 Name = e.Name,
                 Steps = e.Steps,
-                ImageLink = e.ImageLink
+                ImageLink = e.ImageLink,
+                
+
             });
             var filteredRecipes = Recipes.Where(e => data.Any(i => e.IngredientIds.Any(x => x == i.Id))).ToList();
 

@@ -137,6 +137,12 @@ INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (111,N'Salami
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (112,N'Olives', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (113,N'Tomato Sauce', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (114,N'Yeast', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (115,N'Bacon', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (116,N'Celery', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Vegetables'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (117,N'Beef stock', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId]) VALUES (118,N'Bay leaves', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Condiments'))
+
+
 
 SET IDENTITY_INSERT [dbo].[Ingredients] OFF
 
@@ -149,46 +155,51 @@ SET IDENTITY_INSERT [dbo].[Subscription] OFF
 
 SET IDENTITY_INSERT [dbo].[Recipes] ON 
 
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (1,'1 .peel and wash the potatos and the onion.\\2. Next you need to chop thinly the onion.\\3. fry the onion untill golden.\\4. fry the potatos untill medium done.\\5. roughtly smash the potatos, and mix them with the onion and eggs and season it to taste.\\6. pour the mixture into a frying pan and cook it at low-medium heat for 7 minutes on each side.',
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (1,'1. Put a large non-stick frying pan on a low heat. Cook the onion slowly in the oil and butter until soft but not brown – this should take about 15 mins. Meanwhile, peel the tomatoes (if using) by scoring the skins with a cross, putting them in a bowl and pouring over just-boiled water. Drain the water after 2-3 mins and the skins will peel away easily. You can then coarsely grate them.\\2. Add the potatoes to the pan, then cover and cook for a further 15-20 mins, stirring occasionally to make sure they fry evenly. When the potatoes are soft and the onion is shiny, crush 2 garlic cloves and stir in, followed by the beaten eggs.\\3. Put the lid back on the pan and leave the tortilla to cook gently. After 20 mins, the edges and base should be golden, the top set but the middle still a little wobbly. To turn it over, slide it onto a plate and put another plate on top, turn the whole thing over and slide it back into the pan to finish cooking.\\4.Once cooked, transfer to a plate and serve the tortilla warm or cold, scattered with the chopped parsley. To accompany the tortilla, take slices of warmed baguette, stab all over with a fork and rub with the remaining garlic, pile on the grated tomatoes and season with sea salt and a drizzle of olive oil.',
 0, N'Spanish Tortilla', N'https://images.unsplash.com/photo-1639669794539-952631b44515?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1221&q=80' )
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (2,'1 .peel and wash the potatos.\\2. Next you need slice them into french fries strips.\\3. fry the potatos untill medium done.\\4. place them in an oven pan and put them in the preheated oven at 180 degrees celsius.\\5.Take them out of the oven and sprinkle grated cheesse over them, then put them back in the oven for 5 more minutes.',
-0, N'Grated Potatos', N'https://images.unsplash.com/photo-1568226189293-77924f3f10c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80' )
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (3,'1 .Clean the skin and the bones if any.\\2. Dry the salmon with a kitchen paper towel.\\3. Cut the salmon into slices 0.5 cm thick.\\4. Enjoy with some soya sauce',
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (2,'1. Peel the potatoes and cut into 1cm-thick batons. Put into a bowl of cold water and leave to soak for at least 2 hrs to remove the starch from the potatoes – this will help them crisp while frying.\\2.Drain the potatoes well and pat dry with kitchen paper. Fill a deep pan no more than a third full with oil and heat to 140C, or until a cube of bread dropped in browns in 60 seconds. Fry the French fries in batches for 6 mins per batch until golden straw-coloured, cooked through and lightly crisp. Drain well on kitchen paper.\\3.Turn the heat up until the oil reaches 180C, or a cube of bread browns in 30 seconds. Fry the French fries again for 2-3 mins per batch until lightly golden and really crisp. Drain on kitchen paper and immediately season with sea salt.',
+0, N'French Fries', N'https://images.unsplash.com/photo-1568226189293-77924f3f10c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80' )
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (3,'1. Clean the skin and the bones if any.\\2. Dry the salmon with a kitchen paper towel.\\3. Cut the salmon into slices 0.5 cm thick.\\4. Enjoy with some soya sauce',
 0, N'Salmon Sashimi' , N'https://images.unsplash.com/photo-1599570340442-844ea773ef96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (4,'1. in a bowl mix the flour with tghe water, salt, yeast, until you get a soft dough.\\2. let it sit in the fridge for 30 minutes.\\3. roll the dough on a clean flat surface into a round shape of 0.4 cm thick.\\4. place the rolled dough on a baking sheet and spread the tomato sauce, salami, mushrooms, olives and cheesse.\\5. put the pizza in the preheated oven at 210 degrees Celsius for 20 minutes',
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (4,'1. Mix together the yeast and sugar with 250ml warm water and leave to sit for 10 mins. Place half the flour in a table-top mixer with a dough hook, pour in the yeast mixture and beat at medium speed for 10 mins (or mix in a bowl, then knead with oiled hands in the bowl for 5-10 mins).\\2.Leave somewhere warm for 10 more mins, then add the remaining flour and oil. Beat or knead to a dough for a further 5 mins. Put in a well-oiled bowl, cover with a cloth and place somewhere warm to double in size – about 1½ hrs. \\3.For the sauce, heat the oil in a pan over a moderate heat. Add the onion and cook for 3 mins, stirring constantly. Add the garlic, 1 tsp sea salt and 1 tsp ground black pepper and cook for 2 mins more. Add the tomatoes and bring to the boil, then reduce the heat and simmer for a good 20 mins, stirring occasionally.\\4.Once your dough has doubled in size, slap it down on a lightly floured surface and knead for 4 mins until soft but not too elastic. Divide into 6 pieces, roll into balls and leave to rest for 10 mins. Heat oven to the highest temperature possible (210C fan in the Good Food test kitchen) and place a flat baking sheet in the oven.\\5. With a well-floured rolling pin, roll out each ball of dough as thinly as possible. Remove the baking sheet from the oven, oil or dust with flour, then carefully transfer the dough base onto it. Spread over some of the tomato sauce, then the cheese, salami, mushrooms and any toppings you desire.',
 1, N'HomeMade Pizza', N'https://images.unsplash.com/photo-1585778718569-2efde6c55c80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80' )
-INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (5,'1. In a wok or big pan place the beef and cook it untill all the juices evaporate.\\2. Pour the tomato sauce, salt, ground pepper and basil leaves and cook for 5 more minutes.\\3. Place a big enough pot of water on the stove and bring it to a boil, then add the pasta of choice and boil in until aldente.\\4. Strain the pasta and then pour the beef sauce over it and mix well.\\5. Give it a little zing with a sprinkle of parmesan cheesse. Enjoy!',
+INSERT INTO Recipes([Id],[Steps], [IsPremium], [Name], [ImageLink]) VALUES (5,'1. Put a large saucepan on a medium heat and add 1 tbsp olive oil.\\2. Add 4 finely chopped bacon rashers and fry for 10 mins until golden and crisp.\\3. Reduce the heat and add the 2 onions, 2 carrots, 2 celery sticks, 2 garlic cloves and the leaves from 2-3 sprigs rosemary, all finely chopped, then fry for 10 mins. Stir the veg often until it softens.\\4. Increase the heat to medium-high, add 500g beef mince and cook stirring for 3-4 mins until the meat is browned all over.\\5. Add 2 tins plum tomatoes, the finely chopped leaves from ¾ small pack basil, 1 tsp dried oregano, 2 bay leaves, 2 tbsp tomato purée, 1 beef stock cube, 1 deseeded and finely chopped red chilli (if using), 125ml red wine and 6 halved cherry tomatoes. Stir with a wooden spoon, breaking up the plum tomatoes.\\ 6. Bring to the boil, reduce to a gentle simmer and cover with a lid. Cook for 1 hr 15 mins stirring occasionally, until you have a rich, thick sauce.\\7. Add the 75g grated parmesan, check the seasoning and stir.\\8. When the bolognese is nearly finished, cook 400g spaghetti following the pack instructions.\\9. Drain the spaghetti and either stir into the bolognese sauce, or serve the sauce on top. Serve with more grated parmesan, the remaining basil leaves and crusty bread, if you like.',
 1, N'Bolognese Pasta', N'https://images.unsplash.com/photo-1600803734709-83f30a78e312?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80' )
 
 SET IDENTITY_INSERT [dbo].[Recipes] OFF 
 
 
 SET IDENTITY_INSERT [dbo].[IngredientsInRecipes] ON 
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (1, 2, 1)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (2, 79, 1)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (3, 104, 1)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (4, 6, 1)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (5, 105, 1)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (6, 2, 2)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (7, 15, 2)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (8, 104, 2)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (9, 105, 2)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (10, 59, 3)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (11, 107, 3)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (12, 109, 4)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (13, 105, 4)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (14, 114, 4)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (15, 108, 4)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (16, 111, 4)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (17, 29, 4)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (18, 112, 4)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (19, 113, 4)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (20, 110, 5)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (21, 23, 5)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (22, 113, 5)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (23, 42, 5)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (24, 105, 5)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (25, 106, 5)
-INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId]) VALUES (26, 21, 5)
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (1, 2, 1, 3, 'pc')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (2, 79, 1, 1, 'pc' )
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (3, 104, 1, 100, 'ml')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (4, 6, 1, 2, 'pc')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (5, 105, 1, 3, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (6, 2, 2, 3, 'pc')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (7, 15, 2, 50, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (8, 104, 2, 150, 'ml')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (9, 105, 2, 10, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (10, 59, 3, 150, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (11, 107, 3, 70, 'ml')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (12, 109, 4, 300, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (13, 105, 4, 10, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (14, 114, 4, 25, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (15, 108, 4, 100, 'ml')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (16, 111, 4, 75, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (17, 29, 4, 50, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (18, 112, 4, 40, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (19, 113, 4, 75, 'ml')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (20, 110, 5, 150, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (21, 23, 5, 150, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (22, 113, 5, 100, 'ml')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (23, 42, 5, 10, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (24, 105, 5, 20, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (25, 106, 5, 10, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (26, 21, 5, 30, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (27, 115, 5, 100, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (28, 116, 5, 50, 'g')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (29, 117, 5, 1, 'pc')
+INSERT INTO IngredientsInRecipes([Id], [IngredientId], [RecipeId], [Quantity], [QuantityType]) VALUES (30, 118, 5, 3, 'pc')
+
 
 SET IDENTITY_INSERT [dbo].[IngredientsInRecipes] OFF
