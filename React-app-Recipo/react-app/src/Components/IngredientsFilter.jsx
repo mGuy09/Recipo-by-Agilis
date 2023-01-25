@@ -47,8 +47,8 @@ const IngredientsFilter = ({parentCallback, FilterRef}) => {
             <h1 className='text-lg md:text-xl lg:text-2xl font-thin cursor-default '>Ingredient Filter</h1>
         </div>
         <div>
-            <IoIosArrowDown size={42} className={!filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden visible': 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden invisible hidden'} onClick={OpenClose}/>
-            <IoIosArrowUp size={42} className={filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden visible': 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden invisible hidden'} onClick={OpenClose}/>
+            <IoIosArrowDown size={42} className={filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden visible': 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden invisible hidden'} onClick={OpenClose}/>
+            <IoIosArrowUp size={42} className={!filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden visible': 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden invisible hidden'} onClick={OpenClose}/>
         </div>
     </div>
     <div className={filterDropdown || isLarge ? 'transition-all flex gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0 visible' : 'transition-all gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0 invisible hidden'}>

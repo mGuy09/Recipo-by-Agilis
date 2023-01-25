@@ -17,6 +17,8 @@ import UserPage from "./Pages/UserPage";
 import UserOptions from "./Pages/UserOptions";
 import AddRecipe from "./Pages/AddRecipe";
 import RecipePage from "./Pages/RecipePage";
+import PaymentFailed from "./Pages/PaymentFailed";
+import PaymentSuccess from "./Pages/PaymentSuccess";
 
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
         <Route path='/User/Options' element={<UserOptions/>}/>
         <Route path='/Add-Recipe' element={<AddRecipe/>}/>
         <Route path='/Recipes/:id' element={<RecipePage/>} />
+        <Route path='/Checkout/Failed' element={<PaymentFailed/>} />
+        <Route path='/Checkout/Success' element={<PaymentSuccess/>} />
       </Routes>
       <Footer />
     </div>

@@ -1,6 +1,4 @@
-﻿using Recipo_by_Agilis.Models;
-
-namespace Recipo_by_Agilis;
+﻿namespace Recipo_by_Agilis.Models;
 
 public class RecipeDto
 {
@@ -10,5 +8,5 @@ public class RecipeDto
     public bool IsPremium { get; set; }
     public string ImageLink { get; set; }
     public List<int> IngredientIds { get; set; }
-    public Dictionary<int, int> IngredientQuantity { get; set; }
+    public List<IngredientDto> IngredientQuantity { get; set; }
 }

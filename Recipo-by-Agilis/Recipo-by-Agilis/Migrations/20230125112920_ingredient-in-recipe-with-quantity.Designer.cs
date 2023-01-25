@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipo_by_Agilis.Models;
 
@@ -11,9 +12,11 @@ using Recipo_by_Agilis.Models;
 namespace RecipobyAgilis.Migrations
 {
     [DbContext(typeof(RecipoContext))]
-    partial class RecipoContextModelSnapshot : ModelSnapshot
+    [Migration("20230125112920_ingredient-in-recipe-with-quantity")]
+    partial class ingredientinrecipewithquantity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,7 +264,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.Favorites", b =>
@@ -281,7 +284,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Favorites", (string)null);
+                    b.ToTable("Favorites");
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.Ingredient", b =>
@@ -301,7 +304,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ingredients", (string)null);
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.IngredientInRecipe", b =>
@@ -327,7 +330,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IngredientsInRecipes", (string)null);
+                    b.ToTable("IngredientsInRecipes");
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.Recipe", b =>
@@ -355,7 +358,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.Subscription", b =>
@@ -375,7 +378,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subscription", (string)null);
+                    b.ToTable("Subscription");
                 });
 
             modelBuilder.Entity("Recipo_by_Agilis.Models.UserSubscription", b =>
@@ -394,7 +397,7 @@ namespace RecipobyAgilis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserSubscriptions", (string)null);
+                    b.ToTable("UserSubscriptions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

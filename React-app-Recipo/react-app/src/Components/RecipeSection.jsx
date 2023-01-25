@@ -1,31 +1,26 @@
 import axios from 'axios'
-import { useAtom } from 'jotai'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { SelectedIngredients, SelectedRecipe } from '../State'
 import RecipePageCard from './RecipePageCard'
 
 const RecipeSection = () => {
     const [recipes, setRecipes] = useState([])
-    const [selectedIngredients] = useAtom(SelectedIngredients)
-    const [selectedRecipe, setSelectedRecipe] = useAtom(SelectedRecipe)
+    const [selectedIngredients] = useState(JSON.parse(localStorage.getItem('ingredients')))
     React.useEffect(()=>{
         axios.post(`https://localhost:7291/api/Recipes/IngredientsinRecipe`, selectedIngredients).then(res => {
             console.log(res.data.data)
           setRecipes(res.data.data)
         })
       },[])
-    React.useEffect(()=>{
-      console.log(selectedRecipe)
-    },[selectedRecipe])
+    
   return (
     <div>
         <div className='px-10 mx-16 py-10 border-b border-b-gray-300'>
             <h1 className='text-3xl font-thin '>Recipes</h1>
         </div>
-        <div className='flex gap-10 items-center justify-center p-10'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-center gap-10 p-10'>
             {recipes.map(item => (
-                <Link to={`/Recipes/${item.id}`}
+                <Link className='col-span-1' to={`/Recipes/${item.id}`}
                 ><RecipePageCard key={item.id} id={item.id} title={item.name} image={item.imageLink} steps={item.steps} isPremium={item.isPremium}/></Link>
             ))}
         </div>
