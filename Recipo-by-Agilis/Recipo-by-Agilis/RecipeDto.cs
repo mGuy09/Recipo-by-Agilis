@@ -10,4 +10,5 @@ public class RecipeDto
     public bool IsPremium { get; set; }
     public string ImageLink { get; set; }
     public List<int> IngredientIds { get; set; }
+    public Dictionary<int, int> IngredientQuantity { get; set; }
 }
