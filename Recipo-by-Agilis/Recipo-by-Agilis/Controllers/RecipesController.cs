@@ -93,12 +93,31 @@ namespace Recipo_by_Agilis.Controllers
         // POST: api/Recipes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
+        public async Task<ActionResult<Recipe>> PostRecipe(RecipeDto recipe)
         {
-            _context.Recipes.Add(recipe);
+           var a = _context.Recipes.Add(new Recipe()
+            {
+                Name = recipe.Name,
+                ImageLink = recipe.ImageLink,
+                IsPremium = false,
+                Steps = recipe.Steps
+            });
+           await _context.SaveChangesAsync();
+            recipe.IngredientQuantity.ForEach(i =>
+            {
+                _context.IngredientsInRecipes.Add(new IngredientInRecipe()
+                {
+                    IngredientId = i.IngredientId,
+                    Quantity = i.Quantity,
+                    QuantityType = i.QuantityType,
+                    RecipeId = a.Entity.Id /*_context.Recipes.AsEnumerable().Where(item => item.Name == recipe.Name).Select(item => item.Id).First()*/
+                });
+                
+            });
+            await _context.SaveChangesAsync();
             _context.RecipeByUser.Add(new RecipeByUser()
             {
-                RecipeId = recipe.Id,
+                RecipeId = a.Entity.Id,
                 UserId = User.Identity.Name
             });
             await _context.SaveChangesAsync();
