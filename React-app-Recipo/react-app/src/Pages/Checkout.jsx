@@ -73,6 +73,8 @@ const Checkout = () => {
           amount: amount
         }, { withCredentials: true }).then(response => {
           console.log(response)
+          const data = {email: email, role: 'SubscribedUser'}
+          axios.post('https://localhost:7291/api/Setup/AddUserToRole',data, {withCredentials: true}).then(res => console.log(res))
           setDone(false)
           navigate('/Checkout/Success' , {replace: true})
         }).catch(reason => reason.response.status !== 200 && navigate('/Checkout/Failed' , {replace: true}))

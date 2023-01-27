@@ -7,26 +7,25 @@ import { useNavigate } from 'react-router'
 const PaymentSuccess = () => {
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState()
-  const [isPremium, setPremium] = useState()
+  
 
+  // React.useEffect(()=>{
+  //   async function fetchdata(){
+  //     await axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
+  //       console.log(res.data)
+  //     setPremium(res.data.roles.includes('SubscribedUser'))
+  //     setEmail(res.data.emailAddress)
+  //   })
+  //   }
+  //   fetchdata()
+  // },[])
   React.useEffect(()=>{
-    async function fetchdata(){
-      await axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
-        console.log(res.data)
-      setPremium(res.data.roles.includes('SubscribedUser'))
-      setEmail(res.data.emailAddress)
-    })
-    }
-    fetchdata()
-  },[])
-  React.useEffect(()=>{
-    const data =  {email: email, role: 'SubscribedUser'}
-    if(isPremium == false) axios.post('https://localhost:7291/api/Setup/AddUserToRole',data, {withCredentials: true}).then(res => console.log(res))
+    // const data =  {email: email, role: 'SubscribedUser'}
+    // if(isPremium == false) axios.post('https://localhost:7291/api/Setup/AddUserToRole',data, {withCredentials: true}).then(res => console.log(res))
     setTimeout(()=>{
       navigate('/Dashboard', {replace: true})
     },5000)
-  },[email])
+  },[])
   return (
     <div className='flex justify-center'>
     <div className='flex justify-center items-center  w-[80%] h-[80vh] m-10 border-4 rounded-2xl border-gray-300'>
