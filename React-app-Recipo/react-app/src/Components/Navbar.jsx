@@ -51,14 +51,14 @@ function Navbar() {
       <div className='flex justify-between'>
         <div className='flex m-3 mt-3 items-center'>
           <div>
-            <TfiMenu size={30} className='m-1 cursor-pointer' onClick={OpenClose} />
+            <TfiMenu size={30} className='m-1 cursor-pointer active:scale-90 duration-150' onClick={OpenClose} />
           </div>
           <h1 className='cursor-default ml-3 font-semibold text-2xl'>RECIPO</h1>
         </div>
         <div className='m-3'>
-          <FaUserAlt size={25} className='hidden lg:flex mx-5 mt-2 cursor-pointer items-center' onClick={DropdownOpenClose} />
+          <FaUserAlt size={25} className={!dropdown ?'hidden lg:flex mx-5 mt-2 cursor-pointer items-center active:scale-90 duration-150': 'hidden lg:flex mx-5 mt-2 cursor-pointer items-center active:scale-90 duration-150 scale-110'} onClick={DropdownOpenClose} />
           <div className={!dropdown ? 'absolute hidden bg-white z-10 right-2 top-[62px]' : 'absolute flex bg-white z-10 right-2 top-[62px] duration-300'} onClick={DropdownClose}>
-            <ul className='flex flex-col duration-200 shadow-xl'>
+            <ul className='flex flex-col duration-200 shadow-xl shadow-black/30'>
               {isLoggedIn && <Link to={'/User'}><li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>User Page</li></Link>}
               {isLoggedIn && <Link to={'/User/Options'}><li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Options</li></Link>}
               {!isLoggedIn && <Link to='/Register'><li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Register Account</li></Link>}
@@ -74,7 +74,7 @@ function Navbar() {
         <div>
           <div className='flex justify-between py-7 items-center'>
             <h1 className='px-4 cursor-default text-3xl font-bold'>RECIPO</h1>
-            <TfiClose size={20} className='mx-4 cursor-pointer' onClick={OpenClose} />
+            <TfiClose size={20} className='mx-4 cursor-pointer active:scale-[0.8] duration-150'  onClick={OpenClose} />
           </div>
           <ul className='border-t border-t-gray-200'>
             <Link to='/' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700'>Home</li></Link>

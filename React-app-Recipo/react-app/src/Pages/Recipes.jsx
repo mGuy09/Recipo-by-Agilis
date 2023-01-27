@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router'
 import PremiumAd from '../Components/PremiumAd'
+import PremiumAddRecipes from '../Components/PremiumAddRecipes'
 import RecipeSection from '../Components/RecipeSection'
 
 const Recipes = () => {
@@ -19,8 +20,8 @@ const Recipes = () => {
   
   return (
     <div>
-      <PremiumAd />
-      <RecipeSection/>
+      {isPremium ? PremiumAddRecipes :<PremiumAd />}
+      <RecipeSection UserPremium={isPremium}/>
       
     </div>
   )

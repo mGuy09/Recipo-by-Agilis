@@ -23,7 +23,6 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
   }, [baseList, filter, search])
 
    useEffect(()=>{
-    // debugger;
     Checkmark.forEach(element => {
       selectedIngredients.forEach(item => {
         if(item.name === element.id){

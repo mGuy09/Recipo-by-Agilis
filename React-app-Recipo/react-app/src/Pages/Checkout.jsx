@@ -12,6 +12,8 @@ const Checkout = () => {
   const [card, setCard] = useState();
   const [expirationDate, setExpiration] = useState()
   const [cvc, setCvc] = useState()
+  const [dropdownM, setDropdownM] = useState()
+  const [dropdownY, setDropdownY] = useState()
   const [isDone, setDone] = useState(false)
   const [amount, SetAmount] = useState();
 
@@ -26,7 +28,16 @@ const Checkout = () => {
       .catch(reason => reason.response.status === 401 && navigate('/Login'))
   })
   const amountHandler = (e) => {
+    console.log(e)
     SetAmount(parseInt(e.target.value))
+    if(e.target.id === 'monthly') {
+      setDropdownY(false)
+      setDropdownM(true)
+    }
+    else{
+      setDropdownM(false)
+      setDropdownY(true)
+    }
   }
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -63,10 +74,11 @@ const Checkout = () => {
         }, { withCredentials: true }).then(response => {
           console.log(response)
           setDone(false)
-          navigate('/Checkout/Success')
-        }).catch(reason => reason.response.status !== 200 && navigate('/Checkout/Failed'))
+          navigate('/Checkout/Success' , {replace: true})
+        }).catch(reason => reason.response.status !== 200 && navigate('/Checkout/Failed' , {replace: true}))
     }
   }, [isDone])
+
 
   const handleChangeCardNumber = (e) =>{
     setCard(e.target.value)
@@ -82,36 +94,46 @@ const Checkout = () => {
   
 
   return (
-    <div className='flex justify-center items-center h-[80vh] gap-5'>
-      <div className='flex p-10 w-[30%] gap-5'>
+    <div className='flex justify-center h-[80vh] gap-5'>
+      <div className='flex p-10 w-[40%] translate-y-24 gap-5'>
       <div>
-      <input type="radio" id='monthly' onChange={amountHandler} value={799} name='subscription' className='hidden peer' />
-      <label htmlFor="monthly" className='flex flex-col pr-10 pl-3 peer-checked:shadow-lg py-6 border-2 duration-150 border-gray-300 rounded-xl peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-700 hover:bg-gray-200'>
+      <input type="radio" id='monthly' onChange={amountHandler} value={499} name='subscription' className='hidden peer checkmark' />
+      <label htmlFor="monthly" className='flex cursor-pointer flex-col h-[25vh] pr-10 pl-3 gap-5 peer-checked:shadow-lg py-6 border-2 duration-300 border-gray-300 bg-white z-30 rounded-xl peer-checked:rounded-b-none peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-600 peer-checked:active:bg-emerald-700 active:bg-gray-400 hover:bg-gray-200'>
         <p className='text-2xl font-medium'>Monthly</p>
         <p className='text-lg font-thin'>Recurring payment monthly for Recipo Premium</p>
       </label>
+      <div className={dropdownM ? 'flex py-3 px-3 flex-col w-full h-[16.6vh] shadow-lg rounded-b-xl border-2 border-t-0 border-gray-300 bg-white duration-300 translate-y-0 visible ' : 'invisible duration-300 h-0'}>
+        <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}>Have access to all free and premium recipes.</p>
+        <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}>Premium users have the ability to add new recipes.</p>
+        <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}>Price: <span className='font-medium'>€4.99</span></p>
+      </div>
       </div>
       <div>
-      <input type="radio" id='yearly' onChange={amountHandler} value={7999} name='subscription' className='hidden peer' />
-      <label htmlFor="yearly" className='flex flex-col pr-10 pl-3 py-6 border-2 peer-checked:shadow-lg duration-150 border-gray-300 rounded-xl peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-700 hover:bg-gray-200'>
+      <input type="radio" id='yearly' onChange={amountHandler} value={4199} name='subscription' className='hidden peer checkmark' />
+      <label htmlFor="yearly" className='flex cursor-pointer flex-col h-[25vh] pr-10 gap-5 pl-3 py-6 border-2 peer-checked:shadow-lg duration-300 border-gray-300 z-20 rounded-xl peer-checked:rounded-b-none peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-600 peer-checked:active:bg-emerald-700 active:bg-gray-400 hover:bg-gray-200'>
         
           <p className='text-2xl font-medium'>Yearly</p>
         <p className='text-lg font-thin'>Recurring payment yearly for Recipo Premium</p>
       </label>
+      <div className={dropdownY ? 'flex py-3 px-3 flex-col w-full h-[16.6vh] shadow-lg border-2 rounded-b-xl border-t-0 border-gray-300 bg-white duration-300 translate-y-0 visible ' : 'invisible duration-300 h-0'}>
+        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Have access to all free and premium recipes.</p>
+        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Exactly the same as for Monthly.</p>
+        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Price: <span className='font-medium'>€41.99</span></p>
       </div>
       </div>
-      <div className='w-[30%]'>
-        <form onSubmit={onSubmit} className='flex flex-col gap-10 '>
-          {/* <input type="credit" name='card' placeholder='Credit Card Number' onChange={handleCard} className='px-2 py-1 border border-gray-300 rounded-full'/>
-          <input type="month" name="exp" id="" className='px-2 py-1 border border-gray-300 rounded-full' />
-          <input type="text" name='cvv' maxLength={3} placeholder='3-digit CVV' className='px-2 appearance-none py-1 border border-gray-300 rounded-full'/> */}
-
-          <input {...getCardNumberProps({ onChange: handleChangeCardNumber })}  className='px-2 py-1 border border-gray-300 rounded-full'/>
-          <input {...getExpiryDateProps({ onChange: handleChangeExpiryDate })}  className='px-2 py-1 border border-gray-300 rounded-full'/>
-          <input {...getCVCProps({ onChange: handleChangeCVC })}  className='px-2 py-1 border border-gray-300 rounded-full'/>
-          <input type="text" name='fullname' placeholder="Full Name" className='px-2 py-1 border border-gray-300 rounded-full'/>
+      </div>
+      <div className='flex items-center rounded-xl'>
+        
+        <form onSubmit={onSubmit} className='flex flex-col items-center shadow-lg gap-10 border border-gray-300 rounded-xl p-16 '>
+          <h1 className='text-xl font-medium'>Card Information</h1>
+          <input type="text" name='fullname' placeholder="Full Name" className='px-2 py-1 border w-56 border-gray-300 rounded-full'/>
+          <input {...getCardNumberProps({ onChange: handleChangeCardNumber })}  className='px-2 py-1 w-56 border border-gray-300 rounded-full'/>
+          <div className='flex gap-3'>
+          <input {...getExpiryDateProps({ onChange: handleChangeExpiryDate })}  className='px-2 py-1 w-20 border border-gray-300 rounded-full'/>
+          <input {...getCVCProps({ onChange: handleChangeCVC })}  className='px-2 py-1 border w-20 border-gray-300 rounded-full'/>
+          </div>
           {meta.isTouched && meta.error && <span>Error: {meta.error}</span>}
-          <button type='submit' className='bg-orange-500 px-4 py-4 rounded-full hover:bg-orange-400 active:bg-orange-700 duration-150 shadow-lg active:shadow-md'>Pay</button>
+          <button type='submit' className='bg-orange-500 px-10 py-3 rounded-full hover:bg-orange-400 active:bg-orange-700 duration-150 shadow-lg text-white text-lg font-medium active:shadow-md'>Pay</button>
         </form>
       </div>
     </div>

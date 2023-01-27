@@ -13,7 +13,6 @@ const Ingredients = () => {
 
   const [filter, setFilter] = React.useState(FilterRef.id)
   const [search, setSearchFilter] = React.useState('')
-  // const [selectedIngredients, setSelectedIngredients] = React.useState([])
   const [selectedIngredients, setSelectedIngredients] = useAtom(SelectedIngredients)
   localStorage.removeItem('ingredients')
   const [isFocused, setFocus] = React.useState(false)
@@ -34,8 +33,7 @@ const Ingredients = () => {
   const SearchFilter = (e) => {
     setSearchFilter(e.target.value)
   }
-  const onSubmit=()=>{
-    console.log(selectedIngredients)
+  const GetRecipes=()=>{
     localStorage.setItem('ingredients', JSON.stringify(selectedIngredients))
     navigate('/Recipes')
   }
@@ -60,7 +58,7 @@ const Ingredients = () => {
           <input className='px-2 w-full outline-none focus:placeholder:text-gray-300 autofill:hidden' placeholder='Search' onBlur={outOfFocus} onFocus={onFocus}  onChange={SearchFilter} type="search" />
         </div>
         <div className={selectedIngredients.length > 1? 'visible':'invisible'}>
-          <button onClick={onSubmit} className='bg-orange-500 rounded-full shadow-md py-3 px-6 text-white hover:bg-orange-400 duration-150 active:bg-orange-700 font-medium '>Get Recipes</button>
+          <button onClick={GetRecipes} className='bg-orange-500 rounded-full shadow-md py-3 px-6 text-white hover:bg-orange-400 duration-150 active:bg-orange-700 font-medium '>Get Recipes</button>
         </div>
       </div>
       <IngredientsSection ParentCallback={HandleSelectedAmout} filter={filter} search={search}/>

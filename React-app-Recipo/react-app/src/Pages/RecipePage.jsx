@@ -4,36 +4,47 @@ import React from 'react'
 import { useState } from 'react'
 import { Parallax } from 'react-parallax'
 import { useNavigate, useParams } from 'react-router'
-import { SelectedIngredients } from '../State'
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 
 const RecipePage = () => {
     const Param = useParams()
-    const [recipe ,setRecipe] = useState([])
     const navigate = useNavigate()
+    const [user, setUser] = useState()
+    const [recipe ,setRecipe] = useState([])
     const [PortionAmount, setPortionAmount] = useState(1)
+    const [isDone, setDone] = useState()
     const [steps, setSteps] = useState([])
     const [ingredients , setIngredients] = useState([])
+    
     React.useEffect(()=>{
-      axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {}).catch(
+      axios.get('https://localhost:7291/api/Users/GetUser', {withCredentials: true}).then(res => {
+        setUser(res.data.roles.includes('SubscribedUser'))
+        setDone(true)
+      }).catch(
         reason => {
           console.log(reason)
           reason.response.status == 401 && navigate('/Login')}
       )
     },[])
     React.useEffect(()=>{ 
-      async function fetchData(){
-        await axios.get(`https://localhost:7291/api/Recipes/${Param.id}`, {withCredentials: true}).then(res => {
-         setRecipe(res.data)
-         setSteps(res.data.steps.split('\\\\'))
-       })
-       await axios.get('https://localhost:7291/api/Ingredients', {withCredentials: true}).then(res => {
-         setIngredients(res.data)
-       })
+      if(isDone){
+        async function fetchData(){
+          await axios.get(`https://localhost:7291/api/Recipes/${Param.id}`, {withCredentials: true}).then(res => {
+          if(res.data.isPremium){
+            if(!user) navigate('/Subscriptions', {replace: true})
+          }
+           setRecipe(res.data)
+           setSteps(res.data.steps.split('\\\\'))
+         })
+         
+         await axios.get('https://localhost:7291/api/Ingredients', {withCredentials: true}).then(res => {
+           setIngredients(res.data)
+         })
+        }
+        fetchData()
+        setDone(false)
       }
-      fetchData()
-    },[])
+    },[isDone])
     const IncreaseServing = () =>{
       setPortionAmount(PortionAmount+1)
       
@@ -60,7 +71,7 @@ const RecipePage = () => {
         <h1 className='font-medium text-4xl'>{recipe.name}</h1>
         <div className='flex gap-2 items-center'>
         <button onClick={DecreaseServing} className='text-xl select-none px-2 rounded-md hover:bg-gray-200 active:bg-gray-500 border border-gray-400 hover:border-gray-300 active:border-gray-500 hover:scale-105 active:scale-95 duration-300 bg-gray-300' >-</button>
-        <span className='font-medium text-lg'>{PortionAmount} {PortionAmount > 1 ? "Servings" : "Serving"}</span>
+        <span className='font-medium select-none text-lg'>{PortionAmount} {PortionAmount > 1 ? "Servings" : "Serving"}</span>
         <button onClick={IncreaseServing} className='text-xl select-none px-2 rounded-md hover:bg-gray-200 active:bg-gray-500 border border-gray-400 hover:border-gray-300 active:border-gray-500 hover:scale-105 active:scale-95 duration-300 bg-gray-300' >+</button>
         </div>
       </div>

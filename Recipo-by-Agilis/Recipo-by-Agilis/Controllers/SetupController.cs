@@ -71,36 +71,36 @@ public class SetupController : ControllerBase
     [HttpPost]
     [Route("AddUserToRole")]
 
-    public async Task<IActionResult> AddUserToRole(string email, string role)
+    public async Task<IActionResult> AddUserToRole(RoleDto data)
     {
         //check if the user exists
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByEmailAsync(data.Email);
         if (user == null)
         {
-            _logger.LogInformation($"The User with {email} does not exist");
+            _logger.LogInformation($"The User with {data.Email} does not exist");
             return BadRequest(new { error = "User does not exist" });
         }
 
         //check if role exists
 
-        var roleExists = await _roleManager.RoleExistsAsync(role);
+        var roleExists = await _roleManager.RoleExistsAsync(data.Role);
 
         if (!roleExists)
         {
-            _logger.LogInformation($"The Role {email} does not exist");
+            _logger.LogInformation($"The Role {data.Role} does not exist");
             return BadRequest(new { error = "Role does not exist" });
 
         }
 
-        var result = await _userManager.AddToRoleAsync(user, role);
+        var result = await _userManager.AddToRoleAsync(user, data.Role);
         if (result.Succeeded)
         {
             return Ok(new { result = "Success, user has been added to role" });
         }
         else
         {
-            _logger.LogInformation($"The user was not aded to a role");
-            return BadRequest(new { error = "The user eas not added to the role" });
+            _logger.LogInformation($"The user was not added to a role");
+            return BadRequest(new { error = "The user was not added to the role" });
         }
 
         //check if user is assigned to role 

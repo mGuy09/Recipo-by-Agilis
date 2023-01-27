@@ -9,4 +9,5 @@ public class RecipeDto
     public string ImageLink { get; set; }
     public List<int> IngredientIds { get; set; }
     public List<IngredientDto> IngredientQuantity { get; set; }
+    public bool Favorite { get; set; }
 }

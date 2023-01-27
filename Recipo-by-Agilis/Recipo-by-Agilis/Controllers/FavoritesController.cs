@@ -20,39 +20,31 @@ public class FavoritesController: ControllerBase
     }
 
 
-    [HttpGet("{id}")]
-
-    public async Task<ActionResult<Favorites>> GetFavorites(int id)
+    [HttpGet("{recipeId}")]
+    public async Task<ActionResult<Favorites>> PostFavorites(int recipeId)
     {
-        var favorites = await _context.Favorites.FindAsync(id);
-
-        if (favorites == null)
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        var favorites = _context.Favorites.Add(new Favorites()
         {
-            return NotFound();
-        }
-
-        return favorites;
-    }
-
-    [HttpPost]
-    public async Task<ActionResult<Favorites>> PostFavorites(Favorites favorites)
-    {
-        _context.Favorites.Add(favorites);
+            RecipeId = recipeId,
+            UserId = user.Id
+        });
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetFavorites", new { id = favorites.Id }, favorites);
+        return Ok();
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteFavorite(int id)
+    [HttpDelete("{recipeId}")]
+    public async Task<IActionResult> DeleteFavorite(int recipeId)
     {
-        var favorite = await _context.Favorites.FindAsync(id);
-        if (favorite == null)
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        var favorite = _context.Favorites.AsEnumerable().Where(item => item.RecipeId == recipeId && item.UserId == user.Id);
+        if (favorite.First() == null)
         {
             return NotFound();
         }
 
-        _context.Favorites.Remove(favorite);
+        _context.Favorites.Remove(favorite.First());
         await _context.SaveChangesAsync();
 
         return NoContent();

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,7 @@ using Recipo_by_Agilis.Models;
 
 namespace Recipo_by_Agilis.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RecipesController : ControllerBase
@@ -150,8 +151,8 @@ namespace Recipo_by_Agilis.Controllers
         [HttpPost("IngredientsinRecipe")]
         public async Task<IActionResult> GetRecipesByIngredients(List<Ingredient> data)
         {
-
-            var Recipes = _context.Recipes.AsEnumerable().Select(e => new RecipeDto
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var recipes = _context.Recipes.AsEnumerable().Select(e => new RecipeDto
             {
                 Id = e.Id,
                 IngredientIds = _context.IngredientsInRecipes.AsEnumerable().Where(i => i.RecipeId == e.Id).Select(i=> i.IngredientId).ToList(),
@@ -159,12 +160,26 @@ namespace Recipo_by_Agilis.Controllers
                 Name = e.Name,
                 Steps = e.Steps,
                 ImageLink = e.ImageLink,
+                Favorite = _context.Favorites.AsEnumerable().Where(item => item.RecipeId == e.Id).Where(item => item.UserId == user.Id).Any(item => !item.Id.Equals(null))
             });
-            var filteredRecipes = Recipes.Where(e => data.Any(i => e.IngredientIds.Any(x => x == i.Id))).ToList();
+            var filteredRecipes = recipes.Where(e => data.Any(i => e.IngredientIds.Any(x => x == i.Id))).ToList();
 
             return Ok(new
             {
                 data = filteredRecipes
+            });
+        }
+
+        [HttpGet("/Favorites")]
+        public async Task<ActionResult> GetFavoriteRecipes()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var favorites = _context.Favorites.AsEnumerable().Where(e => e.UserId == user.Id).Select(e => e.RecipeId);
+            var recipes = _context.Recipes.Where(e => favorites.Any(i => i == e.Id)).ToList();
+
+            return Ok(new
+            {
+                data = recipes
             });
         }
     }
