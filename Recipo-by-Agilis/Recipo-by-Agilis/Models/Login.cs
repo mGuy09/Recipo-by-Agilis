@@ -11,5 +11,6 @@ public class Login
 
     [Required]
     [StringLength(50, MinimumLength = 5)]
-      public string Password { get; set; }
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
 }

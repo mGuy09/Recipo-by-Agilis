@@ -59,10 +59,17 @@ namespace Recipo_by_Agilis.Controllers
                         Message = "user created successfully"
                     });
                 }
-                return Unauthorized();
+                return BadRequest(result);
             }
             
-            return BadRequest("Some properties are not valid");
+            return BadRequest(new
+            {
+                data = new
+                {
+                    Email = new List<string>{"invalid email" },
+                    Password = new List<string>{"invalid password"}
+                }
+            });
         }
         [Authorize]
         [HttpGet("GetUser")]

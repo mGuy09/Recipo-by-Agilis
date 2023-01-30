@@ -1,14 +1,12 @@
-import axios from 'axios'
 import React from 'react'
-import {AiOutlineHeart,AiFillHeart } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-const FavoriteRecipe = ({title, image, steps, isPremium, Id}) => {
+const FavoriteRecipe = ({title, image, steps, Id}) => {
     
     const navigate = useNavigate()
     const RecipeSteps = steps.split('\\\\')
     
-    const ToRecipe = (e)=>{
+    const ToRecipe = ()=>{
         navigate(`/Recipes/${Id}`)
     }
   return (

@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import { TfiClose, TfiMenu } from 'react-icons/tfi'
 import { FaUserAlt } from 'react-icons/fa'
 import { IoMdStar } from 'react-icons/io'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function Navbar() {
   const[isLoggedIn, setLoggedIn] = useState()
   const [nav, setNav] = useState(false)
   const [dropdown, setDropdown] = useState(false)
-
+  const navigate = useNavigate()
   const ref = useRef()
   const HandleLogout=()=>{
     axios.get('https://localhost:7291/api/Users/Logout', {withCredentials: true}).then(res => 
@@ -41,6 +41,9 @@ function Navbar() {
       setDropdown(!dropdown)
     },100)
   }
+  const ToDashboard = ()=>{
+    navigate('/Dashboard')
+  }
   const DropdownClose = () => {
     setDropdown(false)
   }
@@ -53,11 +56,11 @@ function Navbar() {
           <div>
             <TfiMenu size={30} className='m-1 cursor-pointer active:scale-90 duration-150' onClick={OpenClose} />
           </div>
-          <h1 className='cursor-default ml-3 font-semibold text-2xl'>RECIPO</h1>
+          <h1 onClick={ToDashboard} className=' ml-3 font-semibold cursor-pointer text-2xl'>RECIPO</h1>
         </div>
         <div className='m-3'>
           <FaUserAlt size={25} className={!dropdown ?'hidden lg:flex mx-5 mt-2 cursor-pointer items-center active:scale-90 duration-150': 'hidden lg:flex mx-5 mt-2 cursor-pointer items-center active:scale-90 duration-150 scale-110'} onClick={DropdownOpenClose} />
-          <div className={!dropdown ? 'absolute hidden bg-white z-10 right-2 top-[62px]' : 'absolute flex bg-white z-10 right-2 top-[62px] duration-300'} onClick={DropdownClose}>
+          <div className={!dropdown ? 'absolute hidden bg-white z-[18] right-2 top-[62px]' : 'absolute flex bg-white z-[18] right-2 top-[62px] duration-300'} onClick={DropdownClose}>
             <ul className='flex flex-col duration-200 shadow-xl shadow-black/30'>
               {isLoggedIn && <Link to={'/User'}><li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>User Page</li></Link>}
               {isLoggedIn && <Link to={'/User/Options'}><li className='border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer'>Options</li></Link>}

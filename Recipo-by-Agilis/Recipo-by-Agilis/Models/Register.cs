@@ -14,10 +14,12 @@ public class Register
 
     [Required]
     [StringLength(50, MinimumLength = 5)]
+    [Display(Name = "Password")]
     public string Password { get; set; }
 
     [Required]
     [StringLength(50, MinimumLength = 5)]
+    [Compare("Password")]
     public string ConfirmPassword { get; set; }
 
     

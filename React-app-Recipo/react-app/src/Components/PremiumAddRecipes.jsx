@@ -11,7 +11,7 @@ const PremiumAddRecipes = () => {
         <p className='flex flex-row text-sm sm:text-base lg:text-lg'> Add your recipe so others could cook your recipe at their home</p>
         
         </div>
-        <Link className='bg-emerald-500 text-white py-4 px-6 rounded-full hover:shadow-lg hover:shadow-emerald-400/60 text-xs sm:text-base lg:text-lg font-medium flex items-center hover:bg-emerald-400 hover:scale-105 ease-linear duration-150 active:bg-emerald-700' to='' ><IoMdStar size={18} className='mr-2'/> Add Recipe</Link>
+        <Link className='bg-emerald-500 text-white py-4 px-6 rounded-full hover:shadow-lg hover:shadow-emerald-400/60 text-xs sm:text-base lg:text-lg font-medium flex items-center hover:bg-emerald-400 hover:scale-105 ease-linear duration-150 active:bg-emerald-700' to='/Add-Recipe' ><IoMdStar size={18} className='mr-2'/> Add Recipe</Link>
     </div>
   )
 }

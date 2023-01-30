@@ -175,7 +175,15 @@ namespace Recipo_by_Agilis.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var favorites = _context.Favorites.AsEnumerable().Where(e => e.UserId == user.Id).Select(e => e.RecipeId);
-            var recipes = _context.Recipes.Where(e => favorites.Any(i => i == e.Id)).ToList();
+            var recipes = _context.Recipes.Where(e => favorites.Any(i => i == e.Id)).Select(e => new RecipeDto()
+            {
+                Favorite = true,
+                Id = e.Id,
+                ImageLink = e.ImageLink,
+                IsPremium = e.IsPremium,
+                Name = e.Name,
+                Steps = e.Steps
+            }).ToList();
 
             return Ok(new
             {

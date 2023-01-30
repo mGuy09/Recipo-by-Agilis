@@ -29,12 +29,13 @@ public class UserService : IUserService
             throw new NullReferenceException("register model is null");
 
         var userExists = await _userManager.FindByEmailAsync(model.Email);
-        if (userExists != null) return new UserManagerResponse{Message = "user already exists", IsSuccess = false};
+        if (userExists != null) return new UserManagerResponse{Message = "user already exists", IsSuccess = false , Errors = new {Email = "already exists"}};
         userExists = await _userManager.FindByNameAsync(model.UserName);
-        if (userExists != null) return new UserManagerResponse { Message = "user already exists", IsSuccess = false };
+        if (userExists != null) return new UserManagerResponse { Message = "user already exists", IsSuccess = false, Errors = new { UserName = "already exists" } };
+        
 
         if (model.Password != model.ConfirmPassword)
-            return new UserManagerResponse() { Message = "Passwords don't match", IsSuccess = false };
+            return new UserManagerResponse() { Message = "Passwords don't match",Errors = new {ConfirmPassword = new List<string> {"Passwords don't match"} }, IsSuccess = false };
 
         var newUser = new IdentityUser { Email = model.Email, UserName = model.UserName };
         var result = await _userManager.CreateAsync(newUser, model.Password);
@@ -49,7 +50,7 @@ public class UserService : IUserService
         {
             Message = "Failed to create user",
             IsSuccess = false,
-            Errors = result.Errors.Select(e => e.Description)
+            Errors = new{Password = result.Errors.Select(e => e.Description)}
         };
 
 
@@ -63,9 +64,15 @@ public class UserService : IUserService
         var user = await _userManager.FindByEmailAsync(model.Email);
         if (user == null)
         {
+            
             return new UserManagerResponse()
             {
                 Message = "No user is registered with this email.",
+                Errors = new
+                {
+                    Email = new List<string>(){"No user is registered with this email."},
+                    Password = new List<string>(){"Invaild Password"}
+                },
                 IsSuccess = false,
             };
         }
@@ -76,6 +83,7 @@ public class UserService : IUserService
             return new UserManagerResponse()
             {
                 Message = "Invalid password.",
+                Errors = new {Password = "Invalid Password"},
                 IsSuccess = false,
             };
         var userRoles = await _userManager.GetRolesAsync(user);
