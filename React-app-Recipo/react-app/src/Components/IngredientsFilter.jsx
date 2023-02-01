@@ -41,7 +41,7 @@ const IngredientsFilter = ({parentCallback, FilterRef}) => {
     
     
   return (
-    <div className='duration-300 ease-in-out'>
+    <div className='duration-300 ease-in-out will-change-auto'>
     <div className='p-6 mx-10 flex px-8 justify-between items-center border-b border-b-gray-400 z-10'>
         <div>
             <h1 className='text-lg md:text-xl lg:text-2xl font-thin cursor-default '>Ingredient Filter</h1>
@@ -51,7 +51,7 @@ const IngredientsFilter = ({parentCallback, FilterRef}) => {
             <IoIosArrowUp size={42} className={!filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden visible': 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden invisible hidden'} onClick={OpenClose}/>
         </div>
     </div>
-    <div className={filterDropdown || isLarge ? 'transition-all flex gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0 visible' : 'transition-all gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0 invisible hidden'}>
+    <div className={filterDropdown || isLarge ? 'transition-all flex gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0 will-change-auto' : 'will-change-auto transition-all gap-10 justify-center duration-300 flex-wrap py-7 mx-10 border-b border-b-gray-400 z-0  hidden'}>
             {categoryList.length === 0? <p>Loading...</p>:categoryList.map((item) =>(
                 <FilterRadio key={item.id} Name={item.name} id={item.id} onTrigger={onTrigger}/>
             ) )}
