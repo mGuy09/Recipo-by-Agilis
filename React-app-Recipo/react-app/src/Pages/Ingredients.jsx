@@ -49,7 +49,7 @@ const Ingredients = () => {
   }
   
   return (
-    <>
+    <div className='will-change-auto'>
       <PremiumAddRecipes />
       <IngredientsFilter parentCallback={HandleCallback} FilterRef={FilterRef}/>
       <div className='flex justify-center flex-col items-center gap-5 lg:flex-row-reverse lg:justify-around p-5'>
@@ -62,7 +62,7 @@ const Ingredients = () => {
         </div>
       </div>
       <IngredientsSection ParentCallback={HandleSelectedAmout} filter={filter} search={search}/>
-    </>
+    </div>
   )
 }
 
