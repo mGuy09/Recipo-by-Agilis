@@ -76,6 +76,7 @@ const AddRecipeIngredients = () => {
             })
           : setSelectedIngredients([ingredient]);
       }
+      QuantitySetter()
     }
   };
 

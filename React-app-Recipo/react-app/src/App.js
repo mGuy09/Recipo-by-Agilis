@@ -19,14 +19,10 @@ import AddRecipe from "./Pages/AddRecipe";
 import RecipePage from "./Pages/RecipePage";
 import PaymentFailed from "./Pages/PaymentFailed";
 import PaymentSuccess from "./Pages/PaymentSuccess";
-import MapContainer from "./Components/MapContainer";
-import { MapCenter } from "./State";
-import { useAtom } from "jotai";
+import Map from "./Pages/MapContainer";
 
 
 function App() {
-  
-  
   return (
     <div>
       <Navbar />
