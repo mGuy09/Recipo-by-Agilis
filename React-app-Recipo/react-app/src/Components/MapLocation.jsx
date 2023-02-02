@@ -1,40 +1,22 @@
-
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { usePosition } from "use-position";
 
 const MapLocation = () => {
+    const { latitude, longitude, error } = usePosition();
     const [location, setLocation] = useState({
         loaded: false,
         coordinates: { lat: '', lng: '' }
     })
 
-    const onSuccess = (location) => {
-        setLocation({
-            loaded: true,
-            coordinates: {
-                lat: location.coords.latitude,
-                lng: location.coords.longitude
-            }
-
-        })
-        console.log(location.coords.latitude, location.coords.longitude)
-    }
-    const onError = error => {
-        setLocation({
-            loaded: true,
-            error,
-        })
-    }
     useEffect(() => {
-        if (!("geolocation" in navigator)) {
-            onError({
-                code: 0,
-                message: "Geolocation not available"
-            })
+        if (latitude && longitude && !error) {
+            // Fetch weather data here.
+            setLocation({ loaded: true, coordinates: { lat: latitude, lng: longitude } });
+
         }
-       navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true, })
-       
-    }, [])
+    }, [latitude, longitude, error]);
+
     return (
         location
     )
