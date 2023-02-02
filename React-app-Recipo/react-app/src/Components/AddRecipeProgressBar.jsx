@@ -6,7 +6,7 @@ const AddRecipeProgressBar = ({pageNumber}) => {
   
 
 
-  let ProgressArray = [0, 0, 0, 0, 0];
+  let ProgressArray = [0, 0, 0, 0];
   for (let i = 0; i < ProgressArray.length; i++) {
     if (i <= pageNumber) {
       ProgressArray[i] = 1;

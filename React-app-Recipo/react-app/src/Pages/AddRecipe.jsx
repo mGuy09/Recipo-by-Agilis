@@ -5,12 +5,20 @@ import AddRecipeProgressBar from "../Components/AddRecipeProgressBar";
 import AddRecipeTitle from "../Components/AddRecipeTitle";
 import AddRecipeIngredients from "../Components/AddRecipeIngredients";
 import AddRecipeSteps from "../Components/AddRecipeSteps";
+import { RecipeIngredients, RecipeSteps, RecipeTitle } from "../State";
+import { useAtom } from "jotai";
+import AddRecipeImage from "../Components/AddRecipeImage";
+import AddRecipeSubmit from "../Components/AddRecipeSubmit";
 
 const AddRecipe = () => {
   const [pageNumber, setPageNumber] = useState(0);
+  const [title, setTitle] = useAtom(RecipeTitle)
+  const [ingredients, setIngredients] = useAtom(RecipeIngredients)
+  const [steps, setSteps] = useAtom(RecipeSteps)
   const IncreasePageNumber = () => {
-    pageNumber < 5 && setPageNumber(pageNumber + 1);
-    console.log(pageNumber);
+    if (title.length > 3 && pageNumber == 0) pageNumber < 5 && setPageNumber(pageNumber + 1)
+    else if (ingredients.length > 0 && pageNumber == 1) pageNumber < 5 && setPageNumber(pageNumber + 1)
+    else if (steps.length > 5 && pageNumber == 2) pageNumber < 5 && setPageNumber(pageNumber + 1);
   };
 
   return (
@@ -21,6 +29,7 @@ const AddRecipe = () => {
           {pageNumber === 0 && <AddRecipeTitle />}
           {pageNumber === 1 && <AddRecipeIngredients />}
           {pageNumber === 2 && <AddRecipeSteps />}
+          {pageNumber === 3 && <AddRecipeSubmit/>}
         </div>
         <div className="flex flex-col items-center">
           <AddRecipeProgressBar pageNumber={pageNumber} />

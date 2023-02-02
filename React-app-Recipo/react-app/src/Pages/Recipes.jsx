@@ -20,7 +20,7 @@ const Recipes = () => {
   
   return (
     <div>
-      {isPremium ? PremiumAddRecipes :<PremiumAd />}
+      {isPremium ? <PremiumAddRecipes/> :<PremiumAd />}
       <RecipeSection UserPremium={isPremium}/>
       
     </div>

@@ -162,7 +162,7 @@ namespace Recipo_by_Agilis.Controllers
                 ImageLink = e.ImageLink,
                 Favorite = _context.Favorites.AsEnumerable().Where(item => item.RecipeId == e.Id).Where(item => item.UserId == user.Id).Any(item => !item.Id.Equals(null))
             });
-            var filteredRecipes = recipes.Where(e => data.Any(i => e.IngredientIds.Any(x => x == i.Id))).ToList();
+            var filteredRecipes = recipes.Where(e => data.Any(i => e.IngredientIds.Any(x => x == i.Id))).OrderBy(e=> e.Name).OrderBy(e => e.IsPremium).ToList();
 
             return Ok(new
             {
@@ -183,11 +183,30 @@ namespace Recipo_by_Agilis.Controllers
                 IsPremium = e.IsPremium,
                 Name = e.Name,
                 Steps = e.Steps
-            }).ToList();
+            }).OrderBy(e=> e.Name).OrderBy(e => e.IsPremium).ToList();
 
             return Ok(new
             {
                 data = recipes
+            });
+        }
+
+        [HttpGet("User-Recipes")]
+        public async Task<ActionResult> GetUserRecipes()
+        {
+            var userRecipes = _context.RecipeByUser.AsEnumerable().Where(e => e.UserId == User.Identity.Name);
+            var Recipes = _context.Recipes.AsEnumerable().Where(e => userRecipes.Any(i => i.RecipeId == e.Id)).Select(
+                e => new RecipeDto()
+                {
+                    Id = e.Id,
+                    ImageLink = e.ImageLink,
+                    Name = e.Name,
+                    Steps = e.Steps,
+                    IsPremium = e.IsPremium
+                }).OrderBy(e => e.Name);
+            return Ok(new
+            {
+                data = Recipes
             });
         }
     }
