@@ -6,6 +6,8 @@
     "axios": "^1.2.1",
     "google-map-react": "^2.2.0",
     "google-maps-react": "^2.0.6",
-    "jotai": "^1.13.1"
+    "jotai": "^1.13.1",
+    "react-geolocated": "^4.0.3",
+    "use-position": "^1.0.0"
   }
 }
