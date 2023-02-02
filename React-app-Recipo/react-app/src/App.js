@@ -9,7 +9,7 @@ import Subscriptions from "./Pages/Subscriptions";
 import Register from "./Pages/Register";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NotFound from "./Pages/NotFound";
 import Checkout from "./Pages/Checkout";
 import Recipes from "./Pages/Recipes";
@@ -19,10 +19,14 @@ import AddRecipe from "./Pages/AddRecipe";
 import RecipePage from "./Pages/RecipePage";
 import PaymentFailed from "./Pages/PaymentFailed";
 import PaymentSuccess from "./Pages/PaymentSuccess";
-import Map from "./Pages/MapContainer";
+import MapContainer from "./Components/MapContainer";
+import { MapCenter } from "./State";
+import { useAtom } from "jotai";
 
 
 function App() {
+  
+  
   return (
     <div>
       <Navbar />
@@ -44,7 +48,7 @@ function App() {
         <Route path='/Recipes/:id' element={<RecipePage/>} />
         <Route path='/Checkout/Failed' element={<PaymentFailed/>} />
         <Route path='/Checkout/Success' element={<PaymentSuccess />} />
-        <Route path='/Map' element={<Map />} />
+        <Route path='/Map' element={<MapContainer />} />
       </Routes>
       <Footer />
     </div>
