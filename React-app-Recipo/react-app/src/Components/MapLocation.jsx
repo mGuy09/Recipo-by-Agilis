@@ -11,12 +11,11 @@ const MapLocation = () => {
 
     useEffect(() => {
         if (latitude && longitude && !error) {
-            // Fetch weather data here.
             setLocation({ loaded: true, coordinates: { lat: latitude, lng: longitude } });
-
         }
     }, [latitude, longitude, error]);
 
+    
     return (
         location
     )
