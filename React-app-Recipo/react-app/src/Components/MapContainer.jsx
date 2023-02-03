@@ -2,10 +2,10 @@ import React from 'react'
 import MapLocation from './MapLocation';
 import { useJsApiLoader, GoogleMap, Marker, Circle } from '@react-google-maps/api'
 import Supermarkets from './Supermarkets';
-
+const libraries = ["places"]
 const MapContainer = () => {
   const location = MapLocation();
-  const libraries = ["places"]
+ 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: libraries,
@@ -28,22 +28,23 @@ const MapContainer = () => {
             fullscreenControl: false
           }
         } >
-        {/* <Circle
+        <Circle
           center={location.coordinates}
           options={{
             strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
+            strokeOpacity: 0.1,
             strokeWeight: 2,
             fillColor: '#FF0000',
-            fillOpacity: 0.35,
+            fillOpacity: 0.05,
             clickable: false,
             draggable: false,
             editable: false,
             visible: true,
-            radius: 30000,
+            radius: 300,
             zIndex: 1
-          }} /> */}
+          }} />
         <Marker position={location.coordinates} />
+        {/* <Supermarkets /> */}
       </GoogleMap>
     </div>
   )
