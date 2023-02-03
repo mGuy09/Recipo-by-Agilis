@@ -19,7 +19,8 @@ import AddRecipe from "./Pages/AddRecipe";
 import RecipePage from "./Pages/RecipePage";
 import PaymentFailed from "./Pages/PaymentFailed";
 import PaymentSuccess from "./Pages/PaymentSuccess";
-import Map from "./Pages/MapContainer";
+import MapContainer from "./Components/MapContainer";
+import UpdateRecipe from "./Pages/UpdateRecipe";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path='/User'element={<UserPage/>}/>
         <Route path='/User/Options' element={<UserOptions/>}/>
         <Route path='/Add-Recipe' element={<AddRecipe/>}/>
+        <Route path='/Update/:id' element={<UpdateRecipe/>}/>
         <Route path='/Recipes/:id' element={<RecipePage/>} />
         <Route path='/Checkout/Failed' element={<PaymentFailed/>} />
         <Route path='/Checkout/Success' element={<PaymentSuccess />} />
