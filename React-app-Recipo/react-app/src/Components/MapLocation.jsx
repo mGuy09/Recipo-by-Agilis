@@ -1,25 +1,24 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect } from 'react'
+import { useState } from 'react'
 import { usePosition } from "use-position";
 
 const MapLocation = () => {
-  const { latitude, longitude, error } = usePosition();
-  const [location, setLocation] = useState({
-    loaded: false,
-    coordinates: { lat: "0", lng: "0" },
-  });
+    const { latitude, longitude, error } = usePosition();
+    const [location, setLocation] = useState({
+        loaded: false,
+        coordinates: { lat: '', lng: '' }
+    })
 
-  useEffect(() => {
-    if (latitude && longitude && !error) {
-      // Fetch weather data here.
-      setLocation({
-        loaded: true,
-        coordinates: { lat: latitude, lng: longitude },
-      });
-    }
-  }, [latitude, longitude, error]);
+    useEffect(() => {
+        if (latitude && longitude && !error) {
+            setLocation({ loaded: true, coordinates: { lat: latitude, lng: longitude } });
+        }
+    }, [latitude, longitude, error]);
 
-  return location;
-};
+    
+    return (
+        location
+    )
+}
 
-export default MapLocation;
+export default MapLocation
