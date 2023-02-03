@@ -117,20 +117,23 @@ const UserPage = () => {
             </>
           ) : null}
 
-          {isPremium ? (
+          {isPremium ? userRecipes.length == 0 ? null : (
             <>
               <div className="flex flex-col">
                 <h1 className="text-xl">Your Recipes</h1>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10 mt-10 justify-evenly items-center ">
-                {userRecipes.map((item) => (
-                  <UserRecipe
-                    Id={item.id}
-                    image={item.imageLink}
-                    steps={item.steps}
-                    title={item.name}
-                  />
-                ))}
+                              {userRecipes.map((item) => {
+                                  console.log(item)
+                                  return(
+                                      <UserRecipe
+                                          Id={item.id}
+                                          image={item.imageLink}
+                                          steps={item.steps}
+                                          title={item.name}
+                                      />
+                                  )
+                              })}
               </div>
             </>
           ) : null}

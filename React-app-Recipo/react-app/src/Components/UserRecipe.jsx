@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import { BsPencilSquare } from 'react-icons/bs'
 import { FaTrashAlt } from 'react-icons/fa'
@@ -8,6 +9,11 @@ const UserRecipe = ({title, image, steps, Id}) => {
     const navigate = useNavigate()
     const RecipeSteps = steps.split('\\\\')
     
+    const Delete = () => axios.delete('', { withCredentials: true }).then(res => console.log(res))
+    
+    const ToUpdate = () => {
+        navigate(`/Update/${Id}`)
+    }
     const ToRecipe = ()=>{
         navigate(`/Recipes/${Id}`)
     }
@@ -19,11 +25,13 @@ const UserRecipe = ({title, image, steps, Id}) => {
       ></div>
       <div className="flex justify-center">
         <div className="flex justify-between w-[85%] z-10 absolute">
-          <FaTrashAlt
+                  <FaTrashAlt
+                      onClick={Delete}
             className="m-2 invisible group-hover:visible hover:scale-[1.20] active:scale-110 active:text-red-700 hover:text-red-400 drop-shadow text-white group-hover:duration-200"
             size={23}
           />
-          <BsPencilSquare
+                  <BsPencilSquare
+                      onClick={ToUpdate}
             className="m-2 invisible group-hover:visible hover:scale-[1.20] active:scale-110 active:text-amber-600 drop-shadow hover:text-amber-400 text-white group-hover:duration-200"
             size={23}
           />
