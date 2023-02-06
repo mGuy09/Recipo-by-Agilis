@@ -8,6 +8,7 @@ import {
   RecipeSteps,
   RecipeTitle,
 } from "../State";
+import {  Trans } from 'react-i18next';
 
 const AddRecipeSubmit = () => {
   const [Ingredients] = useAtom(RecipeIngredients);
@@ -52,7 +53,7 @@ const AddRecipeSubmit = () => {
         onClick={OnSubmit}
         className="px-4 py-2 bg-orange-500 rounded-full text-white font-medium shadow-lg hover:scale-105 hover:shadow-xl active:bg-orange-700 hover:bg-orange-400 active:shadow-lg duration-200"
       >
-        Submit Recipe
+        <Trans i18nKey="description.recipe6"></Trans>
       </button>
     </div>
   );

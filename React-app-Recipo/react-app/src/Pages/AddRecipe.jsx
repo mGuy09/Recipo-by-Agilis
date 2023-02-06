@@ -9,6 +9,7 @@ import { RecipeIngredients, RecipeSteps, RecipeTitle } from "../State";
 import { useAtom } from "jotai";
 import AddRecipeImage from "../Components/AddRecipeImage";
 import AddRecipeSubmit from "../Components/AddRecipeSubmit";
+import {  Trans } from 'react-i18next';
 
 const AddRecipe = () => {
   const [pageNumber, setPageNumber] = useState(0);
@@ -38,13 +39,13 @@ const AddRecipe = () => {
               onClick={IncreasePageNumber}
               className="bg-orange-500 my-10 text-white font-medium hover:bg-orange-400 active:bg-orange-700 duration-200 px-5 py-2 rounded-full"
             >
-              Next
+              <Trans i18nKey="description.recipe0"></Trans>
             </button>
             <button
               onClick={()=>{setPageNumber(0)}}
               className="bg-orange-500 my-10 text-white font-medium hover:bg-orange-400 active:bg-orange-700 duration-200 px-5 py-2 rounded-full"
             >
-              Reset
+              <Trans i18nKey="description.recipe1"></Trans>
             </button>
           </div>
         </div>

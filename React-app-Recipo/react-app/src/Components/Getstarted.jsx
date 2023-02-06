@@ -3,6 +3,8 @@ import {FaArrowCircleRight} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Cooks from '../Images/Foodies - Cook Chef Recipe.png'
 
+
+
 function Getstarted() {
   return (
     <div className='flex flex-col justify-around items-center mx-5 my-8 md:mx-10 md:my-16 lg:flex-row lg:mx-20 lg:my-32 gap-10'>

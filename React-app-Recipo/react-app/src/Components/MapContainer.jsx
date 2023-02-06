@@ -2,17 +2,20 @@ import React from 'react'
 import MapLocation from './MapLocation';
 import { useJsApiLoader, GoogleMap, Marker, Circle } from '@react-google-maps/api'
 import Supermarkets from './Supermarkets';
+
+
 const libraries = ["places"]
 const MapContainer = () => {
   const location = MapLocation();
- 
+  const shops = Supermarkets();
+  console.log(shops)
+
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: libraries,
   })
 
   if (!isLoaded) return <div>andrei e enervant</div>
-
   return (
     <div className='w-full h-[70vh]'>
       <GoogleMap
@@ -43,8 +46,9 @@ const MapContainer = () => {
             radius: 300,
             zIndex: 1
           }} />
+
         <Marker position={location.coordinates} />
-        {/* <Supermarkets /> */}
+
       </GoogleMap>
     </div>
   )
