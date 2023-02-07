@@ -106,22 +106,22 @@ const Checkout = () => {
             <p className='text-lg font-thin'><Trans i18nKey="description.subs1"></Trans></p>
       </label>
       <div className={dropdownM ? 'flex py-3 px-3 flex-col w-full h-[16.6vh] shadow-lg rounded-b-xl border-2 border-t-0 border-gray-300 bg-white duration-300 translate-y-0 visible ' : 'invisible duration-300 h-0'}>
-            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs2"></Trans></p>
-            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs3"></Trans></p>
-            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs4"></Trans> <span className='font-medium'>€4.99</span></p>
+            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs2"/></p>
+            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs3"/></p>
+            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs4"/> <span className='font-medium'>€4.99</span></p>
       </div>
       </div>
       <div>
       <input type="radio" id='yearly' onChange={amountHandler} value={4199} name='subscription' className='hidden peer checkmark' />
       <label htmlFor="yearly" className='flex cursor-pointer flex-col h-[25vh] pr-10 gap-5 pl-3 py-6 border-2 peer-checked:shadow-lg duration-300 border-gray-300 z-20 rounded-xl peer-checked:rounded-b-none peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-600 peer-checked:active:bg-emerald-700 active:bg-gray-400 hover:bg-gray-200'>
         
-            <p className='text-2xl font-medium'><Trans i18nKey="description.subs5"></Trans></p>
+            <p className='text-2xl font-medium'><Trans i18nKey="description.subs5"/></p>
             <p className='text-lg font-thin'><Trans i18nKey="description.subs6"/></p>
       </label>
       <div className={dropdownY ? 'flex py-3 px-3 flex-col w-full h-[16.6vh] shadow-lg border-2 rounded-b-xl border-t-0 border-gray-300 bg-white duration-300 translate-y-0 visible ' : 'invisible duration-300 h-0'}>
-        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Have access to all free and premium recipes.</p>
-        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Exactly the same as for Monthly.</p>
-        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Price: <span className='font-medium'>€41.99</span></p>
+            <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs2" /></p>
+            <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs7" /></p>
+            <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs4" /><span className='font-medium'>€41.99</span></p>
       </div>
       </div>
       </div>
