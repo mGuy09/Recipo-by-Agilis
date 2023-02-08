@@ -1,5 +1,4 @@
 import { useAtom } from "jotai";
-import { number } from "prop-types";
 import React, { useEffect, useState } from "react";
 import { RecipeSteps } from "../State";
 
@@ -7,53 +6,81 @@ const UpdateRecipeSteps = () => {
   const [steps, setSteps] = useAtom(RecipeSteps);
   const [StepArray, setStepArray] = useState([]);
   const [isDone, setDone] = useState(false);
+  const [isDone2, setDone2] = useState(false);
+  const [ArrayCreated, setCreated] = useState(false);
   const [stepNumber, setStepNumber] = useState(1);
   const StepElements = document.querySelectorAll(".step");
-  console.log(StepElements);
-  console.log(steps);
-  useEffect(() => {
-    setStepArray(
-      steps.split("\\\\").forEach((item) => {
-        item
-          .replace(number + ". ", "")
-          .replace(".", "")
-          .trim();
-      })
-    );
-
-    StepElements.forEach((item, i) => {
-      item.textContent = StepArray[i];
-    });
-  }, []);
+  console.log({
+    Elements: StepElements,
+    Steps: steps,
+    StepArray: StepArray,
+    StepNumber: stepNumber,
+  });
 
   useEffect(() => {
-    // let stepString = "";
-    // StepElements.forEach((item, i) => {
-    //   if (i == StepElements.length - 1) {
-    //     stepString += i + 1 + ". " + item.value.trim() + ".";
-    //   } else {
-    //     stepString += i + 1 + ". " + item.value.trim() + "." + "\\\\";
-    //   }
-    // });
-    // setSteps(stepString);
-    console.log(steps);
-  }, [StepElements, isDone, stepNumber]);
+    if (ArrayCreated === false) {
+      const myArray = steps
+        .split("\\\\")
+        .map((e, i) => e.replace(i + 1 + `. `, "").slice(0, -1));
+      setStepArray(myArray);
+      setStepNumber(myArray.length);
+      setCreated(true);
+      console.log({
+        stepString: steps,
+        SplitArray: myArray,
+      });
+    }
+  }, [steps]);
+
+  useEffect(() => {
+    if (ArrayCreated === true) {
+      StepElements.forEach((item, i) => {
+        item.value = StepArray[i];
+      });
+      updateSteps();
+      setDone(true);
+    }
+  }, [StepArray, ArrayCreated, steps]);
+
+  useEffect(() => {
+    if (isDone && ArrayCreated) {
+      setCreated("no");
+      setDone("no");
+    }
+  }, [StepElements]);
 
   const DecreaseStepNumber = () => {
-    // if (stepNumber > 1) {
-    //   setStepNumber(stepNumber - 1);
-    //   console.log(steps);
-    // } else setStepNumber(1);
+    if (stepNumber > 1) {
+      setStepNumber(stepNumber - 1);
+      console.log(steps);
+    } else setStepNumber(1);
+    console.log(stepNumber);
   };
 
   const IncreaseStepNumber = () => {
-    // if (stepNumber >= 1 && stepNumber < 8) {
-    //   setStepNumber(stepNumber + 1);
+    console.log(stepNumber);
+    if (stepNumber >= 1 && stepNumber < 8) {
+      setStepNumber(stepNumber + 1);
       console.log(steps);
-    // }
+    }
+    console.log(stepNumber);
   };
+
+  useEffect(() => {
+    let stepString = "";
+    StepElements.forEach((item, i) => {
+      if (i == StepElements.length - 1) {
+        stepString += i + 1 + ". " + item.value.trim() + ".";
+      } else {
+        stepString += i + 1 + ". " + item.value.trim() + "." + "\\\\";
+      }
+    });
+    setSteps(stepString);
+    console.log(steps);
+  }, [StepElements, isDone2, stepNumber]);
+
   const updateSteps = () => {
-    // setDone(!isDone);
+    setDone2(!isDone2);
     console.log(steps);
   };
   return (
@@ -61,7 +88,7 @@ const UpdateRecipeSteps = () => {
       <div className="flex flex-col mt-7 gap-5">
         <h1 className="font-medium text-2xl">Method</h1>
         <div className="px-7 overflow-auto h-[20rem]">
-          {Array.apply(0, Array(StepArray.length)).map((x, i) => (
+          {Array.apply(0, Array(stepNumber)).map((x, i) => (
             <div key={i}>
               <p className="font-medium text-lg">Step {i + 1}</p>
               <textarea

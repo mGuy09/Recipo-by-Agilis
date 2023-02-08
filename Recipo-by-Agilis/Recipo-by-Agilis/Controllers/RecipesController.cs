@@ -63,15 +63,34 @@ namespace Recipo_by_Agilis.Controllers
         // PUT: api/Recipes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipe(int id, Recipe recipe)
+        public async Task<IActionResult> PutRecipe(int id, RecipeDto recipe)
         {
             if (id != recipe.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(recipe).State = EntityState.Modified;
+            _context.Update(new Recipe()
+            {
+                Id = recipe.Id,
+                ImageLink = recipe.ImageLink,
+                IsPremium = recipe.IsPremium,
+                Name = recipe.Name,
+                Steps = recipe.Steps
+            });
+            await _context.SaveChangesAsync();
+            _context.IngredientsInRecipes.AsEnumerable()
+                .Where(e => e.RecipeId == recipe.Id).ToList().ForEach(e =>_context.IngredientsInRecipes.Remove(e));
+            await _context.SaveChangesAsync();
 
+            recipe.IngredientQuantity.ForEach(e => _context.IngredientsInRecipes.Add(new IngredientInRecipe()
+            {
+                IngredientId = e.IngredientId,
+                Quantity = e.Quantity,
+                QuantityType = e.QuantityType,
+                RecipeId = recipe.Id
+            }));
+            await _context.SaveChangesAsync();
             try
             {
                 await _context.SaveChangesAsync();
@@ -82,10 +101,7 @@ namespace Recipo_by_Agilis.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
@@ -137,6 +153,11 @@ namespace Recipo_by_Agilis.Controllers
             }
 
             _context.Recipes.Remove(recipe);
+            await _context.SaveChangesAsync();
+            _context.RecipeByUser.Remove(_context.RecipeByUser.AsEnumerable().Where(e => e.RecipeId == id).First());
+            await _context.SaveChangesAsync();
+            _context.IngredientsInRecipes.AsEnumerable().Where(e => e.RecipeId == id)
+                .Select(e => _context.IngredientsInRecipes.Remove(e));
             await _context.SaveChangesAsync();
 
             return NoContent();

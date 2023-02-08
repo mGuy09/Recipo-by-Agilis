@@ -16,7 +16,7 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
 
   useEffect(()=>{
     ParentCallback(selectedIngredients)
-  }, [selectedIngredients])
+  }, [selectedIngredients, Checkmark])
 
   useEffect(()=>{
     setCheckmark(document.querySelectorAll('.checkmark'))
@@ -33,7 +33,7 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
     })
   },[Checkmark])
 
-  const HandleClick = (e) =>{
+  const HandleClick = (e) => {
     if(e.target.checked){
       setSelected(prev =>{
         return [...prev, {id: parseInt(e.target.dataset.ingredientId), name:e.target.id, categoryId:parseInt(e.target.dataset.categoryId)}]
@@ -41,7 +41,7 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
     }
     else
     {
-      setSelected(selectedIngredients.filter((item) => item.id !== e.target.id))
+      setSelected(selectedIngredients.filter((item) => item.id != e.target.dataset.ingredientId))
     }
   }
   

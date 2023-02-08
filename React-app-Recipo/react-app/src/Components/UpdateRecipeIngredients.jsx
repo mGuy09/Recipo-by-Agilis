@@ -27,7 +27,7 @@ const UpdateRecipeIngredients = () => {
         });
       }
     });
-    updateSpan();
+    QuantitySetter();
     console.log(rQuantities, rIngredients);
   }, [ingredients]);
 
