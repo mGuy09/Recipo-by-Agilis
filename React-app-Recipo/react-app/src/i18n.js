@@ -86,6 +86,15 @@ i18n
                         options0: "UserOptions",
                         info0: "Card Information",
                         info1: "Pay",
+                        nav0: "User Page",
+                        nav1: "Options",
+                        nav2: "Register Account",
+                        nav3: "Sign Out",
+                        nav4: "Home",
+                        nav5:"Dashboard",
+                        nav6: "Subscriptions",
+                        nav7:"Contact",
+
 
 
 
@@ -162,7 +171,15 @@ i18n
                         failed0: "Plata esuata",
                         options0: "Optiuni Utilizator",
                         info0: "Informatii",
-                        info1: "Plateste"
+                        info1: "Plateste",
+                        nav0: "Pagina Utilizator",
+                        nav1: "Optiuni",
+                        nav2: "Inregistreaza contul",
+                        nav3: "Deconectare",
+                        nav4: "Acasa",
+                        nav5: "Bord",
+                        nav6: "Abonari",
+                        nav7:"Contact"
 
 
                     }

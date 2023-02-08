@@ -9,7 +9,7 @@ const lngs = {
     ro: { nativeName: 'Romana' }
 };
 const About = () => {
-    const { t, i18n } = useTranslation();
+    
     return (
         <div className=''>
             <Parallax bgImage={BackgroundImage} className='w-full flex justify-center items-center  bg-black' renderLayer={(percentage) => (
@@ -26,13 +26,7 @@ const About = () => {
             )} strength={0} blur={5}>
                 <div className='bg-white shadow-lg flex flex-col items-start gap-20 justify-center p-20 m-32 rounded-xl'>
                     <div className='flex flex-col gap-4'>
-                        <div>
-                            {Object.keys(lngs).map((lng) => (
-                                <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-                                    {lngs[lng].nativeName}
-                                </button>
-                            ))}
-                        </div>
+                        
                         <h1 className='text-3xl font-semibold'><Trans i18nKey="description.about0"/></h1>
                         <div className='flex flex-col gap-3'>
                            
