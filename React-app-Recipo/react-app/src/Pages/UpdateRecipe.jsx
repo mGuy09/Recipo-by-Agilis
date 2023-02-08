@@ -10,6 +10,7 @@ import UpdateRecipeSubmit from "../Components/UpdateRecipeSubmit";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import axios from "axios";
+import { Trans } from 'react-i18next';
 
 const UpdateRecipe = () => {
   const [pageNumber, setPageNumber] = useState(0);
@@ -29,7 +30,7 @@ const UpdateRecipe = () => {
   };
   console.log(Param.id)
   useEffect(() => {
-    axios.get(`https://localhost:7291/api/Recipes/${Param.id}`, {withCredentials: true}).then(res => {
+    axios.get(`https://localhost:7291/api/Recipes/${Param.id}`, { withCredentials: true }).then(res => {
       const recipe = res.data;
       console.log(recipe);
       setTitle(recipe.name);
@@ -37,7 +38,7 @@ const UpdateRecipe = () => {
       setIngredientQuantities(recipe.ingredientQuantity);
       setIngredientIds(recipe.ingredientIds)
     })
-  },[])
+  }, [])
 
   return (
     <div className="justify-center flex bg-gray-300 ">
@@ -55,16 +56,16 @@ const UpdateRecipe = () => {
             <button
               onClick={IncreasePageNumber}
               className="bg-orange-500 my-10 text-white font-medium hover:bg-orange-400 active:bg-orange-700 duration-200 px-5 py-2 rounded-full"
-            >
-              Next
+            ><Trans i18nKey="description.update0" />
+
             </button>
             <button
               onClick={() => {
                 setPageNumber(0);
               }}
               className="bg-orange-500 my-10 text-white font-medium hover:bg-orange-400 active:bg-orange-700 duration-200 px-5 py-2 rounded-full"
-            >
-              Reset
+            ><Trans i18nKey="description.recipe1" />
+
             </button>
           </div>
         </div>

@@ -2,7 +2,7 @@ import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import React from 'react'
 import { useState } from 'react'
-
+import { Trans } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom'
 import LoginAltButtons from './LoginAltButtons'
 
@@ -42,7 +42,7 @@ const LoginAdminForm = () => {
 
             </form>
             <div className='flex gap-1 mt-12'>
-                <p className='text-lg font-thin'>Don't have an account?</p><Link className='text-lg underline hover:text-orange-300 duration-100 active:text-orange-700 text-orange-500' to='/Register'>Sign Up</Link>
+                <p className='text-lg font-thin'><Trans i18nKey="description.login1" /></p><Link className='text-lg underline hover:text-orange-300 duration-100 active:text-orange-700 text-orange-500' to='/Register'><Trans i18nKey="description.login0" /></Link>
 
             </div>
         </div>

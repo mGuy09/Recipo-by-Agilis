@@ -128,7 +128,7 @@ const Checkout = () => {
       <div className='flex items-center rounded-xl'>
         
         <form onSubmit={onSubmit} className='flex flex-col items-center shadow-lg gap-10 border border-gray-300 rounded-xl p-16 '>
-          <h1 className='text-xl font-medium'>Card Information</h1>
+          <h1 className='text-xl font-medium'><Trans i18nKey="description.info0"/></h1>
           <input type="text" name='fullname' placeholder="Full Name" className='px-2 py-1 border w-56 border-gray-300 rounded-full'/>
           <input {...getCardNumberProps({ onChange: handleChangeCardNumber })}  className='px-2 py-1 w-56 border border-gray-300 rounded-full'/>
           <div className='flex gap-3'>
@@ -136,7 +136,7 @@ const Checkout = () => {
           <input {...getCVCProps({ onChange: handleChangeCVC })}  className='px-2 py-1 border w-20 border-gray-300 rounded-full'/>
           </div>
           {meta.isTouched && meta.error && <span>Error: {meta.error}</span>}
-          <button type='submit' className='bg-orange-500 px-10 py-3 rounded-full hover:bg-orange-400 active:bg-orange-700 duration-150 shadow-lg text-white text-lg font-medium active:shadow-md'>Pay</button>
+          <button type='submit' className='bg-orange-500 px-10 py-3 rounded-full hover:bg-orange-400 active:bg-orange-700 duration-150 shadow-lg text-white text-lg font-medium active:shadow-md'><Trans i18nKey="description.info1" /></button>
         </form>
       </div>
     </div>

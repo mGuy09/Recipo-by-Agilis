@@ -67,7 +67,7 @@ function DisplayMap() {
         id='map'
         mapContainerStyle={mapContainerStyle}
         zoom={8}
-        center={parseFloat(location.coordinates.lat), parseFloat(location.coordinates.lng)}
+        center={location.coordinates}
         onLoad={onMapLoad}
       />
     </div>

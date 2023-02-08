@@ -33,26 +33,26 @@ const About = () => {
                                 </button>
                             ))}
                         </div>
-                        <h1 className='text-3xl font-semibold'><Trans i18nKey="description.about0">.</Trans></h1>
+                        <h1 className='text-3xl font-semibold'><Trans i18nKey="description.about0"/></h1>
                         <div className='flex flex-col gap-3'>
                            
-                            <p className='text-xl '><Trans i18nKey="description.about1"></Trans></p>
+                            <p className='text-xl '><Trans i18nKey="description.about1"/></p>
 
-                            <p className='text-xl'><Trans i18nKey="description.about2"></Trans></p>
+                            <p className='text-xl'><Trans i18nKey="description.about2"/></p>
 
-                            <p className='text-xl'><Trans i18nKey="description.about3"></Trans></p>
+                            <p className='text-xl'><Trans i18nKey="description.about3"/></p>
                         </div>
                     </div>
                     <div className='flex flex-col gap-4'>
-                        <h1 className='text-3xl font-semibold'><Trans i18nKey="description.recipo0"></Trans></h1>
+                        <h1 className='text-3xl font-semibold'><Trans i18nKey="description.recipo0"/></h1>
                         <div className='flex flex-col gap-3'>
-                            <p className='text-xl'><Trans i18nKey="description.recipo1"></Trans></p>
+                            <p className='text-xl'><Trans i18nKey="description.recipo1"/></p>
 
-                            <p className='text-xl'><Trans i18nKey="description.recipo2"></Trans></p>
+                            <p className='text-xl'><Trans i18nKey="description.recipo2"/></p>
 
-                            <p className='text-xl'><Trans i18nKey="description.recipo3"></Trans></p>
+                            <p className='text-xl'><Trans i18nKey="description.recipo3"/></p>
 
-                            <p className='text-xl'><Trans i18nKey="description.recipo4"></Trans></p>
+                            <p className='text-xl'><Trans i18nKey="description.recipo4"/></p>
                         </div>
                     </div>
 

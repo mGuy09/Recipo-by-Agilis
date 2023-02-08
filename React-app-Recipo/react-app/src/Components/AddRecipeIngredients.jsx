@@ -110,7 +110,7 @@ const AddRecipeIngredients = () => {
     <div className="flex flex-col items-center gap-8">
       <div className="mx-5 border-2 rounded-xl h-full w-[28rem] p-5 border-gray-300">
         <div className="py-2 border-b-2 border-b-gray-300 mb-2">
-          <h1 className="text-2xl text-center font-medium "><Trans i18nKey="description.recipe3"></Trans></h1>
+          <h1 className="text-2xl text-center font-medium "><Trans i18nKey="description.recipe3"/></h1>
         </div>
         <div className="flex h-[14rem] flex-col mt-7 w-full overflow-auto gap-3 mx-3">
           {selectedIngredients?.map((item) => (
