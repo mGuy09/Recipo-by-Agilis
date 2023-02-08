@@ -7,6 +7,7 @@ import PremiumAd from "../Components/PremiumAd";
 import PremiumAddRecipes from "../Components/PremiumAddRecipes";
 import RecipePageCard from "../Components/RecipePageCard";
 import UserRecipe from "../Components/UserRecipe";
+import { Trans } from 'react-i18next';
 
 const UserPage = () => {
   const [username, setUsername] = React.useState("");
@@ -78,18 +79,14 @@ const UserPage = () => {
                 : "Standard Plan"}
             </span>
           </p>
-          <p className="text-lg font-medium">
-            Username: <span className="font-normal">{username}</span>
-          </p>
-          <p className="text-lg font-medium">
-            Email address: <span className="font-normal">{email}</span>
-          </p>
+          <p className="text-lg font-medium"><Trans i18nKey="description.user0" /><span className="font-normal">{username}</span></p>
+          <p className="text-lg font-medium"><Trans i18nKey="description.user1" /><span className="font-normal">{email}</span></p>
 
           {!isPremium ? (
             favorites.filter((item) => item.isPremium == false).length > 0 ? (
               <>
                 <div className="flex justify-between pr-20 px-10 border-y-2 border-y-gray-200 py-10">
-                  <h1 className="text-2xl">Favorite Recipes</h1>
+                                  <h1 className="text-2xl"><Trans i18nKey="description.user2" /></h1>
                   <IoIosArrowDown
                     size={42}
                     className={
@@ -121,7 +118,7 @@ const UserPage = () => {
             <>
               <div className="w-full h-full flex flex-col"></div>
               <div className="flex justify-between pr-20 px-10 border-y-2 border-y-gray-200 py-10">
-                <h1 className="text-2xl">Favorite Recipes</h1>
+                                  <h1 className="text-2xl"><Trans i18nKey="description.user2" />s</h1>
                 <IoIosArrowDown
                   size={42}
                   className={
@@ -158,7 +155,7 @@ const UserPage = () => {
             userRecipes.length == 0 ? null : (
               <>
                 <div className="flex justify-between pr-20 px-10 border-y-2 border-y-gray-200 py-10">
-                  <h1 className="text-2xl">Your Recipes</h1>
+                                  <h1 className="text-2xl"><Trans i18nKey="description.user3" /></h1>
                   <IoIosArrowDown
                     size={42}
                     className={

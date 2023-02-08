@@ -1,6 +1,7 @@
 import { useAtom } from "jotai";
 import React, { useEffect, useState } from "react";
 import { RecipeSteps } from "../State";
+import {  Trans } from 'react-i18next';
 
 const AddRecipeSteps = () => {
     const [steps, setSteps] = useAtom(RecipeSteps);
@@ -43,11 +44,11 @@ const AddRecipeSteps = () => {
   return (
     <div className="h-[45vh]">
       <div className="flex flex-col mt-7 gap-5">
-        <h1 className="font-medium text-2xl">Method</h1>
+        <h1 className="font-medium text-2xl"><Trans i18nKey="description.recipe4"/></h1>
         <div className="px-7 overflow-auto h-[20rem]">
           {Array.apply(0, Array(stepNumber)).map((x, i) => (
             <div key={i}>
-              <p className="font-medium text-lg">Step {i + 1}</p>
+              <p className="font-medium text-lg"><Trans i18nKey="description.recipe5"/> {i + 1}</p>
               <textarea
                 name=""
                 id=""

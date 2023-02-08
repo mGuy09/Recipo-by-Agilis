@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import FilterRadio from './FilterRadio'
 import axios from 'axios'
+import { Trans } from 'react-i18next';
 
 const IngredientsFilter = ({parentCallback, FilterRef}) => {
     const [filterDropdown, setDropdown] = useState(false)
@@ -44,7 +45,7 @@ const IngredientsFilter = ({parentCallback, FilterRef}) => {
     <div className=''>
     <div className='p-6 mx-10 flex px-8 justify-between items-center border-b border-b-gray-400 z-10'>
         <div>
-            <h1 className='text-lg md:text-xl lg:text-2xl font-thin cursor-default '>Ingredient Filter</h1>
+                  <h1 className='text-lg md:text-xl lg:text-2xl font-thin cursor-default '><Trans i18nKey="description.filter0" /></h1>
         </div>
         <div>
             <IoIosArrowDown size={42} className={!filterDropdown ? 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-200 lg:hidden visible': 'rounded-full p-2 active:bg-gray-300 hover:bg-gray-100 duration-150 lg:hidden rotate-180'} onClick={OpenClose}/>

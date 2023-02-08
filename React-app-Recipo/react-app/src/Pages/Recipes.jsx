@@ -5,6 +5,7 @@ import PremiumAd from '../Components/PremiumAd'
 import PremiumAddRecipes from '../Components/PremiumAddRecipes'
 import RecipeSection from '../Components/RecipeSection'
 
+
 const Recipes = () => {
   const [isPremium, setIsPremium] = React.useState()
   const navigate = useNavigate()

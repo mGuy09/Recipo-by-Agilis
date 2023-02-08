@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import IngredientLabel from './IngredientLabel'
 import axios from 'axios'
+import { Trans } from 'react-i18next';
 
 const  IngredientsSection = ({search, filter, ParentCallback}) => {
   const [baseList, setBaseList] = useState([])
@@ -49,8 +50,8 @@ const  IngredientsSection = ({search, filter, ParentCallback}) => {
 
   return (
     <div className='flex flex-col'>
-       <div className={selectedIngredients.length <= 1 ?'p-3 flex justify-center items-center visible': 'p-3 invisible'}>
-        <h1 className='font-thin text-xl '>Please select 2 or more ingredients</h1>
+      <div className={selectedIngredients.length <= 1 ? 'p-3 flex justify-center items-center visible' : 'p-3 invisible'}>
+        <h1 className='font-thin text-xl '><Trans i18nKey="description.ingresec0" /></h1>
       </div>
       
       {baseList.length === 0 &&  <div className='my-20 flex justify-center items-center'><div className=' animate-spin border-t-gray-600 border-l-gray-200 border-r-4 border-r-gray-600 border-b-4 border-b-gray-200 border-t-4 border-l-4 rounded-full absolute w-7 h-7 m-2'></div><div className='w-7 h-7 m-2 border-4 border-black border-opacity-40 rounded-full absolute'></div></div>}

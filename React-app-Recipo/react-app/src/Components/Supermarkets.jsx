@@ -1,50 +1,33 @@
-// import { React, useEffect, useState } from 'react';
-// import axios from 'axios'
-// import MapLocation from './MapLocation';
-// import MapContainer from './MapContainer';
-// import { useJsApiLoader, GoogleMap, Marker, Circle } from '@react-google-maps/api'
-// import usePlacesAutocomplete from 'use-places-autocomplete'
-// const Supermarkets = () => {
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { usePosition } from "use-position";
+import axios from 'axios'
 
-//   // const URL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=mega&inputtype=textquery&locationbias=circle%3A2000%4047.6918452%2C-122.2226413&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}';
-  
-//   const PlacesAutocomplete = () => {
-//     const { value, setValue } = usePlacesAutocomplete();
 
-//     const handleInput = (e) => {
-//       // Place a "string" to update the value of the input element
-//       setValue('supermarket');
-//     };
 
-  
-  
-  
-//   const [shopsList, setShopList] = useState([])
-//   const userLocation = MapLocation();
-//   const map = window.google.maps.Map
+const Supermarkets = () => {
+    const { latitude, longitude, error } = usePosition();
+    const [location, setLocation] = useState([{
+        loaded: false,
+        coordinates: { lat: 0, lng: 0 },
+        label: 'supermarket'
+    }])
 
-//   const shops = {
-//     location: userLocation.coordinates,
-//     radius: 500,
-//     query: 'supermarket',
-//   }
-  
+    useEffect(() => {
+        axios.get(`https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input=supermarket%20par&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`, { withCredentials: true, baseURL: 'http://localhost:3000' })
+            .then(res =>
+                console.log(res.data))
+    }, [])
+    // useEffect(() => {
+    //     if (latitude && longitude && !error) {
+    //         setLocation({ loaded: true, coordinates: { lat: latitude, lng: longitude } });
+    //     }
+    // }, [latitude, longitude, error]);
 
-//   const service = map.PlacesService
-//   service.textSearch(shops, callback)
 
-//   const goog = map.PlacesServiceStatus
-//   function callback(results, status) {
-//     if (status == new goog.OK) {
-//       for (var i = 0; i < results.length; i++) {
-//         var place = results[i];
-//         Marker = (results[i]);
-//       }
-//     }
+    return (
+        location
+    )
+}
 
-    
-//   }
-//   return shops
-// }
-
-// export default Supermarkets
+export default Supermarkets

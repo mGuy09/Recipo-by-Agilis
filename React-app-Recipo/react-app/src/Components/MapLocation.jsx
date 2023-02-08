@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { usePosition } from "use-position";
 
-const MapLocation = () => {
+
+function MapLocation () {
     const { latitude, longitude, error } = usePosition();
     const [location, setLocation] = useState({
         loaded: false,

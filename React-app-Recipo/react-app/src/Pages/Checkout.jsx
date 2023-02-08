@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { usePaymentInputs } from 'react-payment-inputs'
+import {  Trans } from 'react-i18next';
 
 const Checkout = () => {
   const [userName, setUsername] = useState();
@@ -101,33 +102,33 @@ const Checkout = () => {
       <div>
       <input type="radio" id='monthly' onChange={amountHandler} value={499} name='subscription' className='hidden peer checkmark' />
       <label htmlFor="monthly" className='flex cursor-pointer flex-col h-[25vh] pr-10 pl-3 gap-5 peer-checked:shadow-lg py-6 border-2 duration-300 border-gray-300 bg-white z-30 rounded-xl peer-checked:rounded-b-none peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-600 peer-checked:active:bg-emerald-700 active:bg-gray-400 hover:bg-gray-200'>
-        <p className='text-2xl font-medium'>Monthly</p>
-        <p className='text-lg font-thin'>Recurring payment monthly for Recipo Premium</p>
+            <p className='text-2xl font-medium'><Trans i18nKey="description.subs0"></Trans></p>
+            <p className='text-lg font-thin'><Trans i18nKey="description.subs1"></Trans></p>
       </label>
       <div className={dropdownM ? 'flex py-3 px-3 flex-col w-full h-[16.6vh] shadow-lg rounded-b-xl border-2 border-t-0 border-gray-300 bg-white duration-300 translate-y-0 visible ' : 'invisible duration-300 h-0'}>
-        <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}>Have access to all free and premium recipes.</p>
-        <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}>Premium users have the ability to add new recipes.</p>
-        <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}>Price: <span className='font-medium'>€4.99</span></p>
+            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs2"/></p>
+            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs3"/></p>
+            <p className={dropdownM ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs4"/> <span className='font-medium'>€4.99</span></p>
       </div>
       </div>
       <div>
       <input type="radio" id='yearly' onChange={amountHandler} value={4199} name='subscription' className='hidden peer checkmark' />
       <label htmlFor="yearly" className='flex cursor-pointer flex-col h-[25vh] pr-10 gap-5 pl-3 py-6 border-2 peer-checked:shadow-lg duration-300 border-gray-300 z-20 rounded-xl peer-checked:rounded-b-none peer-checked:border-emerald-900 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:hover:bg-emerald-600 peer-checked:active:bg-emerald-700 active:bg-gray-400 hover:bg-gray-200'>
         
-          <p className='text-2xl font-medium'>Yearly</p>
-        <p className='text-lg font-thin'>Recurring payment yearly for Recipo Premium</p>
+            <p className='text-2xl font-medium'><Trans i18nKey="description.subs5"/></p>
+            <p className='text-lg font-thin'><Trans i18nKey="description.subs6"/></p>
       </label>
       <div className={dropdownY ? 'flex py-3 px-3 flex-col w-full h-[16.6vh] shadow-lg border-2 rounded-b-xl border-t-0 border-gray-300 bg-white duration-300 translate-y-0 visible ' : 'invisible duration-300 h-0'}>
-        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Have access to all free and premium recipes.</p>
-        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Exactly the same as for Monthly.</p>
-        <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}>Price: <span className='font-medium'>€41.99</span></p>
+            <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs2" /></p>
+            <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs7" /></p>
+            <p className={dropdownY ? 'font-thin visible duration-75' : 'font-thin invisible'}><Trans i18nKey="description.subs4" /><span className='font-medium'>€41.99</span></p>
       </div>
       </div>
       </div>
       <div className='flex items-center rounded-xl'>
         
         <form onSubmit={onSubmit} className='flex flex-col items-center shadow-lg gap-10 border border-gray-300 rounded-xl p-16 '>
-          <h1 className='text-xl font-medium'>Card Information</h1>
+          <h1 className='text-xl font-medium'><Trans i18nKey="description.info0"/></h1>
           <input type="text" name='fullname' placeholder="Full Name" className='px-2 py-1 border w-56 border-gray-300 rounded-full'/>
           <input {...getCardNumberProps({ onChange: handleChangeCardNumber })}  className='px-2 py-1 w-56 border border-gray-300 rounded-full'/>
           <div className='flex gap-3'>
@@ -135,7 +136,7 @@ const Checkout = () => {
           <input {...getCVCProps({ onChange: handleChangeCVC })}  className='px-2 py-1 border w-20 border-gray-300 rounded-full'/>
           </div>
           {meta.isTouched && meta.error && <span>Error: {meta.error}</span>}
-          <button type='submit' className='bg-orange-500 px-10 py-3 rounded-full hover:bg-orange-400 active:bg-orange-700 duration-150 shadow-lg text-white text-lg font-medium active:shadow-md'>Pay</button>
+          <button type='submit' className='bg-orange-500 px-10 py-3 rounded-full hover:bg-orange-400 active:bg-orange-700 duration-150 shadow-lg text-white text-lg font-medium active:shadow-md'><Trans i18nKey="description.info1" /></button>
         </form>
       </div>
     </div>

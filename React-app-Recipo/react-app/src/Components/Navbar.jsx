@@ -4,21 +4,33 @@ import { RiUserFill, RiUserLine } from "react-icons/ri";
 import { IoMdStar } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import React, { useState, useEffect, useRef } from 'react'
+import { TfiClose, TfiMenu } from 'react-icons/tfi'
+import { FaUserAlt } from 'react-icons/fa'
+import { IoMdStar } from 'react-icons/io'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { useTranslation, Trans } from 'react-i18next';
+
+
+const lngs = {
+  en: { nativeName: 'English' },
+  ro: { nativeName: 'Romana' }
+};
 
 function Navbar() {
-  const [isLoggedIn, setLoggedIn] = useState();
-  const [nav, setNav] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
-  const navigate = useNavigate();
-  const ref = useRef();
+  const { t, i18n } = useTranslation();
+  const [isLoggedIn, setLoggedIn] = useState()
+  const [nav, setNav] = useState(false)
+  const [dropdown, setDropdown] = useState(false)
+  const navigate = useNavigate()
+  const ref = useRef()
   const HandleLogout = () => {
-    axios
-      .get("https://localhost:7291/api/Users/Logout", { withCredentials: true })
-      .then((res) => {
-        localStorage.removeItem("Authorized");
-        window.location.reload(false);
-      });
-  };
+    axios.get('https://localhost:7291/api/Users/Logout', { withCredentials: true }).then(res => {
+      localStorage.removeItem('Authorized')
+      window.location.reload(false)
+    })
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -77,6 +89,14 @@ function Navbar() {
             RECIPO
           </h1>
         </div>
+        <div>
+          {Object.keys(lngs).map((lng) => (
+            <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
+              {lngs[lng].nativeName}
+            </button>
+          ))}
+        </div>
+        
         <div className="m-3">
           {!isLoggedIn ? (
             <RiUserLine
@@ -111,21 +131,21 @@ function Navbar() {
               {isLoggedIn && (
                 <Link to={"/User"}>
                   <li className="border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer">
-                    User Page
+                    <Trans i18nKey="description.nav0" />
                   </li>
                 </Link>
               )}
               {isLoggedIn && (
                 <Link to={"/User/Options"}>
                   <li className="border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer">
-                    Options
+                    <Trans i18nKey="description.nav1" />
                   </li>
                 </Link>
               )}
               {!isLoggedIn && (
                 <Link to="/Register">
                   <li className="border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer">
-                    Register Account
+                    <Trans i18nKey="description.nav2" />
                   </li>
                 </Link>
               )}
@@ -134,12 +154,12 @@ function Navbar() {
                   onClick={HandleLogout}
                   className="border-b border-b-gray-200 py-2 px-3 hover:bg-orange-500 cursor-pointer"
                 >
-                  Sign Out
+                  <Trans i18nKey="description.nav3" />
                 </li>
               ) : (
                 <Link to={"/Login"}>
                   <li className="py-2 px-3 hover:bg-orange-500 cursor-pointer">
-                    Sign In
+                    <Trans i18nKey="description.started3" />
                   </li>
                 </Link>
               )}
@@ -164,49 +184,14 @@ function Navbar() {
               onClick={OpenClose}
             />
           </div>
-          <ul className="border-t border-t-gray-200">
-            <Link to="/" onClick={Close}>
-              <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700">
-                Home
-              </li>
-            </Link>
-            {isLoggedIn && (
-              <Link to="/Dashboard" onClick={Close}>
-                <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700">
-                  Dashboard
-                </li>
-              </Link>
-            )}
-            {isLoggedIn && (
-              <Link to="/Subscriptions" onClick={Close}>
-                <li className="p-4 text-emerald-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:bg-emerald-500 hover:text-white active:bg-emerald-700 flex">
-                  <IoMdStar className="mr-1 mt-1" /> Subscriptions
-                </li>
-              </Link>
-            )}
-            <Link to="/Contact" onClick={Close}>
-              <li className="p-4 hover:bg-orange-500 drop-shadow-md hover:shadow-lg duration-75 active:duration-75 hover:text-white active:bg-orange-700">
-                Contact
-              </li>
-            </Link>
-            <Link to="/About" onClick={Close}>
-              <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700">
-                About
-              </li>
-            </Link>
-            {isLoggedIn ? (
-              <Link to="" onMouseUp={Close} onClick={HandleLogout}>
-                <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700 lg:hidden">
-                  Sign Out
-                </li>
-              </Link>
-            ) : (
-              <Link to="/Login" onClick={Close}>
-                <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700 lg:hidden">
-                  Sign In
-                </li>
-              </Link>
-            )}
+          <ul className='border-t border-t-gray-200'>
+            <Link to='/' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700'><Trans i18nKey="description.nav4" /></li></Link>
+            {isLoggedIn && <Link to='/Dashboard' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700'><Trans i18nKey="description.nav5" /></li></Link>}
+            {isLoggedIn && <Link to='/Subscriptions' onClick={Close}><li className='p-4 text-emerald-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:bg-emerald-500 hover:text-white active:bg-emerald-700 flex'><IoMdStar className='mr-1 mt-1' /><Trans i18nKey="description.nav6" /> </li></Link>}
+            <Link to='/Contact' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md hover:shadow-lg duration-75 active:duration-75 hover:text-white active:bg-orange-700'><Trans i18nKey="description.nav7" /></li></Link>
+            <Link to='/About' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700'><Trans i18nKey="description.footer5" /></li></Link>
+            {isLoggedIn ? <Link to='' onMouseUp={Close} onClick={HandleLogout}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700 lg:hidden'><Trans i18nKey="description.nav3" /></li></Link> :
+              <Link to='/Login' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700 lg:hidden'><Trans i18nKey="description.started3" /></li></Link>}
           </ul>
         </div>
       </div>

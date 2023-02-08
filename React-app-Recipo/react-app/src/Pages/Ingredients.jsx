@@ -1,12 +1,13 @@
-import axios from "axios";
-import { useAtom } from "jotai";
-import React from "react";
-import { FaSearch } from "react-icons/fa";
-import { useParams, useNavigate } from "react-router";
-import IngredientsFilter from "../Components/IngredientsFilter";
-import IngredientsSection from "../Components/IngredientsSection";
-import PremiumAddRecipes from "../Components/PremiumAddRecipes";
-import { SelectedIngredients } from "../State";
+import axios from 'axios'
+import { useAtom } from 'jotai'
+import React from 'react'
+import { FaSearch } from 'react-icons/fa'
+import { useParams, useNavigate } from 'react-router'
+import IngredientsFilter from '../Components/IngredientsFilter'
+import IngredientsSection from '../Components/IngredientsSection'
+import PremiumAddRecipes from '../Components/PremiumAddRecipes'
+import { SelectedIngredients } from '../State'
+import { Trans } from 'react-i18next';
 
 const Ingredients = () => {
   const FilterRef = useParams();
@@ -61,15 +62,8 @@ const Ingredients = () => {
             type="search"
           />
         </div>
-        <div
-          className={selectedIngredients.length > 1 ? "visible" : "invisible"}
-        >
-          <button
-            onClick={GetRecipes}
-            className="bg-orange-500 rounded-full shadow-md py-3 px-6 text-white hover:bg-orange-400 duration-150 active:bg-orange-700 font-medium "
-          >
-            Get Recipes
-          </button>
+        <div className={selectedIngredients.length > 1 ? 'visible' : 'invisible'}>
+          <button onClick={GetRecipes} className='bg-orange-500 rounded-full shadow-md py-3 px-6 text-white hover:bg-orange-400 duration-150 active:bg-orange-700 font-medium '><Trans i18nKey="description.ingre0" /></button>
         </div>
       </div>
       <IngredientsSection
