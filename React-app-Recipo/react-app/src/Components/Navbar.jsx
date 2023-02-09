@@ -4,33 +4,38 @@ import { RiUserFill, RiUserLine } from "react-icons/ri";
 import { IoMdStar } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import React, { useState, useEffect, useRef } from 'react'
-import { TfiClose, TfiMenu } from 'react-icons/tfi'
-import { FaUserAlt } from 'react-icons/fa'
-import { IoMdStar } from 'react-icons/io'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { useTranslation, Trans } from 'react-i18next';
-
+import { useTranslation, Trans } from "react-i18next";
 
 const lngs = {
-  en: { nativeName: 'English' },
-  ro: { nativeName: 'Romana' }
+  en: { nativeName: "English" },
+  ro: { nativeName: "Romana" },
 };
 
 function Navbar() {
   const { t, i18n } = useTranslation();
-  const [isLoggedIn, setLoggedIn] = useState()
-  const [nav, setNav] = useState(false)
-  const [dropdown, setDropdown] = useState(false)
-  const navigate = useNavigate()
-  const ref = useRef()
+  console.log(i18n);
+  const [lngChange, setLngChange] = useState(
+    i18n.language == "en" ? false : true
+  );
+  const [isLoggedIn, setLoggedIn] = useState();
+  const [nav, setNav] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+  const langRadio = document.querySelectorAll('.lang')
+  const navigate = useNavigate();
+  const ref = useRef();
   const HandleLogout = () => {
-    axios.get('https://localhost:7291/api/Users/Logout', { withCredentials: true }).then(res => {
-      localStorage.removeItem('Authorized')
-      window.location.reload(false)
-    })
-  }
+    axios
+      .get("https://localhost:7291/api/Users/Logout", { withCredentials: true })
+      .then((res) => {
+        localStorage.removeItem("Authorized");
+        window.location.reload(false);
+      });
+  };
+  useEffect(() => {
+    i18n.language == 'en' ? setLngChange(false) : setLngChange(true)
+    console.log(langRadio)
+    i18n.language == 'en' ? langRadio.forEach(lng => lng.id == 'en' ? lng.checked = true : lng.checked = false) : langRadio.forEach(lng => lng.id == 'ro' ? lng.checked = true : lng.checked = false )
+  },[langRadio])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -62,7 +67,6 @@ function Navbar() {
   const DropdownClose = () => {
     setDropdown(false);
   };
-
   return (
     <>
       <div
@@ -89,15 +93,72 @@ function Navbar() {
             RECIPO
           </h1>
         </div>
-        <div>
-          {Object.keys(lngs).map((lng) => (
-            <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-              {lngs[lng].nativeName}
+
+        <div className="m-3 flex gap-5">
+          {/* {!lngChange ? (
+            <button
+              className="bg-gray-300 rounded-full hover:scale-110 active:scale-105 font-medium px-3 hover:bg-gray-100 hover:border hover:border-gray-300 border border-transparent active:bg-gray-400 duration-150 py-0"
+              key={lngs.en}
+              onClick={() => {
+                setLngChange(true);
+                i18n.changeLanguage("ro");
+                window.location.reload();
+              }}
+            >
+              En
             </button>
-          ))}
-        </div>
-        
-        <div className="m-3">
+          ) : (
+            <button
+              className="bg-gray-300 rounded-full hover:scale-110 active:scale-105 font-medium px-3 hover:bg-gray-200 hover:border hover:border-gray-300 border border-transparent active:bg-gray-400 duration-150 py-0"
+              key={lngs.ro}
+              onClick={() => {
+                setLngChange(false);
+                i18n.changeLanguage("en");
+                window.location.reload();
+              }}
+            >
+              Ro
+            </button>
+          )} */}
+          <div className="bg-gray-300 rounded-full relative object-contain z-10 py-0 duration-500 flex items-center">
+            <div>
+              <input
+                type="radio"
+                name="language"
+                className="lang hidden peer"
+                id="en"
+              />
+              <label
+                htmlFor="en"
+                className="peer-checked:bg-black duration-500 font-normal z-50 px-4 py-2 flex peer-checked:text-white peer-checked:font-medium rounded-full"
+                onClick={() => {
+                  i18n.changeLanguage("en");
+                  window.location.reload()
+                }}
+              >
+                En
+              </label>
+            </div>
+            <div>
+              <input
+                id="ro"
+                type="radio"
+                name="language"
+                className="lang hidden peer"
+              />
+              <label
+                htmlFor="ro"
+                className="peer-checked:bg-black duration-500 font-normal z-50 px-4 flex py-2 peer-checked:text-white peer-checked:font-medium rounded-full"
+                onClick={() => {
+                  i18n.changeLanguage("ro");
+                  window.location.reload();
+                }}
+              >
+                Ro
+              </label>
+            </div>
+          </div>
+
           {!isLoggedIn ? (
             <RiUserLine
               size={25}
@@ -184,14 +245,50 @@ function Navbar() {
               onClick={OpenClose}
             />
           </div>
-          <ul className='border-t border-t-gray-200'>
-            <Link to='/' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700'><Trans i18nKey="description.nav4" /></li></Link>
-            {isLoggedIn && <Link to='/Dashboard' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700'><Trans i18nKey="description.nav5" /></li></Link>}
-            {isLoggedIn && <Link to='/Subscriptions' onClick={Close}><li className='p-4 text-emerald-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:bg-emerald-500 hover:text-white active:bg-emerald-700 flex'><IoMdStar className='mr-1 mt-1' /><Trans i18nKey="description.nav6" /> </li></Link>}
-            <Link to='/Contact' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md hover:shadow-lg duration-75 active:duration-75 hover:text-white active:bg-orange-700'><Trans i18nKey="description.nav7" /></li></Link>
-            <Link to='/About' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700'><Trans i18nKey="description.footer5" /></li></Link>
-            {isLoggedIn ? <Link to='' onMouseUp={Close} onClick={HandleLogout}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700 lg:hidden'><Trans i18nKey="description.nav3" /></li></Link> :
-              <Link to='/Login' onClick={Close}><li className='p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700 lg:hidden'><Trans i18nKey="description.started3" /></li></Link>}
+          <ul className="border-t border-t-gray-200">
+            <Link to="/" onClick={Close}>
+              <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700">
+                <Trans i18nKey="description.nav4" />
+              </li>
+            </Link>
+            {isLoggedIn && (
+              <Link to="/Dashboard" onClick={Close}>
+                <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700">
+                  <Trans i18nKey="description.nav5" />
+                </li>
+              </Link>
+            )}
+            {isLoggedIn && (
+              <Link to="/Subscriptions" onClick={Close}>
+                <li className="p-4 text-emerald-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:bg-emerald-500 hover:text-white active:bg-emerald-700 flex">
+                  <IoMdStar className="mr-1 mt-1" />
+                  <Trans i18nKey="description.nav6" />{" "}
+                </li>
+              </Link>
+            )}
+            <Link to="/Contact" onClick={Close}>
+              <li className="p-4 hover:bg-orange-500 drop-shadow-md hover:shadow-lg duration-75 active:duration-75 hover:text-white active:bg-orange-700">
+                <Trans i18nKey="description.nav7" />
+              </li>
+            </Link>
+            <Link to="/About" onClick={Close}>
+              <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700">
+                <Trans i18nKey="description.footer5" />
+              </li>
+            </Link>
+            {isLoggedIn ? (
+              <Link to="" onMouseUp={Close} onClick={HandleLogout}>
+                <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700 lg:hidden">
+                  <Trans i18nKey="description.nav3" />
+                </li>
+              </Link>
+            ) : (
+              <Link to="/Login" onClick={Close}>
+                <li className="p-4 hover:bg-orange-500 drop-shadow-md active:duration-75 hover:shadow-lg duration-75 hover:text-white active:bg-orange-700 lg:hidden">
+                  <Trans i18nKey="description.started3" />
+                </li>
+              </Link>
+            )}
           </ul>
         </div>
       </div>
