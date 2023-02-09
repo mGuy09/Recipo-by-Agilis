@@ -171,7 +171,7 @@ INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES 
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES (145,N'Coriander Leaves', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'), N'Frunze de coriandru')
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES (146,N'Coriander Seeds', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'), N'Seminte de coriandru')
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES (147,N'Cinnamon', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'), N'Scortisoara')
-INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES (148,N'Cayenne', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices')., N'Cayenne')
+INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES (148,N'Cayenne', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Herbs & Spices'), N'Cayenne')
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES (149,N'Turkey', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'), N'Curcan')
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES (150,N'Partridge', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'), N'Potârniche')
 INSERT INTO [dbo].[Ingredients] ([Id],[Name], [CategoryId], [Translate]) VALUES (151,N'Mutton Liver', (select id from [dbo].[Category] where [dbo].[Category].[Name]=N'Meats'), N'Ficat de oaie')
