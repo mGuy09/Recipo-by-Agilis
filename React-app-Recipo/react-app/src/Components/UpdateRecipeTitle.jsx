@@ -11,9 +11,8 @@ const UpdateRecipeTitle = () => {
     document.querySelector("#title").value = title
   },[title])
   const GetTitle = (e) => {
-    // if (title == '') {
-    //   setTitle(e.target.value)
-    // }
+
+      setTitle(e.target.value)
   }
   return (
     <div className='flex flex-col gap-10 h-[30vh] items-center'>

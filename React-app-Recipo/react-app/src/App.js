@@ -27,7 +27,7 @@ import UpdateRecipe from "./Pages/UpdateRecipe";
 
 function App() {
   return (
-    <div>
+    <div className="flex flex-col duration-700">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

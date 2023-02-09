@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useAtom } from "jotai";
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {
   RecipeIngredientQuantities,
   RecipeIngredients,
@@ -14,7 +14,7 @@ const UpdateRecipeSubmit = () => {
   const [Quantities] = useAtom(RecipeIngredientQuantities);
   const [Steps] = useAtom(RecipeSteps);
     const [Title] = useAtom(RecipeTitle);
-    
+    const Param = useParams()
     const navigate = useNavigate()
 
   const OnSubmit = () => {
@@ -27,9 +27,10 @@ const UpdateRecipeSubmit = () => {
       return console.log("Dude wtf");
     }
     axios
-      .post(
-        "https://localhost:7291/api/Recipes",
+      .put(
+        `https://localhost:7291/api/Recipes/${Param.id}`,
         {
+          id: Param.id,
           name: Title,
           steps: Steps,
           isPremium: false,
