@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Trans } from 'react-i18next';
 
 
 function RegisterForm() {
@@ -49,25 +50,25 @@ function RegisterForm() {
                 <h1 className='text-2xl font-medium m-2 mt-10 mb-10'>Join us</h1>
                 <div className='flex flex-col gap-5 items-center'>
                     <div className='flex flex-col'>
-                    {usernameError ? <p className='flex text-red-500  gap-2 items-center'><AiOutlineExclamationCircle/> Invalid username</p> :null}
+                        {usernameError ? <p className='flex text-red-500  gap-2 items-center'><AiOutlineExclamationCircle /><Trans i18nKey="description.regform0" /> </p> :null}
                     <input type="text" name='username' autoComplete='none' placeholder='Username' className={usernameError ?'border border-red-500 placeholder:text-red-700 rounded-full px-3 py-1 outline-none m-2' :'border border-gray-400 rounded-full px-3 py-1 outline-none m-2'} onChange={onChange} />
                     </div>
                     <div className='flex flex-col'>
-                    {emailError ? <p className='flex text-red-500  gap-2 items-center'><AiOutlineExclamationCircle/> Invalid email address</p> :null}
+                        {emailError ? <p className='flex text-red-500  gap-2 items-center'><AiOutlineExclamationCircle /><Trans i18nKey="description.regform1" />  </p> :null}
                     <input  type="text" name='email' autoComplete='none' placeholder='Email' className={emailError ?'border border-red-500 placeholder:text-red-700 rounded-full px-3 py-1 outline-none m-2' :'border border-gray-400 rounded-full px-3 py-1 outline-none m-2'} onChange={onChange} />
                     </div>
                     <div className='flex flex-col'>
-                    {passwordError ? <p className='flex  text-red-500 gap-2 items-center'><AiOutlineExclamationCircle/> Invalid password</p> :null}
+                        {passwordError ? <p className='flex  text-red-500 gap-2 items-center'><AiOutlineExclamationCircle /><Trans i18nKey="description.regform2" /></p> :null}
                     <input type="password" name='password' placeholder='Password' className={passwordError ?'border border-red-500 placeholder:text-red-700 rounded-full px-3 py-1 outline-none m-2' :'border border-gray-400 rounded-full px-3 py-1 outline-none m-2'} onChange={onChange} />
                     </div>
                     <div className='flex flex-col'>
-                    {cPasswordError ? <p className='flex text-red-500  gap-2 items-center'><AiOutlineExclamationCircle/> Passwords do not match</p> :null}
+                        {cPasswordError ? <p className='flex text-red-500  gap-2 items-center'><AiOutlineExclamationCircle /><Trans i18nKey="description.regform3" /></p> :null}
                     <input type="password" name='confirmpassword' placeholder='Confirm Password' className={cPasswordError ?'border border-red-500 placeholder:text-red-700 rounded-full px-3 py-1 outline-none m-2' :'border border-gray-400 rounded-full px-3 py-1 outline-none m-2'} onChange={onChange} />
                     </div>
 
                 </div>
-                <button type='submit' className='bg-orange-500 mx-2 text-white hover:bg-orange-400 active:bg-orange-700 rounded-full px-6 py-2 duration-300 my-5 '>Sign Up</button>
-                <p className='font-thin flex gap-1 whitespace-nowrap'>Already have an account? <Link className='underline underline-offset-2 hover:text-orange-400 duration-150 active:text-orange-700 font-medium text-orange-500' to="/Login">Sign In</Link></p>
+                <button type='submit' className='bg-orange-500 mx-2 text-white hover:bg-orange-400 active:bg-orange-700 rounded-full px-6 py-2 duration-300 my-5 '><Trans i18nKey="description.login0" /></button>
+                <p className='font-thin flex gap-1 whitespace-nowrap'><Trans i18nKey="description.regform4" /><Link className='underline underline-offset-2 hover:text-orange-400 duration-150 active:text-orange-700 font-medium text-orange-500' to="/Login"><Trans i18nKey="description.started3" /></Link></p>
 
             </form>
         </div>
