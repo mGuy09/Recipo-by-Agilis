@@ -14,7 +14,7 @@ const RecipePageCard = ({
   User,
 }) => {
   const [favorite, setFavorite] = React.useState(Favorite);
-
+console.log(steps)
   const navigate = useNavigate();
   const RecipeSteps = steps.split("\\\\");
   const toggleHeart = () => {

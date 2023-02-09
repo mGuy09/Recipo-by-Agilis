@@ -5,4 +5,6 @@ public class IngredientDto
     public int IngredientId { get; set; }
     public int Quantity { get; set; }
     public string QuantityType { get; set; }
+
+    public string Translate { get; set; }
 }
