@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Hint } from "react-autocomplete-hint";
 import { IoIosRemoveCircle } from "react-icons/io";
+import { Trans } from 'react-i18next';
 
 const RecipeForm = () => {
   const [stepNumber, setStepNumber] = useState(1);
@@ -66,8 +67,8 @@ const RecipeForm = () => {
       } else {
         selectedIngredients.length > 0
           ? setSelectedIngredients((prev) => {
-              return [...prev, ingredient];
-            })
+            return [...prev, ingredient];
+          })
           : setSelectedIngredients([ingredient]);
       }
     }
@@ -146,8 +147,8 @@ const RecipeForm = () => {
       selectedIngredients.filter(
         (item) => item.id.toString() !== e.target.parentNode.dataset.ingredient
       )
-      );
-      updateSpan()
+    );
+    updateSpan()
     console.log(selectedIngredients);
   };
 
@@ -155,11 +156,11 @@ const RecipeForm = () => {
     <div>
       <div>
         <div className="mx-10 px-5 py-7 text-2xl font-thin border-b-2 border-b-gray-300">
-          <h1>Add Recipe</h1>
+          <h1><Trans i18nKey="description.premium5" /></h1>
         </div>
         <div className="flex flex-col gap-2 items-center">
           <label className="font-medium text-lg" htmlFor="Title">
-            Recipe title
+            <Trans i18nKey="description.premium9" />
           </label>
           <input
             type="text"
@@ -172,7 +173,7 @@ const RecipeForm = () => {
             <div className="mx-5 border-2 rounded-xl h-full w-[28rem] p-5 border-gray-300">
               <div className="py-2 border-b-2 border-b-gray-300 mb-2">
                 <h1 className="text-2xl text-center font-medium ">
-                  Ingredients
+                  <Trans i18nKey="description.premium10" />
                 </h1>
               </div>
               <div className="flex flex-col mt-7 w-full gap-3 mx-3">
@@ -228,11 +229,11 @@ const RecipeForm = () => {
             </Hint>
           </div>
           <div className="flex flex-col mt-7 gap-5">
-            <h1 className="font-medium text-2xl">Method</h1>
+            <h1 className="font-medium text-2xl"><Trans i18nKey="description.premium11" /></h1>
             <div className="px-7">
               {Array.apply(0, Array(stepNumber)).map((x, i) => (
                 <div key={i}>
-                  <p className="font-medium text-lg">Step {i + 1}</p>
+                  <p className="font-medium text-lg"><Trans i18nKey="description.premium12" /> {i + 1}</p>
                   <textarea
                     name=""
                     id=""

@@ -58,14 +58,13 @@ const UserPage = () => {
       {isPremium ? <PremiumAddRecipes /> : <PremiumAd />}
       <div className="p-10 font-thin text-3xl border-b-2 border-b-gray-300 mx-4">
         <h1 className="mx-10">
-          {username.charAt(0).toUpperCase().concat(username.substring(1))}'s
-          Details
+          {username.charAt(0).toUpperCase().concat(username.substring(1))}<Trans i18nKey="description.user4" />
         </h1>
       </div>
       <div className="flex flex-col items-center gap-0">
         <div className="flex flex-col px-5 py-10 w-[70%] shadow-lg border justify-start rounded-xl border-gray-300 m-10 gap-5">
           <p className="text-lg font-medium">
-            Subscription:{" "}
+            <Trans i18nKey="description.user5" />{" "}
             <span
               className={
                 userRole.includes("SubscribedUser")

@@ -13,110 +13,55 @@ const google = window.google;
 let service;
 const libraries = ["places"]
 
-// const shops = Supermarkets();
-// console.log(shops)
 
-const mapContainerStyle = {
-  height: "100vh",
-  width: "100vw"
-};
 
 function DisplayMap() {
-  const location = MapLocation();
-  const center = {
-    lat: location.coordinates.lat,
-    lng: location.coordinates.lng
-  };
-  const { isLoaded, loadError } = useLoadScript({
+    const location = MapLocation();
+  
+  const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries
-  });
+    libraries: libraries,
+  })
 
-  const mapRef = React.useRef();
-  const onMapLoad = React.useCallback(map => {
-    mapRef.current = map;
-  }, []);
-  const panTo = React.useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(12);
-    let map = mapRef.current;
-    let request = {
-      location: { lat, lng },
-      radius: "500",
-      type: ["supermarket"]
-    };
 
-    service = new google.maps.places.PlacesService(mapRef.current);
-    service.nearbySearch(request, callback);
-    function callback(result, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (let i = 0; i < result.lenght; i++) {
-          let place = result[i];
-          new google.maps.Marker({
-            position: place.geometry.location,
-            map
-          });
-        }
-      }
-    }
-  }, []);
+  if (!isLoaded) return <div>andrei e enervant</div>
   return (
-    <div>
-      <Search panTo={panTo} />
+    <div className='w-full h-[70vh]'>
       <GoogleMap
-        id='map'
-        mapContainerStyle={mapContainerStyle}
-        zoom={8}
+        defaultCenter={{ lat: 0, lng: 0 }}
         center={location.coordinates}
-        onLoad={onMapLoad}
-      />
+        zoom={15}
+        mapContainerStyle={{ width: '100%', height: '100%' }}
+        options={
+          {
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false
+          }
+        } >
+        <Circle
+          center={location.coordinates}
+          options={{
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.1,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.05,
+            clickable: false,
+            draggable: false,
+            editable: false,
+            visible: true,
+            radius: 300,
+            zIndex: 1
+          }} />
+
+        <Marker position={location.coordinates} />
+
+      </GoogleMap>
     </div>
-  );
+  )
+
 }
-// const { isLoaded } = useJsApiLoader({
-//   googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-//   libraries: libraries,
-// })
-
-
-//   if (!isLoaded) return <div>andrei e enervant</div>
-//   return (
-//     <div className='w-full h-[70vh]'>
-//       <GoogleMap
-//         defaultCenter={{ lat: 0, lng: 0 }}
-//         center={location.coordinates}
-//         zoom={15}
-//         mapContainerStyle={{ width: '100%', height: '100%' }}
-//         options={
-//           {
-//             zoomControl: false,
-//             streetViewControl: false,
-//             mapTypeControl: false,
-//             fullscreenControl: false
-//           }
-//         } >
-//         <Circle
-//           center={location.coordinates}
-//           options={{
-//             strokeColor: '#FF0000',
-//             strokeOpacity: 0.1,
-//             strokeWeight: 2,
-//             fillColor: '#FF0000',
-//             fillOpacity: 0.05,
-//             clickable: false,
-//             draggable: false,
-//             editable: false,
-//             visible: true,
-//             radius: 300,
-//             zIndex: 1
-//           }} />
-
-//         <Marker position={location.coordinates} />
-
-//       </GoogleMap>
-//     </div>
-//   )
-
-
-export default DisplayMap
+  export default DisplayMap
 

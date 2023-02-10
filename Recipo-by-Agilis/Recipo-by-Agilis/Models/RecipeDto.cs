@@ -10,4 +10,5 @@ public class RecipeDto
     public List<int> IngredientIds { get; set; }
     public List<IngredientDto> IngredientQuantity { get; set; }
     public bool Favorite { get; set; }
+    public string Translate { get; set; }
 }
