@@ -13,7 +13,6 @@ const lngs = {
 
 function Navbar() {
   const { t, i18n } = useTranslation();
-  console.log(i18n);
   const [lngChange, setLngChange] = useState(
     i18n.language == "en" ? false : true
   );
@@ -33,7 +32,6 @@ function Navbar() {
   };
   useEffect(() => {
     i18n.language == 'en' ? setLngChange(false) : setLngChange(true)
-    console.log(langRadio)
     i18n.language == 'en' ? langRadio.forEach(lng => lng.id == 'en' ? lng.checked = true : lng.checked = false) : langRadio.forEach(lng => lng.id == 'ro' ? lng.checked = true : lng.checked = false )
   },[langRadio])
 

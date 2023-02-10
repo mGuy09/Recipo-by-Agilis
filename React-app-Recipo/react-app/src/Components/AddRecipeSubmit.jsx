@@ -25,7 +25,7 @@ const AddRecipeSubmit = () => {
       Steps.includes("1. .\\\\") ||
       Title == ""
     ) {
-      return console.log("Dude wtf");
+      return console.log("Dude how");
     }
     axios
       .post(
@@ -42,8 +42,7 @@ const AddRecipeSubmit = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
-        navigate("/Dashboard", { replace: true });
+        navigate("/User", { replace: true });
       });
   };
 

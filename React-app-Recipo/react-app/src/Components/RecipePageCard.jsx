@@ -41,6 +41,7 @@ const RecipePageCard = ({
           ? "flex flex-col border-2 border-emerald-500 hover:shadow-lg active:shadow-md shadow rounded-xl select-none relative w-[400px] h-[500px] hover:scale-[1.03] active:scale-[1.02] p-3 duration-300"
           : "flex flex-col hover:shadow-lg shadow active:shadow-md border-2 border-gray-300 rounded-xl select-none relative w-[400px] h-[500px] hover:scale-[1.07] active:scale-[1.02] p-3 duration-300"
       }
+      key={Id}
     >
       <div
         onClick={ToRecipe}

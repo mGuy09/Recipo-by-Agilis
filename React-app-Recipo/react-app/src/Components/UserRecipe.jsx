@@ -24,7 +24,7 @@ const UserRecipe = ({title, image, steps, Id}) => {
         setDropdown(false)
     }
     return (
-      <div className="relative">
+      <div className="relative" key={Id}>
         <div className={dropdown ? "w-full h-screen absolute z-20" : ""}></div>
         <div
           onBlur={closeDropdown}

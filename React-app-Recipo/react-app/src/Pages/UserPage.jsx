@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-import { FaArrowDown } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowDropdown } from "react-icons/io";
 import { useNavigate } from "react-router";
 import PremiumAd from "../Components/PremiumAd";
@@ -79,14 +78,22 @@ const UserPage = () => {
                 : "Standard Plan"}
             </span>
           </p>
-          <p className="text-lg font-medium"><Trans i18nKey="description.user0" /><span className="font-normal">{username}</span></p>
-          <p className="text-lg font-medium"><Trans i18nKey="description.user1" /><span className="font-normal">{email}</span></p>
+          <p className="text-lg font-medium">
+            <Trans i18nKey="description.user0" />
+            <span className="font-normal">{username}</span>
+          </p>
+          <p className="text-lg font-medium">
+            <Trans i18nKey="description.user1" />
+            <span className="font-normal">{email}</span>
+          </p>
 
           {!isPremium ? (
             favorites.filter((item) => item.isPremium == false).length > 0 ? (
               <>
                 <div className="flex justify-between pr-20 px-10 border-y-2 border-y-gray-200 py-10">
-                                  <h1 className="text-2xl"><Trans i18nKey="description.user2" /></h1>
+                  <h1 className="text-2xl">
+                    <Trans i18nKey="description.user2" />
+                  </h1>
                   <IoIosArrowDown
                     size={42}
                     className={
@@ -118,7 +125,9 @@ const UserPage = () => {
             <>
               <div className="w-full h-full flex flex-col"></div>
               <div className="flex justify-between pr-20 px-10 border-y-2 border-y-gray-200 py-10">
-                                  <h1 className="text-2xl"><Trans i18nKey="description.user2" />s</h1>
+                <h1 className="text-2xl">
+                  <Trans i18nKey="description.user2" />
+                </h1>
                 <IoIosArrowDown
                   size={42}
                   className={
@@ -155,7 +164,9 @@ const UserPage = () => {
             userRecipes.length == 0 ? null : (
               <>
                 <div className="flex justify-between pr-20 px-10 border-y-2 border-y-gray-200 py-10">
-                                  <h1 className="text-2xl"><Trans i18nKey="description.user3" /></h1>
+                  <h1 className="text-2xl">
+                    <Trans i18nKey="description.user3" />
+                  </h1>
                   <IoIosArrowDown
                     size={42}
                     className={
@@ -169,12 +180,11 @@ const UserPage = () => {
                 <div
                   className={
                     userRecipeDropdown
-                      ? "grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10 mt-10 justify-evenly items-center"
-                      : "grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10 mt-10 justify-evenly items-center scale-y-0 origin-top invisible"
+                      ? "grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10 mt-10 justify-evenly duration-500 visible transition-all scroll-smooth ease-in-out origin-top opacity-100 items-center"
+                      : "grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10 mt-10 justify-evenly duration-300 transition-all ease-in-out scroll-smooth h-0 scale-y-0 opacity-0 items-center origin-top overflow-hidden "
                   }
                 >
                   {userRecipes.map((item) => {
-                    console.log(item);
                     return (
                       <UserRecipe
                         Id={item.id}

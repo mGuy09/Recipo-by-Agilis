@@ -93,7 +93,7 @@ const RecipePage = () => {
           <h1 className='text-3xl font-medium mb-10'><Trans i18nKey="description.recipe4" /></h1>
           {steps.map(item => (
             <div className='flex flex-col py-3' key={item[0]}>
-              <h1 className='text-xl font-medium'><Trans i18nKey="description.recipe4" /> {item.substring(0, 1)}</h1>
+              <h1 className='text-xl font-medium'><Trans i18nKey="description.recipe5" /> {item.substring(0, 1)}</h1>
               <p className='flex gap-5 font-normal text-xl' >{item.substring(2)}</p>
             </div>
           ))}
