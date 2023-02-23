@@ -47,7 +47,7 @@ To make the experience even better, we offer a membership program that allows us
 
 # Technologies used
 
-- **C#** & **ASP.Net** **_Core_**
+- **ASP.Net** **_Core_**
 - **Entity Framework** & **Identity**
 - **Microsoft SQL**
 - **ReactJS**
